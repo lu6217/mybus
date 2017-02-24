@@ -1,5 +1,6 @@
 package com.lu.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,7 +19,12 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "ACCOUNT")
 @DynamicInsert
 @DynamicUpdate
-public class Account {
+public class Account implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4346170139689800818L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
