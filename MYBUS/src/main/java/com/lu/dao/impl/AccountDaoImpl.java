@@ -1,6 +1,7 @@
 package com.lu.dao.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lu.dao.AccountDao;
 import com.lu.entity.Account;
-@Repository 
+@Repository
 public class AccountDaoImpl implements AccountDao{
 	
 	@Autowired
@@ -21,6 +22,13 @@ public class AccountDaoImpl implements AccountDao{
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		return session.save(account);
+	}
+
+
+	@Override
+	public List<Account> checkName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

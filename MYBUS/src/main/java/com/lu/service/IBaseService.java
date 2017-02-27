@@ -1,6 +1,6 @@
 package com.lu.service;
 
-import java.io.Serializable;  
+import java.io.Serializable;
 
 public interface IBaseService<T, PK extends Serializable> {  
   
