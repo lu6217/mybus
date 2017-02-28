@@ -9,5 +9,7 @@ public interface AccountService {
 	public Serializable save(Account account);
 
 	public boolean checkName(String name);
+
+	public Account findByName(String name);
 	
 }

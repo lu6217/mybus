@@ -15,7 +15,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name="ORDER")
+@Table(name="tb_order")
 @DynamicInsert
 @DynamicUpdate
 public class Order {
@@ -28,12 +28,16 @@ public class Order {
 	@JoinColumn
 	private List<User> users;
 	
+	@JoinColumn(name="accountId")
 	private Long account;
 	
+	@JoinColumn(name="trainId")
 	private Long trainNumber;
 	
+	@JoinColumn(name="beginSite")
 	private Long beginSite;
 	
+	@JoinColumn(name="endSite")
 	private Long endSite;
 	
 	private Long num;
@@ -47,6 +51,7 @@ public class Order {
 	private String price;  //用目的地的价格减去出发站的价格
 	
 	private String status;//待付款   已付款  已支付待乘车   已取消     已退订  已关闭   已完成
+	
 	public Long getId() {
 		return id;
 	}

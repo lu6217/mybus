@@ -26,6 +26,10 @@ public class Account implements Serializable{
 	 */
 	private static final long serialVersionUID = -4346170139689800818L;
 
+	public static final long GENERAL_USERTYPE = 10L;
+	public static final long MANAGE_USERTYPE=20L;
+	public static final long ADMIN_USERTYPE=1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -33,6 +37,8 @@ public class Account implements Serializable{
 	private String name;
 	
 	private String password;
+	
+	private Long type;
 	
 	@OneToMany
 	@JoinColumn
@@ -82,6 +88,12 @@ public class Account implements Serializable{
 		this.orders = orders;
 	}
 
-	
-	
+	public Long getType() {
+		return type;
+	}
+
+	public void setType(Long type) {
+		this.type = type;
+	}
+
 }
