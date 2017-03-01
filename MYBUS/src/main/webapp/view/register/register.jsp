@@ -4,39 +4,64 @@
 <%
 	request.setAttribute("path", request.getContextPath());
 %>
-<script type="text/javascript" src="${path}/js/jquery-2.1.1.min.js"></script>
-<html>
+
+<html>	
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
+<link href="${path}/css/style.css" rel='stylesheet' type='text/css' />
+<!--webfonts-->
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<!--//webfonts-->
+<script src="${path}/js/jquery-2.1.1.min.js"></script>
 </head>
 <body>
-	<form id="registerform" name="registerform" method="post" action="${path }/luwei/account/register" >
-		<center>
-			<table name="registertable">
-				<h1>Register</h1>
-				<tr>
-					账户名：<input type="text" name="name" id="name" onblur="checkName()" /><span id="namespan" ></span>
-				</tr><br>
-				<tr>
-					密码：<input type="password" name="password" id="password" onblur="checkPwd()" /><span id="pwdspan"></span>
-				</tr><br>
-				<tr>
-					确认密码：<input type="password" name="password2" id="password2" onblur="checkPwd2()" /><span id="pwd2span"></span>
-				</tr><br>
-				<tr>
-					<input type="reset" value="重置" />
-					<input type="button" id="reg" value="提交" />
-				</tr>
-				<br><hr/>
-				<tr>
-					<a href="${path }/view/login.jsp">去登陆</a>
-				</tr>
-			</table>
-		</center>
-	</form>
-	
-	<script>
+<script>$(document).ready(function(c) {
+	$('.close').on('click', function(c){
+		$('.login-form').fadeOut('slow', function(c){
+	  		$('.login-form').remove();
+		});
+	});	  
+});
+</script>
+ <!--SIGN UP-->
+ <h1>Sign Up Form</h1>
+<div class="login-form">
+	<div class="close"> </div>
+		<div class="head-info">
+			<!--<label class="lbl-1"> </label>
+			<label class="lbl-2"> </label>
+			<label class="lbl-3"> </label>-->
+		</div>
+			<div class="clear"> </div>
+	<div class="avtar">
+		<img src="${path}/images/avtar.png" />
+	</div>
+			<form id="registerform" name="registerform" method="post" action="${path }/luwei/account/register" >
+					<input type="text" id="name" name="name" class="text" value="Username" onfocus="this.value = '';" onblur="checkName()" ><br>
+					<span id="namespan"></span>
+					<input type="password" id="password" name="password" value="Password" onfocus="this.value = '';" onblur="checkPwd()" ><br>
+					<span id="pwdspan"></span>
+					<input type="password" id="password2" name="password2" value="Password" onfocus="this.value = '';" onblur="checkPwd2()"><br>
+					<span id="pwd2span"></span>
+					<br><br>
+				
+
+			</form>
+	<div class="signin">
+		<input type="submit" id="reg" value="Sign Up" >
+	</div>
+</div>
+   <div class="copy-rights">
+ 
+ 		<p><a href="${path }/view/login/login.jsp">go Login</a></p>	
+		<p>Copyright &copy; 2017.Company name All rights reserved.</p>
+   </div>
+
+<script>
 	
 		function judgePassword(pwd) {
 			var regex = /^[a-zA-Z]\w{5,17}$/;	//以字母来头的字母数字下划线 长度为6-18

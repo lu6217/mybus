@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.AccountDao;
 import com.lu.entity.Account;
+import com.lu.entity.vo.AccountSearchVo;
 import com.lu.service.AccountService;
+import com.lu.util.PagingVO;
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -41,6 +44,15 @@ public class AccountServiceImpl implements AccountService {
 			account=lists.get(0);
 		}
 		return account;
+	}
+
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo, AccountSearchVo accountVo) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=accountDao.searchList(pagingVo,accountVo);
+		return vo;
 	}
 
 }

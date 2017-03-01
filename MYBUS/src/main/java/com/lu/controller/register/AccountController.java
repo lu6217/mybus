@@ -6,13 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.Account;
-import com.lu.entity.vo.AccountVo;
+import com.lu.entity.vo.AccountRegisterVo;
+import com.lu.entity.vo.AccountSearchVo;
 import com.lu.service.AccountService;
+import com.lu.util.PagingVO;
 
 
 @Controller
@@ -34,13 +37,10 @@ public class AccountController {
 			result="user not exis!";
 		}else if(pwd.equals(account.getPassword())){
 			result="success!";
+			request.getSession().setAttribute("acount", account);
 		}else{
 			result="wrong password!";
 		}
-		//Account a=null;
-		
-		//request.getSession().setAttribute("acount", a);
-		
 		return result;
 	}
 	
@@ -52,7 +52,7 @@ public class AccountController {
 	
 	@RequestMapping("/register")
 	@ResponseBody
-	public String register(HttpServletRequest request, AccountVo accountVo){
+	public String register(HttpServletRequest request, AccountRegisterVo accountVo){
 		System.out.println(accountVo.getName()+"---"+accountVo.getPassword()+"---"+accountVo.getPassword2());
 		//ResultResponse result = new ResultResponse();
 		String result=null;
@@ -87,6 +87,11 @@ public class AccountController {
 		}
 		return flag;
 	}
+	@RequestMapping("/list")
+	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){
+		PagingVO vo =accountService.searchList(pagingVo,accountVo);
+		System.out.println(vo.getCount());
+		return "";
+	}
 	
-
 }

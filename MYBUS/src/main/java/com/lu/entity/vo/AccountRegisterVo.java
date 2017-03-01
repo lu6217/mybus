@@ -1,6 +1,6 @@
 package com.lu.entity.vo;
 
-public class AccountVo {
+public class AccountRegisterVo {
 
 	private String name;
 	

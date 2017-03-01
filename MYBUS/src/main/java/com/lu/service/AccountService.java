@@ -3,6 +3,8 @@ package com.lu.service;
 import java.io.Serializable;
 
 import com.lu.entity.Account;
+import com.lu.entity.vo.AccountSearchVo;
+import com.lu.util.PagingVO;
 
 public interface AccountService {
 
@@ -11,5 +13,7 @@ public interface AccountService {
 	public boolean checkName(String name);
 
 	public Account findByName(String name);
+
+	public PagingVO searchList(PagingVO pagingVo, AccountSearchVo accountVo);
 	
 }

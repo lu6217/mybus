@@ -38,7 +38,7 @@ public class Account implements Serializable{
 	
 	private String password;
 	
-	private Long type;
+	private Long type=GENERAL_USERTYPE;
 	
 	@OneToMany
 	@JoinColumn
