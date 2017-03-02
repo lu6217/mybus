@@ -19,7 +19,7 @@ public class PagingCriteriaSearchCallback<T> implements HibernateCallback<T> {
 	 * 
 	 */
 	private static final int DEF_SIZE = SystemConfigHolder.instance().getInterger("system.pagesize.default");
-	
+//	private static final int DEF_SIZE = 10;
 	public PagingCriteriaSearchCallback(){
 		
 	}

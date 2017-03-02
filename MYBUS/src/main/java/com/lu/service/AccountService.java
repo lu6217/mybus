@@ -15,5 +15,9 @@ public interface AccountService {
 	public Account findByName(String name);
 
 	public PagingVO searchList(PagingVO pagingVo, AccountSearchVo accountVo);
-	
+
+	public Account findById(Long accountId);
+
+	public boolean updateAccountType(Account account);
+
 }

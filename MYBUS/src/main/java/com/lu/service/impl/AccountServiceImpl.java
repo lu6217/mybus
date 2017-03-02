@@ -55,4 +55,26 @@ public class AccountServiceImpl implements AccountService {
 		return vo;
 	}
 
+	@Override
+	@Transactional
+	public Account findById(Long accountId) {
+		// TODO Auto-generated method stub
+		Account account=null;
+		List<Account> lists=accountDao.findById(accountId);
+		if(lists!=null && lists.size()>0){
+			account=lists.get(0);
+		}
+		return account;
+	}
+
+	@Override
+	@Transactional
+	public boolean updateAccountType(Account account) {
+		// TODO Auto-generated method stub
+		accountDao.update(account);
+		
+		return true;
+	}
+
+
 }

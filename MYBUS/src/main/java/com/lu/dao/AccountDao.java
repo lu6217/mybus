@@ -54,5 +54,13 @@ public class AccountDao extends BaseDAO<Account>{
 		return query;
 	}
 
+
+	public List<Account> findById(Long id) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Account.class);
+		query.addEq("id",id);
+		return this.select(query);
+	}
+
 	
 }

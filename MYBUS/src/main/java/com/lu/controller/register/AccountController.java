@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.Account;
+import com.lu.entity.User;
 import com.lu.entity.vo.AccountRegisterVo;
 import com.lu.entity.vo.AccountSearchVo;
+import com.lu.entity.vo.UserVo;
 import com.lu.service.AccountService;
+import com.lu.service.UserService;
 import com.lu.util.PagingVO;
 
 
@@ -24,6 +27,9 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private UserService userService; 
 	
 	@RequestMapping("/login")
 	@ResponseBody
@@ -53,7 +59,6 @@ public class AccountController {
 	@RequestMapping("/register")
 	@ResponseBody
 	public String register(HttpServletRequest request, AccountRegisterVo accountVo){
-		System.out.println(accountVo.getName()+"---"+accountVo.getPassword()+"---"+accountVo.getPassword2());
 		//ResultResponse result = new ResultResponse();
 		String result=null;
 		String name=accountVo.getName().trim();
@@ -93,5 +98,49 @@ public class AccountController {
 		System.out.println(vo.getCount());
 		return "";
 	}
+	
+	@RequestMapping("/updatetype")
+	@ResponseBody
+	public String updateAccountType(HttpServletRequest request,@RequestParam(value = "accountId", required = false) Long accountId,
+			@RequestParam(value = "type", required = false) Long type){
+		String result=null;
+		Account account=accountService.findById(accountId);
+		if(account!=null){
+			account.setType(type);
+			if(accountService.updateAccountType(account)){
+				result="success!";
+			}
+		}else{
+			result="user not exis!";
+		}
+		
+		return result;
+	}
+	
+	
+	@RequestMapping("/adduser")
+	@ResponseBody
+	public String addUser(HttpServletRequest request, UserVo userVo){
+		String result=null;
+		if(userVo.getAccountId()!=null){
+			Account account=accountService.findById(userVo.getAccountId());
+			if(account!=null){
+				User user=new User();
+				user.setAccountId(userVo.getAccountId());
+				user.setAddress(userVo.getAddress().trim());
+				user.setAge(Long.parseLong(userVo.getAge().trim()));
+				user.setIDcard(userVo.getIDcard().trim());
+				user.setName(userVo.getName().trim());
+				user.setSex(Integer.parseInt(userVo.getSex().trim()));
+				user.setTelphone(userVo.getTelphone().trim());
+				userService.saveOrUpdateUser(user);
+				result="success!";
+			}else{
+				result="faliure!";
+			}
+		}
+		return result;
+	}
+	
 	
 }

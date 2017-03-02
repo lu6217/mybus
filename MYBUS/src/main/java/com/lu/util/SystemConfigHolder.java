@@ -87,7 +87,7 @@ public class SystemConfigHolder {
 
 		load();
 		
-		load("interface-setting.properties");
+//		load("interface-setting.properties");
 	}
 
 	private void load() {
@@ -108,23 +108,23 @@ public class SystemConfigHolder {
 		}
 	}
 	
-	private void load(String fileName) {
-		InputStream is = null;
-
-		try {
-
-			is = SystemConfigHolder.class.getClassLoader().getResourceAsStream(fileName);
-			properties.load(is);
-			is.close();
-
-		} catch (Exception e) {
-			if (log.isErrorEnabled()) {
-				log.error(e.toString());
-			}
-		} finally {
-			IOCloseUtils.close(is);
-		}
-	}
+//	private void load(String fileName) {
+//		InputStream is = null;
+//
+//		try {
+//
+//			is = SystemConfigHolder.class.getClassLoader().getResourceAsStream(fileName);
+//			properties.load(is);
+//			is.close();
+//
+//		} catch (Exception e) {
+//			if (log.isErrorEnabled()) {
+//				log.error(e.toString());
+//			}
+//		} finally {
+//			IOCloseUtils.close(is);
+//		}
+//	}
 
 	/**
 	 * Gets the value.
@@ -179,7 +179,7 @@ public class SystemConfigHolder {
 	
 	public Integer getInterger(String key, int defaultValue){
 		
-		return Integer.valueOf(properties.getProperty(key,"100"));
+		return Integer.valueOf(properties.getProperty(key,String.valueOf(defaultValue)));
 	}
 
 	/**
