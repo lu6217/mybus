@@ -15,7 +15,7 @@
 	<form id="updateForm" name="updateForm" method="post" action="${path }/luwei/account/updatetype">
 		<center>
 			<table>
-				<input type="hidden" id="accountId" name="accountId" value="16" />
+				<input type="hidden" id="accountId" name="accountId" value="2" />
 				<select name="type" id="type" class="form-control">
 					<option value="1"> - Admin - </option>
 					<option value="10">General</option>

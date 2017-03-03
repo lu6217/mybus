@@ -13,8 +13,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.lu.entity.enumType.TrainStatus;
 @Entity
-@Table(name="train")
+@Table(name="tb_train")
 @DynamicInsert
 @DynamicUpdate
 public class TrainNumber {
@@ -23,17 +25,17 @@ public class TrainNumber {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private String number;
+	private String number; //车次
 	
-	private Long beginSite;
+	private Long beginSite;//始发站
 	
-	private Long endSite;
+	private Long endSite; //终点站
 	
-	private Date StartTime;
+	private Date StartTime;//发车时间
 	
-	private String price;
+	private String price; //票价
 	
-	private Long num;
+	private Long num; //余票
 	
 	@OneToMany
 	@JoinColumn
@@ -41,7 +43,7 @@ public class TrainNumber {
 	
 	private String category;
 	
-	private String status;// 已禁用   正常使用 
+	private Integer status=TrainStatus.ON.getStatus();// 0禁用   10正常使用 
 
 	public Long getId() {
 		return id;
@@ -115,13 +117,12 @@ public class TrainNumber {
 		this.sites = sites;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
+
 }

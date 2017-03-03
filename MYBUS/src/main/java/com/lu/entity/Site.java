@@ -10,7 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name="site")
+@Table(name="tb_site")
 @DynamicInsert
 @DynamicUpdate
 public class Site {
@@ -19,14 +19,10 @@ public class Site {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private String name;
+	private String name;//站点名称
 	
-	private String priceL;
+	private String price;//站点的价格 从始发站到此站的票价
 	
-	private String priceR;
-	
-	private String direction;
-
 	public Long getId() {
 		return id;
 	}
@@ -43,29 +39,12 @@ public class Site {
 		this.name = name;
 	}
 
-	public String getPriceL() {
-		return priceL;
+	public String getPrice() {
+		return price;
 	}
 
-	public void setPriceL(String priceL) {
-		this.priceL = priceL;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
-	public String getPriceR() {
-		return priceR;
-	}
-
-	public void setPriceR(String priceR) {
-		this.priceR = priceR;
-	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
-	} 
-	
-	
 }

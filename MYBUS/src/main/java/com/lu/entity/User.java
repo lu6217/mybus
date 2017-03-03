@@ -1,17 +1,20 @@
 package com.lu.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name="USER")
+@Table(name="tb_user")
 @DynamicInsert
 @DynamicUpdate
 public class User {
@@ -32,8 +35,12 @@ public class User {
 	
 	private String telphone;
 	
-	@JoinColumn(name="accountId")
+	@Column(name="accountId")
 	private Long accountId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "accountId", updatable = false, insertable = false)
+	private Account account;
 
 	public Long getId() {
 		return id;
@@ -89,6 +96,14 @@ public class User {
 
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Long getAccountId() {

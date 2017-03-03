@@ -7,16 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "tb_account")
 @DynamicInsert
 @DynamicUpdate
 public class Account implements Serializable{
@@ -34,19 +33,17 @@ public class Account implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private String name;
+	private String name;//账户名
 	
-	private String password;
+	private String password;//密码
 	
-	private Long type=GENERAL_USERTYPE;
+	private Long type=GENERAL_USERTYPE; //账户类型
 	
-	@OneToMany
-	@JoinColumn
-	private List<User> users;
+	@Transient
+	private List<User> users; //用户
 	
-	@OneToMany
-	@JoinColumn
-	private List<Order> orders;
+	@Transient
+	private List<Order> orders;//订单
 
 	public Long getId() {
 		return id;

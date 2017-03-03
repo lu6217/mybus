@@ -14,7 +14,7 @@
 	<form id="addUserForm" name="addUserForm" method="post" action="${path }/luwei/account/adduser">
 		<center>
 			<table>
-				<input type="hidden" name="accountId" id="accountId" value="15">
+				<input type="hidden" name="accountId" id="accountId" value="1">
 				username:<input type="text" id="name" name="name" /><br>
 				sex:男<input type="radio" name="sex" value="1" /> 
 				女<input type="radio" name="sex" value="0" /><br>
