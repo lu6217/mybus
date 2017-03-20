@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.schedule;
 
 import java.util.Date;
 import java.util.List;

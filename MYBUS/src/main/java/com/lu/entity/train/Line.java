@@ -1,6 +1,8 @@
-package com.lu.entity;
+package com.lu.entity.train;
 
 import java.util.List;
+
+import com.lu.entity.schedule.Schedule;
 
 public class Line {
 

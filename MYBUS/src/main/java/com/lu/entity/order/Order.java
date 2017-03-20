@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.order;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.lu.entity.account.Account;
 
 @Entity
 @Table(name="tb_order")

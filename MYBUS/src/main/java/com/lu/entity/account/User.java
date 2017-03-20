@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

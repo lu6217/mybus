@@ -1,6 +1,6 @@
 package com.lu.service;
 
-import com.lu.entity.User;
+import com.lu.entity.account.User;
 
 public interface UserService {
 

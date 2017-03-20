@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.AccountDao;
-import com.lu.entity.Account;
+import com.lu.entity.account.Account;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.service.AccountService;
 import com.lu.util.PagingVO;

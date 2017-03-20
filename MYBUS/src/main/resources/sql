@@ -1,0 +1,7 @@
+----sql Óï¾ä
+
+create table tb_train_site(
+id bigint NOT NULL PRIMARY KEY,
+train_id bigint,
+site_id bigint
+);

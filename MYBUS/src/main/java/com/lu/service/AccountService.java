@@ -2,7 +2,7 @@ package com.lu.service;
 
 import java.io.Serializable;
 
-import com.lu.entity.Account;
+import com.lu.entity.account.Account;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.util.PagingVO;
 

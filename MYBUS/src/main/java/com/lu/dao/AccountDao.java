@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.lu.entity.Account;
+import com.lu.entity.account.Account;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.util.BaseDAO;
 import com.lu.util.DetachedCriteriaBuilder;

@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.account;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.lu.entity.order.Order;
 
 
 @Entity

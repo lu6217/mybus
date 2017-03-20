@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lu.entity.Account;
-import com.lu.entity.User;
+import com.lu.entity.account.Account;
+import com.lu.entity.account.User;
 import com.lu.entity.vo.AccountRegisterVo;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.entity.vo.UserVo;

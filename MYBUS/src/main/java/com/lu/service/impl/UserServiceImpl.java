@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.UserDao;
-import com.lu.entity.User;
+import com.lu.entity.account.User;
 import com.lu.service.UserService;
 
 @Service

@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.train;
 
 import java.util.Date;
 import java.util.List;
@@ -33,15 +33,15 @@ public class TrainNumber {
 	
 	private Date StartTime;//发车时间
 	
-	private String price; //票价
+	private String price; //全票价
 	
 	private Long num; //余票
 	
 	@OneToMany
 	@JoinColumn
-	private List<Site> sites;
+	private List<Site> sites; //所经的站点
 	
-	private String category;
+	private String category; //车辆类型    T  K  Z  
 	
 	private Integer status=TrainStatus.ON.getStatus();// 0禁用   10正常使用 
 

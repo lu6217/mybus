@@ -1,4 +1,4 @@
-package com.lu.entity;
+package com.lu.entity.order;
 
 import java.util.Date;
 
