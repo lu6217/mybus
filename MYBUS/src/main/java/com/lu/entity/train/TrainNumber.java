@@ -7,14 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.lu.entity.enumType.TrainStatus;
+import com.lu.entity.site.Site;
 @Entity
 @Table(name="tb_train")
 @DynamicInsert
@@ -37,14 +37,15 @@ public class TrainNumber {
 	
 	private Long num; //余票
 	
-	@OneToMany
-	@JoinColumn
+	@Transient
 	private List<Site> sites; //所经的站点
 	
 	private String category; //车辆类型    T  K  Z  
 	
 	private Integer status=TrainStatus.ON.getStatus();// 0禁用   10正常使用 
 
+	private Date createTime;//创建时间
+	
 	public Long getId() {
 		return id;
 	}
@@ -123,6 +124,14 @@ public class TrainNumber {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.lu.entity.train;
+package com.lu.entity.site;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +21,9 @@ public class Site {
 	
 	private String name;//站点名称
 	
-	private String price;//站点的价格 从始发站到此站的票价
+	//private String price;//站点的价格 从始发站到此站的票价
 	
+	private String description;//站点描述
 	//private Long trainId;//车次
 	
 	public Long getId() {
@@ -41,12 +42,12 @@ public class Site {
 		this.name = name;
 	}
 
-	public String getPrice() {
-		return price;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPrice(String price) {
-		this.price = price;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
