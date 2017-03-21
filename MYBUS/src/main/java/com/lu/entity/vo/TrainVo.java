@@ -17,7 +17,7 @@ public class TrainVo {
 	
 	private String price; //È«Æ±¼Û
 	
-	private String num; //ÓàÆ±
+	private String num; //ÓàÆ±  
 
 	public String getNumber() {
 		return number;
