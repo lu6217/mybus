@@ -17,6 +17,7 @@
 <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
 <script src="${path}/js/jquery-2.1.1.min.js"></script>
+<script src="${path}/js/layer/layer.js"></script>
 </head>
 <body>
 <script>$(document).ready(function(c) {
@@ -48,8 +49,6 @@
 					<input type="password" id="password2" name="password2" value="Password" onfocus="this.value = '';" onblur="checkPwd2()"><br>
 					<span id="pwd2span"></span>
 					<br><br>
-				
-
 			</form>
 	<div class="signin">
 		<input type="submit" id="reg" value="Sign Up" >
@@ -74,28 +73,33 @@
 		function checkName(){
 			var name=$("#name").val();
 			//if(!name) return;
-			
 			if(!name){
 				//alert("name==null");
-				$("#namespan").text("用户名不能为空！");
+				layer.tips('name不能为空!', '#name',{
+					tips: [2,'#F14164'],
+					time: 5000
+				});
 				return;
 			}else if(name.length<4 || name.length>12){
-				$("#namespan").text("长度不能小于4！");
+				layer.tips('name长度不能小于 4!', '#name',{
+					tips: [2,'#F14164'],
+					time: 5000
+				});
 				return;
 			}
-			$("#namespan").text("");
-			
-			
+			//$("#namespan").text("");
 			$.ajax(
 		    		{
 		    			 type:"POST",
 		    		     url:"${path }/luwei/account/register/checkname",
 		    		     data: {name:name},
 		    	         success:function(res){
-		    	        	 if(res!=null && res=="true"){
-		    	        		alert("账户名被占用"); 
+		    	        	 if(res && res.result){
+		    	        		 layer.msg(res.message);
+// 		    	        		 alert(res.message); 
 		    	        	 }else{
-		    	        	 	alert("ok");
+		    	        		 layer.msg(res.message);
+		    	        	 	//alert(res.message);
 		    	        	 }
 			    		},
 			    		error:function(err,err1,err2){
@@ -107,19 +111,24 @@
 		function checkPwd(){
 			var pwd=$("#password").val();
 			if(!judgePassword(pwd)){
-				$("#pwdspan").text("以字母开头的6-18位");
+				layer.tips('6到18个字符!', '#password',{
+					tips: [2,'#F14164'],
+					time: 5000
+				});
+				//$("#pwdspan").text("以字母开头的6-18位");
 				return;
 			}
-			$("#pwdspan").text("");
+			//$("#pwdspan").text("");
 		}
 		function checkPwd2(){
 			var pwd=$("#password").val();
 			var pwd2=$("#password2").val();
 			if(judgePassword(pwd) && pwd!=pwd2){
-				$("#pwd2span").text("请确认密码！");
+				 layer.msg('两次密码不一致！');
+				//$("#pwd2span").text("请确认密码！");
 				return;
 			}
-			$("#pwd2span").text("");
+			//$("#pwd2span").text("");
 		}
 		
 		$("#reg").bind("click",function(){
@@ -131,15 +140,16 @@
 			checkPwd(); //验证密码
 			checkPwd2();
 			$.post("${path }/luwei/account/register",$("#registerform").serialize(),function(data) {
-				if(data!=null){
-					alert(data);
-				}
-// 				if (data && data.result) {
-// 					alert("恭喜你，注册成功！");
-// 					//window.location.replace("${path}/arwen/userinfo/register/result");
-// 				}else if (data){
-// 					alert(data.message);
+// 				if(data!=null){
+// 					alert(data);
 // 				}
+				if (data && data.result) {
+					//alert("恭喜你，注册成功！");
+					layer.msg(data.message,{icon: 6});
+					//window.location.replace("${path}/arwen/userinfo/register/result");
+				}else if (data){
+					alert(data.message,{icon: 5});
+				}
 			});
 		});
 	</script>

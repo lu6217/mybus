@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.vo.TrainVo;
 import com.lu.service.TrainService;
+import com.lu.util.ResultResponse;
 
 @Controller
 @RequestMapping("/train")
@@ -22,13 +23,11 @@ public class TrainController {
 	
 	@RequestMapping("/create")
 	@ResponseBody
-	public String addTrain(HttpServletRequest request,TrainVo trainVo){
-		System.out.println("kk");
-		System.out.println(trainVo.getStartTime().getTime());
-		String result=null;
+	public ResultResponse addTrain(HttpServletRequest request,TrainVo trainVo){
+		
+		ResultResponse result = new ResultResponse();
 		if(trainVo!=null){
 			TrainNumber train=new TrainNumber();
-			
 			train.setNumber(trainVo.getNumber().trim());
 			//train.setBeginSite(trainVo.getBeginSite().trim());
 			//train.setEndSite(trainVo.getEndSite().trim());
@@ -43,7 +42,10 @@ public class TrainController {
 			train.setStartTime(trainVo.getStartTime());
 			train.setCreateTime(new Date());
 			trainService.save(train);
-			result="success";
+			result.setMessage("Success!");
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("failure!");
 		}
 		return result;
 	}

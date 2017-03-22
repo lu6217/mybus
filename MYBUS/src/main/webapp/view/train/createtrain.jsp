@@ -8,16 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>create train</title>
+<script src="${path}/js/jquery-2.1.1.min.js"></script>
 <script src="${path}/js/laydate/laydate.js"></script>
-
 <link rel="stylesheet" type="text/css" href="${path}/js/laydate/date/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="${path}/js/laydate/date/bootstrap-clockpicker.min.css">
+<link rel="stylesheet" type="text/css" href="${path}/css/jquery-ui.min.css">
 </head>
 <body>
 
-<form id="createtrainform" name="reatetrainform" method="post" action="${path }/luwei/train/create" >
+<form id="createtrainform" name="reatetrainform" method="post" >
 		<center>
-			<table name="createtable">
+			<table>
 				<h1>Create Train</h1>
 				<tr>
 					车次：<input type="text" name="number" id="number" onblur="" /><span id="namespan" ></span>
@@ -43,20 +44,63 @@
 							</div>
 				</tr><br>
 				<tr>
-					<input type="reset" value="重置" />
-					<input type="submit" id="create" value="提交" />
+					<input type="button" id="create" value="提交" />
 				</tr>
-				<br><hr/>
-<!-- 				<tr> -->
-<%-- 					<a href="${path }/view/login.jsp">去登陆</a> --%>
-<!-- 				</tr> -->
+				<br>
 			</table>
 		</center>
 	</form>
 	<script type="text/javascript" src="${path}/js/laydate/date/jquery.min.js"></script>
 	<script type="text/javascript" src="${path}/js/laydate/date/bootstrap-clockpicker.min.js"></script>
+	<script src="${path}/js/layer/layer.js"></script>
 	<script type="text/javascript">
 		$('.clockpicker').clockpicker();
+		$("#create").bind("click",function(){
+			$.post("${path }/luwei/train/create",$("#createtrainform").serialize(),function(data) {
+				if(data && data.result) {
+					layer.msg(data.message,{icon: 6});
+					//window.location.replace("${path}/arwen/userinfo/register/result");
+				}else{
+					layer.msg(data.message,{icon: 5});
+				}
+			});
+		});
+		
+		$("input[name=beginSite]").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+						url : "${path}/luwei/site/fuzzy",
+						dataType : "json",
+						type : 'post',
+						data : {
+							q : request.term
+							//request.term 表示获取文本框输入的值
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									name:item.name,
+									value:item.id
+								}
+							}));
+						}
+				})
+			},
+			focus: function(event, ui) { 
+ 				return false;
+ 			},
+ 			select:function(event,ui){
+ 				//$("#parentCourse").val(ui.item['value']);
+				$("input[name=beginSite]").val(ui.item['name']);
+				return false;
+ 			},
+ 			change:function(event,ui){
+ 				if(null==ui.item){
+ 					//$("#parentCourse").val("");
+ 				}
+ 			},
+ 			minLength : 1
+		});	
 	</script>
 
 

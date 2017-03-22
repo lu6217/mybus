@@ -19,6 +19,7 @@ import com.lu.entity.vo.UserVo;
 import com.lu.service.AccountService;
 import com.lu.service.UserService;
 import com.lu.util.PagingVO;
+import com.lu.util.ResultResponse;
 
 
 @Controller
@@ -58,39 +59,47 @@ public class AccountController {
 	
 	@RequestMapping("/register")
 	@ResponseBody
-	public String register(HttpServletRequest request, AccountRegisterVo accountVo){
+	public ResultResponse register(HttpServletRequest request, AccountRegisterVo accountVo){
 		//ResultResponse result = new ResultResponse();
-		String result=null;
+		ResultResponse result = new ResultResponse();
 		String name=accountVo.getName().trim();
-		String password=accountVo.getPassword().trim();//去掉两头的空格
-		String password2=accountVo.getPassword2().trim();
-		if(password!=null && password2!=null && !"".equals(password) && !"".equals(password2) && password.equals(password2)){
-			Md5PasswordEncoder md5 = new Md5PasswordEncoder();
-			Account account=new Account();
-			account.setName(name);
-			account.setPassword(md5.encodePassword(password, null));
-			accountService.save(account);
-			result="success!";
+		if(!accountService.checkName(name)){
+			String password=accountVo.getPassword().trim();//去掉两头的空格
+			String password2=accountVo.getPassword2().trim();
+			if(password!=null && password2!=null && !"".equals(password) && !"".equals(password2) && password.equals(password2)){
+				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
+				Account account=new Account();
+				account.setName(name);
+				account.setPassword(md5.encodePassword(password, null));
+				accountService.save(account);
+				result.setMessage("Register Success!");
+			}else{
+				result.setResult(Boolean.FALSE);
+				result.setMessage("Register Failure! Password Error!");
+			}
 		}else{
-			result="failure!";
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Register Failure! Name Exists");
 		}
 		return result;
 	}
 	
 	@RequestMapping("/register/checkname")
 	@ResponseBody
-	public String checkName(HttpServletRequest request){
-		String flag=null;
+	public ResultResponse checkName(HttpServletRequest request){
+		
+		ResultResponse result = new ResultResponse();
 		String name=request.getParameter("name").trim();
 		if(name!=null){
-			boolean f=accountService.checkName(name);
-			if(f==true){
-				flag="true";
+			boolean flag=accountService.checkName(name);
+			if(flag){
+				result.setResult(Boolean.FALSE);
+				result.setMessage("Name Exists");
 			}else{
-				flag="false";
+				result.setMessage("Name Avaiable");
 			}
 		}
-		return flag;
+		return result;
 	}
 	@RequestMapping("/list")
 	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){

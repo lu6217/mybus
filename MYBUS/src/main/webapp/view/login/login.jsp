@@ -17,6 +17,7 @@
 <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
 <!--//webfonts-->
 <script src="${path}/js/jquery-2.1.1.min.js"></script>
+<script src="${path}/js/layer/layer.js"></script>
 </head>
 <body>
 <script>$(document).ready(function(c) {

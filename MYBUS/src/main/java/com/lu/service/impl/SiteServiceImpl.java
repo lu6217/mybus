@@ -29,7 +29,7 @@ public class SiteServiceImpl implements SiteService{
 	public boolean checkName(String name) {
 		// TODO Auto-generated method stub
 		List<Site> lists=siteDao.getSiteByName(name);
-		if(lists!=null){
+		if(lists!=null && lists.size()!=0){
 			return true;
 		}
 		return false;
