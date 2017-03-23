@@ -97,7 +97,7 @@
 				}else{
 					layer.msg(data.message,{icon: 5});
 				}
-			});
+			}); 
 		});
 	$(document).ready(function () {	
 		$("#beginSite").autocomplete({
