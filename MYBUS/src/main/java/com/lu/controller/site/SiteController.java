@@ -64,10 +64,9 @@ public class SiteController {
 	}
 	@RequestMapping(value = "fuzzy", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<ResultVO> fuzzy2(@RequestParam("q") String queryKey) {
-		System.out.println("fuzzy");
+	public List<ResultVO> fuzzy2(@RequestParam("q") String queryKey,@RequestParam("site") String site) {
 		System.out.println(queryKey);
-		return null;
+		return siteService.fuzzyQuerySite(queryKey.trim(),site.trim());
 	}
 	
 }

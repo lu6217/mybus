@@ -6,5 +6,7 @@ public interface TrainService {
 
 	void save(TrainNumber train);
 
+	boolean checkName(String name);
+
 	
 }

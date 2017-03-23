@@ -1,5 +1,7 @@
 package com.lu.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,16 @@ public class TrainServiceImpl implements TrainService{
 		// TODO Auto-generated method stub
 		trainDao.save(train);
 		
+	}
+	@Override
+	@Transactional
+	public boolean checkName(String name) {
+		// TODO Auto-generated method stub
+		List<TrainNumber> lists=trainDao.getTrainByName(name);
+		if(lists!=null && lists.size()!=0){
+			return true;
+		}
+		return false;
 	}
 
 }

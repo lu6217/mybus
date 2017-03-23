@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.SiteDao;
 import com.lu.entity.site.Site;
+import com.lu.entity.vo.ResultVO;
 import com.lu.service.SiteService;
 
 @Service
@@ -33,6 +34,25 @@ public class SiteServiceImpl implements SiteService{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	@Transactional
+	public List<ResultVO> fuzzyQuerySite(String queryKey,String site) {
+		// TODO Auto-generated method stub
+		return siteDao.fuzzyQuerySite(queryKey,site);
+	}
+
+	@Override
+	@Transactional
+	public Site getSiteByName(String beginSite) {
+		// TODO Auto-generated method stub
+		List<Site> lists=siteDao.getSiteByName(beginSite);
+		Site site=null;
+		if(lists!=null && lists.size()!=0){
+			site=lists.get(0);
+		}
+		return site; 
 	}
 
 	

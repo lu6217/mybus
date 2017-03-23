@@ -2,9 +2,12 @@ package com.lu.dao;
 
 import java.util.List;
 
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.springframework.stereotype.Repository;
 
 import com.lu.entity.site.Site;
+import com.lu.entity.vo.ResultVO;
 import com.lu.util.BaseDAO;
 import com.lu.util.DetachedCriteriaBuilder;
 
@@ -17,6 +20,19 @@ public class SiteDao extends BaseDAO<Site>{
 		query.addEq("name",name);
 		
 		return this.select(query);
+	}
+
+	public List<ResultVO> fuzzyQuerySite(String queryKey, String site) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Site.class);
+		builder.setProjection(Projections.projectionList()
+				.add(Projections.property("id"), "id")
+				.add(Projections.property("name"),"name")
+				.add(Projections.property("description"), "description")
+				);
+		builder.addLikeStart("name",queryKey).addNe("name", site);
+		builder.getDetachedCriteria().setResultTransformer(new AliasToBeanResultTransformer(ResultVO.class));
+		return selectTopNE(builder, 10);
 	}
 
 }

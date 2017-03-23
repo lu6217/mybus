@@ -21,7 +21,7 @@
 			<table>
 				<h1>Create Train</h1>
 				<tr>
-					车次：<input type="text" name="number" id="number" onblur="" /><span id="namespan" ></span>
+					车次：<input type="text" name="number" id="number" onblur="checkName()" /><span id="namespan" ></span>
 				</tr><br>
 				<tr>
 					始发站：<input type="text" name="beginSite" id="beginSite" onblur="" /><span id="pwdspan"></span>
@@ -52,9 +52,43 @@
 	</form>
 	<script type="text/javascript" src="${path}/js/laydate/date/jquery.min.js"></script>
 	<script type="text/javascript" src="${path}/js/laydate/date/bootstrap-clockpicker.min.js"></script>
+	<script src="${path}/js/jquery-ui.min.js"></script>
+	<script src="${path}/js/jquery-ui.custom.min.js"></script>
 	<script src="${path}/js/layer/layer.js"></script>
 	<script type="text/javascript">
+		
 		$('.clockpicker').clockpicker();
+		
+		function checkName(){
+			var name=$("#number").val();
+			if(!name){
+				//alert("name==null");
+				layer.tips('Name not null!','#number',{
+					tips:[2,'#F14164'],
+					time:5000
+				});
+				return;
+			}
+			$.ajax(
+		    		{
+		    			 type:"POST",
+		    		     url:"${path }/luwei/train/create/checkname",
+		    		     data: {name:name},
+		    	         success:function(res){
+		    	        	 if(res && res.result){
+		    	        		layer.msg(res.message);
+		    	        		//alert(res.message); 
+		    	        	 }else{
+		    	        		 layer.msg(res.message);
+		    	        	 	//alert(res.message);
+		    	        	 }
+			    		},
+			    		error:function(err,err1,err2){
+			    		    //debugger;
+			            }
+		    		});
+		}
+		
 		$("#create").bind("click",function(){
 			$.post("${path }/luwei/train/create",$("#createtrainform").serialize(),function(data) {
 				if(data && data.result) {
@@ -65,22 +99,24 @@
 				}
 			});
 		});
-		
-		$("input[name=beginSite]").autocomplete({
+	$(document).ready(function () {	
+		$("#beginSite").autocomplete({
 			source : function(request, response) {
 				$.ajax({
 						url : "${path}/luwei/site/fuzzy",
 						dataType : "json",
 						type : 'post',
 						data : {
-							q : request.term
+							q : request.term ,
 							//request.term 表示获取文本框输入的值
+							site: $('#endSite').val()
 						},
 						success : function(data) {
 							response($.map(data, function(item) {
 								return {
-									name:item.name,
-									value:item.id
+									label:item.name,
+									value:item.id,
+									name:item.name
 								}
 							}));
 						}
@@ -91,16 +127,60 @@
  			},
  			select:function(event,ui){
  				//$("#parentCourse").val(ui.item['value']);
-				$("input[name=beginSite]").val(ui.item['name']);
+				//$("#beginSite").val(ui.item['name']);
+				$(this).next("input").val(ui.item['lable']);
+	 			$(this).val(ui.item['name']);
 				return false;
  			},
  			change:function(event,ui){
  				if(null==ui.item){
+ 					$(this).next("input").val("");
  					//$("#parentCourse").val("");
  				}
  			},
- 			minLength : 1
+ 			minLength : 0
 		});	
+		$("#endSite").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+						url : "${path}/luwei/site/fuzzy",
+						dataType : "json",
+						type : 'post',
+						data : {
+							q : request.term,
+							//request.term 表示获取文本框输入的值
+							site: $('#beginSite').val()
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									label:item.name,
+									value:item.id,
+									name:item.name
+								}
+							}));
+						}
+				})
+			},
+			focus: function(event, ui) { 
+ 				return false;
+ 			},
+ 			select:function(event,ui){
+ 				//$("#parentCourse").val(ui.item['value']);
+				//$("#beginSite").val(ui.item['name']);
+				$(this).next("input").val(ui.item['lable']);
+	 			$(this).val(ui.item['name']);
+				return false;
+ 			},
+ 			change:function(event,ui){
+ 				if(null==ui.item){
+ 					$(this).next("input").val("");
+ 					//$("#parentCourse").val("");
+ 				}
+ 			},
+ 			minLength : 0
+		});	
+	})
 	</script>
 
 
