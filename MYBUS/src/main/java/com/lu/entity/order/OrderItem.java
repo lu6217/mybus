@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,28 +22,32 @@ public class OrderItem {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@JoinColumn(name = "user_id")
+	@Column(name = "user_Id")
 	private Long userId;//用户Id
 	
-	@JoinColumn(name="train_id")
+	@Column(name="train_Id")
 	private Long trainId; //车次Id
 	
-	@JoinColumn(name="beginSite_id")
+	@Column(name="beginSite_Id")
 	private Long beginSiteId; //乘车站
 	
-	@JoinColumn(name="endSite_id")
-	private Long endSite; //下车站
+	@Column(name="endSite_id")
+	private Long endSiteId; //下车站
 	
 	@Column(name="startTime")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime; //发车时间
 	
+	@Column(name="seatType")
 	private Integer seatType;  //席别
 	
+	@Column(name="seat")
 	private String seat;//座位
 	
+	@Column(name="price")
 	private String price;  //用目的地的价格减去出发站的价格的绝对值
 	
+	@Column(name="status")
 	private String status;//待付款   已付款  已支付待乘车   已取消     已退订  已关闭   已完成
 
 	public Long getId() {
@@ -79,12 +82,12 @@ public class OrderItem {
 		this.beginSiteId = beginSiteId;
 	}
 
-	public Long getEndSite() {
-		return endSite;
+	public Long getEndSiteId() {
+		return endSiteId;
 	}
 
-	public void setEndSite(Long endSite) {
-		this.endSite = endSite;
+	public void setEndSiteId(Long endSiteId) {
+		this.endSiteId = endSiteId;
 	}
 
 	public Date getStartTime() {

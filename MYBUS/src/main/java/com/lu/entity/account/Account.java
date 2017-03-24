@@ -3,6 +3,7 @@ package com.lu.entity.account;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,10 +36,13 @@ public class Account implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="name")
 	private String name;//账户名
 	
+	@Column(name="password")
 	private String password;//密码
 	
+	@Column(name="type")
 	private Long type=GENERAL_USERTYPE; //账户类型
 	
 	@Transient

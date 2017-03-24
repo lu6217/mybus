@@ -23,16 +23,22 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="name")
 	private String name;
 	
+	@Column(name="IDcard")
 	private String IDcard;
 	
+	@Column(name="sex")
 	private int sex;//0女  1男
 	
+	@Column(name="age")
 	private Long age;
 	
+	@Column(name="address")
 	private String address;
 	
+	@Column(name="telphone")
 	private String telphone;
 	
 	@Column(name="accountId")

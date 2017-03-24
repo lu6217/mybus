@@ -2,15 +2,19 @@
 
 --删除表
 drop table tb_train_site;
---创建表
+--创建表     
 create table tb_train_site(
 id bigint NOT NULL PRIMARY KEY,
 train_id bigint,
 site_id bigint,
 price varchar(255),
-time datetime,
 distance varchar(255)
 );
+--添加 上一站点id  下一站点id
+alter table tb_train_site add prev_site_id bigint;
+alter table tb_train_site add next_site_id bigint;
+alter table tb_train_site add arrival_time datetime;
+alter table tb_train_site add leave_time datetime;
 
 ----alter table tb_train_site add distance varchar(255);为表添加一列
 ----alter table tb_train_site drop column time;

@@ -3,6 +3,7 @@ package com.lu.entity.train;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,25 +26,37 @@ public class TrainNumber {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="name")
 	private String number; //车次
 	
+	@Column(name="beginSite_id")
 	private Long beginSite;//始发站
 	
+	@Column(name="endSite_id")
 	private Long endSite; //终点站
 	
+	@Column(name="startTime")
 	private Date StartTime;//发车时间
 	
+	@Column(name="price")
 	private String price; //全票价
 	
+	@Column(name="num")
 	private Long num; //余票
+	
+	@Column(name="time")
+	private Date time;//运行时长
 	
 	@Transient
 	private List<Site> sites; //所经的站点
 	
+	@Column(name="category")
 	private String category; //车辆类型    T  K  Z  
 	
+	@Column(name="status")
 	private Integer status=TrainStatus.ON.getStatus();// 0禁用   10正常使用 
-
+	
+	@Column(name="createTime")
 	private Date createTime;//创建时间
 	
 	public Long getId() {
@@ -132,6 +145,14 @@ public class TrainNumber {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 }
