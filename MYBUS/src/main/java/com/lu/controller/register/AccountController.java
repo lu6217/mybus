@@ -32,6 +32,13 @@ public class AccountController {
 	@Autowired
 	private UserService userService; 
 	
+	/**
+	 * login
+	 * @param request
+	 * @param name
+	 * @param password
+	 * @return
+	 */
 	@RequestMapping("/login")
 	@ResponseBody
 	public String login(HttpServletRequest request,@RequestParam(value = "name", required = false) String name,
@@ -64,7 +71,7 @@ public class AccountController {
 		ResultResponse result = new ResultResponse();
 		String name=accountVo.getName().trim();
 		if(!accountService.checkName(name)){
-			String password=accountVo.getPassword().trim();//去掉两头的空格
+			String password=accountVo.getPassword().trim();//去锟斤拷锟斤拷头锟侥空革拷
 			String password2=accountVo.getPassword2().trim();
 			if(password!=null && password2!=null && !"".equals(password) && !"".equals(password2) && password.equals(password2)){
 				Md5PasswordEncoder md5 = new Md5PasswordEncoder();
