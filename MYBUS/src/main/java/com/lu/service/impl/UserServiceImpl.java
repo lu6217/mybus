@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.UserDao;
 import com.lu.entity.account.User;
+import com.lu.entity.vo.UserVo;
 import com.lu.service.UserService;
+import com.lu.util.PagingVO;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -20,6 +22,15 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		userDao.saveOrUpdate(user);
 		
+	}
+
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo, UserVo userVo) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=userDao.searchList(pagingVo,userVo);
+		return vo;
 	}
 	
 }

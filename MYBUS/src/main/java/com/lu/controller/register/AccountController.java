@@ -111,8 +111,8 @@ public class AccountController {
 	@RequestMapping("/list")
 	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){
 		PagingVO vo =accountService.searchList(pagingVo,accountVo);
-		System.out.println(vo.getCount());
-		return "";
+		model.addAttribute("pageVO", vo);
+		return "view/background/account/accountlist";
 	}
 	
 	@RequestMapping("/updatetype")
@@ -158,5 +158,10 @@ public class AccountController {
 		return result;
 	}
 	
-	
+	@RequestMapping("/userlist")
+	public String userSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
+		PagingVO vo =userService.searchList(pagingVo,userVo);
+		model.addAttribute("pageVO", vo);
+		return "view/background/account/userlist";
+	}
 }
