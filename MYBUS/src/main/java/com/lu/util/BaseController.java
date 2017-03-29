@@ -28,7 +28,7 @@ public abstract class BaseController {
 				rr.setMessage(e.getMessage());
 			} else {
 
-				rr.setMessage("ϵͳæ,���Ժ�");
+				rr.setMessage("系统忙,请稍后");
 			}
 		}
 

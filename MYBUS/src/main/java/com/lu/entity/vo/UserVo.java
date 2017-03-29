@@ -8,7 +8,7 @@ public class UserVo {
 	
 	private String IDcard;
 	
-	private String sex;//0Å®  1ÄÐ
+	private String sex;//0å¥³  1ç”·
 	
 	private String age;
 	

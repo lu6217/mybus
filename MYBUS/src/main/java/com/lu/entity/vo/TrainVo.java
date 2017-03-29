@@ -6,18 +6,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class TrainVo {
 	
-	private String number; //³µ´Î
+	private String number; //è½¦æ¬¡
 	
-	private String beginSite;//Ê¼·¢Õ¾
+	private String beginSite;//å§‹å‘ç«™
 	
-	private String endSite; //ÖÕµãÕ¾
+	private String endSite; //ç»ˆç‚¹ç«™
 	//1910/01/01 08:00:00
 	@DateTimeFormat(pattern = "HH:mm")
-	private Date StartTime;//·¢³µÊ±¼ä
+	private Date StartTime;//å‘è½¦æ—¶é—´
 	
-	private String price; //È«Æ±¼Û
+	private String price; //ç¥¨ä»·
 	
-	private String num; //ÓàÆ±  
+	private String num; //åº§ä½æ•°
 
 	public String getNumber() {
 		return number;

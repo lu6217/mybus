@@ -16,7 +16,7 @@ public class RestResponse implements Serializable {
 
 	private Boolean result = true;
 
-	private String msg = "²Ù×÷³É¹¦!";
+	private String msg ="æ“ä½œæˆåŠŸ!";
 
 	private Map<String, Object> data = new HashMap<String, Object>();
 

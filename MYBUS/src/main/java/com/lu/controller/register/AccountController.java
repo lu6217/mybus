@@ -71,7 +71,7 @@ public class AccountController {
 		ResultResponse result = new ResultResponse();
 		String name=accountVo.getName().trim();
 		if(!accountService.checkName(name)){
-			String password=accountVo.getPassword().trim();//ȥ����ͷ�Ŀո�
+			String password=accountVo.getPassword().trim();//去除空格
 			String password2=accountVo.getPassword2().trim();
 			if(password!=null && password2!=null && !"".equals(password) && !"".equals(password2) && password.equals(password2)){
 				Md5PasswordEncoder md5 = new Md5PasswordEncoder();

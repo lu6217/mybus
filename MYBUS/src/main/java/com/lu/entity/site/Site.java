@@ -21,13 +21,13 @@ public class Site {
 	private Long id;
 	
 	@Column(name="name")
-	private String name;//Õ¾µãÃû³Æ
+	private String name;//ç«™ç‚¹å
 	
-	//private String price;//Õ¾µãµÄ¼Û¸ñ ´ÓÊ¼·¢Õ¾µ½´ËÕ¾µÄÆ±¼Û
+	//private String price;//ä»·æ ¼
 	
 	@Column(name="description")
-	private String description;//Õ¾µãÃèÊö
-	//private Long trainId;//³µ´Î
+	private String description;//ç«™ç‚¹æè¿°
+	//private Long trainId;//è½¦æ¬¡id
 	
 	public Long getId() {
 		return id;

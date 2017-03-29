@@ -37,19 +37,19 @@ public class Account implements Serializable{
 	private Long id;
 	
 	@Column(name="name")
-	private String name;//ÕË»§Ãû
+	private String name;//è´¦æˆ·å
 	
 	@Column(name="password")
-	private String password;//ÃÜÂë
+	private String password;//å¯†ç 
 	
 	@Column(name="type")
-	private Long type=GENERAL_USERTYPE; //ÕË»§ÀàĞÍ
+	private Long type=GENERAL_USERTYPE; //è´¦æˆ·ç±»å‹
 	
 	@Transient
-	private List<User> users; //ÓÃ»§
+	private List<User> users; //user
 	
 	@Transient
-	private List<Order> orders;//¶©µ¥
+	private List<Order> orders;//è®¢å•
 
 	public Long getId() {
 		return id;

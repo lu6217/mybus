@@ -11,15 +11,15 @@ public class Schedule {
 	
 	private Long lineId;
 	
-	private String direction;//方向
+	private String direction;//鏂瑰悜
 	
 	private Date startTime;
 	
 	private Date endTime;
 	
-	private Double miles;//距离
+	private Double miles;//璺濈
 	
-	private Double price; //价格
+	private Double price; //绁ㄤ环
 	
 	private List<ScheduleSite> sites;
 

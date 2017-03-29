@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public enum OrderStatus {
-	OrderStatus_ToPay("´ıÖ§¸¶"),
-	OrderStatus_Paied("ÒÑÖ§¸¶"),
-	OrderStatus_WaitForAboard("ÒÑÖ§¸¶´ı³Ë³µ"),
-	OrderStatus_Canceled("ÒÑÈ¡Ïû"),
-	OrderStatus_Unsubscribe("ÒÑÍË¶©"),
-	OrderStatus_Closed("ÒÑ¹Ø±Õ"),
-	OrderStatus_Finished("ÒÑÍê³É");
+	OrderStatus_ToPay("å¾…æ”¯ä»˜"),
+	OrderStatus_Paied("å·²æ”¯ä»˜"),
+	OrderStatus_WaitForAboard("å·²æ”¯ä»˜å¾…ä¹˜è½¦"),
+	OrderStatus_Canceled("å·²å–æ¶ˆ"),
+	OrderStatus_Unsubscribe("å·²é€€è®¢"),
+	OrderStatus_Closed("å·²å…³é—­"),
+	OrderStatus_Finished("å·²å®Œæˆ");
 	
 	String description;
 	

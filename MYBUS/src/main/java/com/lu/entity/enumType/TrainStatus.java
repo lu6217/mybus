@@ -2,7 +2,7 @@ package com.lu.entity.enumType;
 
 public enum TrainStatus {
 
-	OFF(0), ON(10);//off ½ûÓÃ   on¿ÉÓÃ
+	OFF(0), ON(10);//off å·²å…³é—­   on æ­£å¸¸ä½¿ç”¨
 
 	private Integer status;
 

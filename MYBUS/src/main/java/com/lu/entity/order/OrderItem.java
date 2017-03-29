@@ -23,32 +23,32 @@ public class OrderItem {
 	private Long id;
 	
 	@Column(name = "user_Id")
-	private Long userId;//ÓÃ»§Id
+	private Long userId;//userId
 	
 	@Column(name="train_Id")
-	private Long trainId; //³µ´ÎId
+	private Long trainId; //è½¦æ¬¡Id
 	
 	@Column(name="beginSite_Id")
-	private Long beginSiteId; //³Ë³µÕ¾
+	private Long beginSiteId; //ä¹˜è½¦ç«™
 	
 	@Column(name="endSite_id")
-	private Long endSiteId; //ÏÂ³µÕ¾
+	private Long endSiteId; //ç›®çš„ç«™
 	
 	@Column(name="startTime")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date startTime; //·¢³µÊ±¼ä
+	private Date startTime; //å‘è½¦æ—¶é—´
 	
 	@Column(name="seatType")
-	private Integer seatType;  //Ï¯±ğ
+	private Integer seatType;  //åº§ä½ç±»å‹
 	
 	@Column(name="seat")
-	private String seat;//×ùÎ»
+	private String seat;//åº§ä½
 	
 	@Column(name="price")
-	private String price;  //ÓÃÄ¿µÄµØµÄ¼Û¸ñ¼õÈ¥³ö·¢Õ¾µÄ¼Û¸ñµÄ¾ø¶ÔÖµ
+	private String price;  //ç¥¨ä»·  ç›®çš„ç«™ç‚¹çš„ç¥¨ä»·å‡å»ä¹˜è½¦ç«™ç‚¹çš„ç¥¨ä»·
 	
 	@Column(name="status")
-	private String status;//´ı¸¶¿î   ÒÑ¸¶¿î  ÒÑÖ§¸¶´ı³Ë³µ   ÒÑÈ¡Ïû     ÒÑÍË¶©  ÒÑ¹Ø±Õ   ÒÑÍê³É
+	private String status;//æœªæ”¯ä»˜   å·²æ”¯ä»˜æœªä¹˜è½¦  å·²æ”¯ä»˜å·²ä¹˜è½¦  å·²ç»“æŸ   é€€è®¢  æ”¹ç­¾ 
 
 	public Long getId() {
 		return id;
