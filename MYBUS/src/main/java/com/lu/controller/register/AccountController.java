@@ -108,7 +108,7 @@ public class AccountController {
 		}
 		return result;
 	}
-	@RequestMapping("/list")
+	@RequestMapping("/accountlist")
 	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){
 		PagingVO vo =accountService.searchList(pagingVo,accountVo);
 		model.addAttribute("pageVO", vo);
