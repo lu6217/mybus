@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -115,6 +116,14 @@ public class AccountController {
 		return "view/background/account/accountlist";
 	}
 	
+	@RequestMapping("/get/{id}")
+	public String getUser(@PathVariable("id")Long id, Model model){
+		User user=userService.getUserById(id);
+		model.addAttribute("user", user);
+		return "view/background/account/adduser";
+	}
+	
+	
 	@RequestMapping("/updatetype")
 	@ResponseBody
 	public String updateAccountType(HttpServletRequest request,@RequestParam(value = "accountId", required = false) Long accountId,
@@ -133,6 +142,11 @@ public class AccountController {
 		return result;
 	}
 	
+	@RequestMapping("/toadduser/{id}")
+	public String toAdduser(@PathVariable("id")Long id, Model model){
+		model.addAttribute("accountId", id);
+		return "view/background/account/adduser";
+	}
 	
 	@RequestMapping("/adduser")
 	@ResponseBody
@@ -147,7 +161,7 @@ public class AccountController {
 				user.setAge(Long.parseLong(userVo.getAge().trim()));
 				user.setIDcard(userVo.getIDcard().trim());
 				user.setName(userVo.getName().trim());
-				user.setSex(Integer.parseInt(userVo.getSex().trim()));
+				user.setSex(Long.parseLong(userVo.getSex().trim()));
 				user.setTelphone(userVo.getTelphone().trim());
 				userService.saveOrUpdateUser(user);
 				result="success!";

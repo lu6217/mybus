@@ -1,5 +1,7 @@
 package com.lu.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +33,18 @@ public class UserServiceImpl implements UserService{
 		PagingVO vo =pagingVo;
 		vo=userDao.searchList(pagingVo,userVo);
 		return vo;
+	}
+
+	@Override
+	@Transactional
+	public User getUserById(Long id) {
+		// TODO Auto-generated method stub
+		List<User> lists=userDao.getUserById(id);
+		User user=new User();
+		if(lists!=null && lists.size()!=0){
+			user=lists.get(0);
+		}
+		return user;
 	}
 	
 }

@@ -12,100 +12,54 @@
 </head>
 <body>
 
-<div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                         <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                         <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                         <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                         <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>File input</label>
-                                            <input type="file">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text area</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Radio Buttons</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">1
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Selects</label>
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-default">Reset Button</button>
-                                    </form>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                            </div>
-                            <!-- /.row (nested) -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form role="form" id="addUserForm" name="addUserForm" method="post" action="${path }/luwei/account/adduser">
+                        <input type="hidden" name="accountId" id="accountId" value="${accountId }">
+                        <div class="form-group">
+                            <label>userName</label>
+                            <input class="form-control" placeholder="${user.name }" id="name" name="name" value="${user.name }">
                         </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
+                         <div class="form-group">
+                            <label>Sex</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="sex" value="1" checked="">男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sex" id="sex" value="0">女
+                            </label>
+                        </div>
+                           <div class="form-group">
+                            <label>CardType</label>
+                            <select name="cardType" id="cardType" class="form-control">
+                                <option value="1">身份证 </option>
+								<option value="10">军官证</option>
+								<option value="20">学生证</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                            <label>IDcard</label>
+                            <input class="form-control" placeholder="${user.IDcard }"  name="IDcard" id="IDcard" value="${user.IDcard }">
+                        </div>
+                         <div class="form-group">
+                            <label>Age</label>
+                            <input class="form-control" placeholder="${user.age }" name="age" id="age" value="${user.age }" >
+                        </div>
+                         <div class="form-group">
+                            <label>Telphone</label>
+                            <input class="form-control" placeholder="${user.telphone }" name="telphone" id="telphone" value="${user.telphone }">
+                        </div>
+                         <div class="form-group">
+                            <label>Address</label>
+                            <input class="form-control" placeholder="${user.address }" name="address" id="address" value="${user.address }" >
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
+                    </form>
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.panel-body -->
             </div>
 
-<!-- ------------------------------------------------------------------- -->
-	<form id="addUserForm" name="addUserForm" method="post" action="${path }/luwei/account/adduser">
-		<center>
-			<table>
-				<input type="hidden" name="accountId" id="accountId" value="1">
-				username:<input type="text" id="name" name="name" /><br>
-				sex:男<input type="radio" name="sex" value="1" /> 
-				女<input type="radio" name="sex" value="0" /><br>
-				cardType:<select name="cardType" id="cardType" class="form-control">
-					<option value="1"> 身份证 </option>
-					<option value="10">军官证</option>
-					<option value="20">学生证</option>
-				</select><br>
-				card:<input type="text" name="IDcard" id="IDcard" /><br>
-				age:<input type="text" name="age" id="age" /><br>
-				tel:<input type="text" name="telphone" id="telphone" /><br>
-				address:<input type="text" name="address" id="address" /><br>
-				<input type="submit" id="addUserS" value="提交" />
-				
-			</table>
-		</center>
-	</form>
 	  <jsp:include page="/view/background/common/scripts.jsp" />
 </body>
 </html>

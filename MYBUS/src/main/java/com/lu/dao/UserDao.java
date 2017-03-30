@@ -1,5 +1,7 @@
 package com.lu.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.lu.entity.account.User;
@@ -29,6 +31,12 @@ public class UserDao extends BaseDAO<User>{
 		query.addEq("user.accountId", userVo.getAccountId());
 		
 		return query;
+	}
+	public List<User> getUserById(Long id) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class);
+		builder.addEq("id",id);
+		return this.select(builder);
 	}
 	
 }

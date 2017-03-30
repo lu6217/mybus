@@ -10,4 +10,6 @@ public interface UserService {
 
 	public PagingVO searchList(PagingVO pagingVo, UserVo userVo);
 
+	public User getUserById(Long id);
+
 }

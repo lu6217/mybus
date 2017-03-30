@@ -75,14 +75,13 @@
 	                                            <td title='<c:out value="${acc.name } "></c:out>' class="text-center">${acc.name }</td>
 	                                            <td title='<c:out value="${acc.type } "></c:out>' class="text-center">${acc.type }</td>
 	                                            <td class="text-center">
-													<button class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add</button>
+													<button class="btn btn-success btn-sm" onclick="adds('${acc.id }')"><i class="fa fa-plus"></i> Add</button>
 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button>
-													<button class="btn btn-primary btn-sm"><i class="fa fa-edit "></i> Edit</button>
+													<button class="btn btn-primary btn-sm" onclick="edits('${acc.id }')"><i class="fa fa-edit "></i> Edit</button>
 													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
- 
     									   </c:if>
    										  </c:if>
                                     </tbody>
@@ -94,7 +93,7 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-         
+         <footer><p>Copyright &copy; 2017..</p></footer>
         </div>
     </div>
    </div>
@@ -105,28 +104,34 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${path}/view/moban/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${path}/view/moban/assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
-            
-            $('.btn-success').on('click', function(){  
-            	alert("add");
-            	layer.open({
-            		  type: 2, 
-            		  title: 'adduser',
-            		  area:['600px','500px'],
-            		  content: '${path}/view/background/account/adduser.jsp',
-            		  btn:['确定','取消'],
-            		  yes:function(){
-            			  alert('yes');
-            		  },
-            		  btn2:function(){
-            			  alert('no');
-            			  }
-            		}); 
-            });
-            
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $('#dataTables-example').dataTable();
+         });
+         function edits(id){
+          	layer.open({
+       		  type: 2, 
+       		  title: ['UserInfo','font-size:25px;'],
+       		  area:['600px','500px'],
+       		  content: '${path}/luwei/account/get/'+id,
+       		  btn:['Close']
+       		 
+       		}); 
+          }
+          
+         function adds(id){ 
+         	layer.open({
+         		  type: 2, 
+         		  title: ['AddUser','font-size:25px;'],
+         		  area:['600px','500px'],
+         		  content:'${path}/luwei/account/toadduser/'+id,
+//          		  content: '${path}/view/background/account/adduser.jsp?accountId='+id,
+         		  btn:['Close'],
+         		  anim: 0,		//0-6 窗口的弹出动画效果
+         		  tips:1	
+         		}); 
+         };
+        
             
     </script>
          <!-- Custom Js -->

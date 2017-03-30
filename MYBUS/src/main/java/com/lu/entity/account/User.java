@@ -30,7 +30,7 @@ public class User {
 	private String IDcard;
 	
 	@Column(name="sex")
-	private int sex;//0女  1男
+	private Long sex;//0女  1男
 	
 	@Column(name="age")
 	private Long age;
@@ -72,11 +72,11 @@ public class User {
 		IDcard = iDcard;
 	}
 
-	public int getSex() {
+	public Long getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(Long sex) {
 		this.sex = sex;
 	}
 
