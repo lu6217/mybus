@@ -16,6 +16,7 @@
                 <div class="panel-body">
                     <form role="form" id="addUserForm" name="addUserForm" method="post" action="${path }/luwei/account/adduser">
                         <input type="hidden" name="accountId" id="accountId" value="${accountId }">
+                        <input type="hidden" name="id" id="id" value="${user.id }">
                         <div class="form-group">
                             <label>userName</label>
                             <input class="form-control" placeholder="${user.name }" id="name" name="name" value="${user.name }">
@@ -53,13 +54,28 @@
                             <label>Address</label>
                             <input class="form-control" placeholder="${user.address }" name="address" id="address" value="${user.address }" >
                         </div>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success" id="reg">Submit</button>
                         <button type="reset" class="btn btn-default">Reset</button>
                     </form>
                 </div>
                 <!-- /.panel-body -->
             </div>
+<jsp:include page="/view/background/common/scripts.jsp" />
+<script>
+		$("#reg").bind("click",function(){
+			layer.msg("kk");
+			$.post("${path }/luwei/account/adduser",$("#addUserForm").serialize(),function(data) {
+				if (data && data.result) {
+// 					layer弹窗有点问题  
+					layer.msg(data.message);
+// 					window.location.replace("${path}/luwei/account/userlist");
+				}else if (data){
+					layer.msg(data.message);
+				}
+			});
+		});
 
-	  <jsp:include page="/view/background/common/scripts.jsp" />
+</script>
+	  
 </body>
 </html>

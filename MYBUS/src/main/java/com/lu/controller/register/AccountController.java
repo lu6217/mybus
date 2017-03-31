@@ -123,6 +123,24 @@ public class AccountController {
 		return "view/background/account/adduser";
 	}
 	
+	@RequestMapping("/getuserinfo/{id}")
+	public String getUserInfo(@PathVariable("id")Long id, Model model){
+		User user=userService.getUserById(id);
+		model.addAttribute("user", user);
+		return "view/background/account/userinfo";
+	}
+	
+	@RequestMapping("/deluser")
+	@ResponseBody
+	public ResultResponse delUser(HttpServletRequest request){
+		ResultResponse result = new ResultResponse();
+		String id=request.getParameter("id").trim();
+		
+		//删除还没做   
+		System.out.println("id="+id);
+		result.setMessage("OK! 删除成功!");
+		return result;
+	}
 	
 	@RequestMapping("/updatetype")
 	@ResponseBody
@@ -148,25 +166,43 @@ public class AccountController {
 		return "view/background/account/adduser";
 	}
 	
+	/**
+	 * save or update
+	 * @param request
+	 * @param userVo
+	 * @return
+	 */
 	@RequestMapping("/adduser")
 	@ResponseBody
-	public String addUser(HttpServletRequest request, UserVo userVo){
-		String result=null;
-		if(userVo.getAccountId()!=null){
-			Account account=accountService.findById(userVo.getAccountId());
-			if(account!=null){
-				User user=new User();
-				user.setAccountId(userVo.getAccountId());
-				user.setAddress(userVo.getAddress().trim());
-				user.setAge(Long.parseLong(userVo.getAge().trim()));
-				user.setIDcard(userVo.getIDcard().trim());
-				user.setName(userVo.getName().trim());
-				user.setSex(Long.parseLong(userVo.getSex().trim()));
-				user.setTelphone(userVo.getTelphone().trim());
-				userService.saveOrUpdateUser(user);
-				result="success!";
-			}else{
-				result="faliure!";
+	public ResultResponse addUser(HttpServletRequest request, UserVo userVo){
+		ResultResponse result = new ResultResponse();
+		if(userVo!=null && userVo.getId()!=null){
+			User user=userService.getUserById(userVo.getId());
+			user.setAddress(userVo.getAddress().trim());
+			user.setAge(Long.parseLong(userVo.getAge().trim()));
+			user.setIDcard(userVo.getIDcard().trim());
+			user.setName(userVo.getName().trim());
+			user.setSex(Long.parseLong(userVo.getSex().trim()));
+			user.setTelphone(userVo.getTelphone().trim());
+			userService.saveOrUpdateUser(user);
+			result.setMessage("OK! success!");
+		}else{
+			if(userVo!=null && userVo.getAccountId()!=null){
+				Account account=accountService.findById(userVo.getAccountId());
+				if(account!=null){
+					User user=new User();
+					user.setAccountId(userVo.getAccountId());
+					user.setAddress(userVo.getAddress().trim());
+					user.setAge(Long.parseLong(userVo.getAge().trim()));
+					user.setIDcard(userVo.getIDcard().trim());
+					user.setName(userVo.getName().trim());
+					user.setSex(Long.parseLong(userVo.getSex().trim()));
+					user.setTelphone(userVo.getTelphone().trim());
+					userService.saveOrUpdateUser(user);
+					result.setMessage("OK!success!");
+				}else{
+					result.setMessage("failure!");
+				}
 			}
 		}
 		return result;

@@ -2,6 +2,8 @@ package com.lu.entity.vo;
 
 public class UserVo {
 	
+	private Long id;
+	
 	private String name;
 	
 	private Long cardType;
@@ -17,6 +19,14 @@ public class UserVo {
 	private String telphone;
 	
 	private Long accountId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

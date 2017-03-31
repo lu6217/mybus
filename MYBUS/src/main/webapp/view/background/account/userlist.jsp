@@ -55,6 +55,7 @@
                                             <th class="text-center">Telphone</th>
                                             <th class="text-center">Address</th>
                                             <th class="text-center">AccountId</th>
+                                            <th class="text-center">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -91,6 +92,12 @@
 	                                            <td title='<c:out value="${user.telphone } "></c:out>' class="text-center">${user.telphone }</td>
 	                                            <td title='<c:out value="${user.address } "></c:out>' class="text-center">${user.address }</td>
 	                                            <td title='<c:out value="${user.accountId } "></c:out>' class="text-center">${user.accountId }</td>
+	                                       		 <td class="text-center">
+													<button class="btn btn-success btn-sm" onclick="adds('${user.id }')"><i class="fa fa-plus"></i> Add</button>
+<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
+													<button class="btn btn-primary btn-sm" onclick="edits('${user.id }')"><i class="fa fa-edit "></i> Edit</button>
+													<button class="btn btn-danger btn-sm"  onclick="del('${user.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
  
@@ -175,6 +182,73 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+            
+            function edits(id){
+              	layer.open({
+           		  type: 2, 
+           		  title: ['UserInfo','font-size:25px;'],
+           		  area:['600px','500px'],
+           		  content: '${path}/luwei/account/get/'+id,
+           		  btn:['Close']
+           		 
+           		}); 
+              }
+              
+             function adds(id){ 
+             	layer.open({
+             		  type: 2, 
+             		  title: ['AddUser','font-size:25px;'],
+             		  area:['600px','500px'],
+             		  content:'${path}/luwei/account/toadduser/'+id,
+//              		  content: '${path}/view/background/account/adduser.jsp?accountId='+id,
+             		  btn:['Close'],
+             		  anim: 0,		//0-6 窗口的弹出动画效果
+             		  tips:1	
+             		}); 
+             };
+            function del(id){
+            	layer.open({
+            		type: 2
+                    ,title: '是否删除此用户？'
+                    ,closeBtn: false
+                    ,area: ['250px','360px']
+                    ,shade: 0.8
+                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,btn: ['残忍删除','火速取消']
+                    ,moveType: 1 //拖拽模式，0或者1
+//                     ,content:'${path}/view/background/account/userinfo.jsp'
+                    ,content: '${path}/luwei/account/getuserinfo/'+id
+                    ,yes: function(){
+                    	$.ajax(
+            		    		{
+            		    			 type:"POST",
+            		    		     url:"${path}/luwei/account/deluser/",
+            		    		     data: {id:id},
+            		    	         success:function(res){
+            		    	        	 if(res && res.result){
+            		    	        		 layer.msg(res.message);
+//             		    	        		 alert(res.message); 
+            		    	        	 }else{
+            		    	        		 layer.msg(res.message);
+            		    	        	 	//alert(res.message);
+            		    	        	 }
+            			    		},
+            			    		error:function(err,err1,err2){
+            			    		    //debugger;
+            			            }
+            		    		});
+                    }
+//                     ,success: function(layero){
+//                       var btn = layero.find('.layui-layer-btn');
+//                       btn.css('text-align', 'center');
+//                       btn.find('.layui-layer-btn0').attr({
+//                         href: '${path}/luwei/account/toadduser/'+id
+                       
+//                       });
+//                     }	
+           		}); 
+            }
+            
     </script>
          <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
