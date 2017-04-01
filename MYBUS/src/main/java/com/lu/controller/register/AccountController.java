@@ -134,11 +134,15 @@ public class AccountController {
 	@ResponseBody
 	public ResultResponse delUser(HttpServletRequest request){
 		ResultResponse result = new ResultResponse();
-		String id=request.getParameter("id").trim();
-		
-		//删除还没做   
-		System.out.println("id="+id);
-		result.setMessage("OK! 删除成功!");
+		Long id=Long.parseLong(request.getParameter("id").trim());
+		User user=userService.getUserById(id);
+		if(user!=null){
+			userService.delUser(user);
+			result.setMessage("OK! 删除成功!");
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("falure!");
+		}
 		return result;
 	}
 	
@@ -186,7 +190,7 @@ public class AccountController {
 			user.setTelphone(userVo.getTelphone().trim());
 			userService.saveOrUpdateUser(user);
 			result.setMessage("OK! success!");
-		}else{
+		}else if(userVo!=null && userVo.getId()==null){
 			if(userVo!=null && userVo.getAccountId()!=null){
 				Account account=accountService.findById(userVo.getAccountId());
 				if(account!=null){
@@ -201,9 +205,16 @@ public class AccountController {
 					userService.saveOrUpdateUser(user);
 					result.setMessage("OK!success!");
 				}else{
+					result.setResult(Boolean.FALSE);
 					result.setMessage("failure!");
 				}
+			}else{
+				result.setResult(Boolean.FALSE);
+				result.setMessage("failure!");
 			}
+		}else {
+			result.setResult(Boolean.FALSE);
+			result.setMessage("failure!");
 		}
 		return result;
 	}

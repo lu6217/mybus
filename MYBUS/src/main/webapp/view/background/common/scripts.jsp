@@ -24,3 +24,4 @@
     
    <!-- layer -->
     <script src="${path}/js/layer/layer.js"></script>
+      <script src="${path}/layui/layui.js"></script>

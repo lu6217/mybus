@@ -17,4 +17,6 @@
 <%-- 	<link rel="stylesheet" type="text/css" href="${path}/js/laydate/date/bootstrap-clockpicker.min.css"> --%>
 <%-- 	<link rel="stylesheet" type="text/css" href="${path}/css/jquery-ui.min.css"> --%>
 	
+	<link rel="stylesheet" type="text/css" href="${path}/layui/css/layui.css">
+	
 	

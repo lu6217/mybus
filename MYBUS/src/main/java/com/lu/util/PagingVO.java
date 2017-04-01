@@ -22,7 +22,7 @@ public class PagingVO {
 	public PagingVO() {
 		this.pageIndex = "1";
 		//this.pageSize="10";
-		this.pageSize = SystemConfigHolder.instance().getInterger("system.pagesize.default",15).toString();
+		this.pageSize = SystemConfigHolder.instance().getInterger("system.pagesize.default",100000000).toString();
 	}
 	
 	public PagingVO(String pageIndex, String size) {

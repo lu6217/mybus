@@ -28,7 +28,7 @@ public class UserDao extends BaseDAO<User>{
 //		query.addLikeAny("user.IDcard",userVo.getIDcard());
 //		query.addEq("user.age", userVo.getAge());
 //		query.addEq("user.sex", userVo.getSex());
-		query.addEq("user.accountId", userVo.getAccountId());
+//		query.addEq("user.accountId", userVo.getAccountId());
 		
 		return query;
 	}

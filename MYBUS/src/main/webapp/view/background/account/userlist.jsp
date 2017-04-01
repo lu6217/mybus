@@ -112,61 +112,6 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-md-12">
-                     <!--    Context Classes  -->
-                    <div class="panel panel-default">
-                       
-                        <div class="panel-heading">
-                            Context Classes
-                        </div>
-                        
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-<!--                                 <table class="table"> -->
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="success">
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr class="info">
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr class="warning">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>4</td>
-                                            <td>John</td>
-                                            <td>Smith</td>
-                                            <td>@jsmith</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  end  Context Classes  -->
-                </div>
-            </div>
-                <!-- /. ROW  -->
         </div>
     </div>
              <!-- /. PAGE INNER  -->
@@ -190,8 +135,11 @@
            		  area:['600px','500px'],
            		  content: '${path}/luwei/account/get/'+id,
            		  btn:['Close']
-           		 
-           		}); 
+//            		  end:function(){
+//            			// alert('close');
+//               		 window.location.reload();
+//            		 }
+           		});
               }
               
              function adds(id){ 
@@ -200,10 +148,11 @@
              		  title: ['AddUser','font-size:25px;'],
              		  area:['600px','500px'],
              		  content:'${path}/luwei/account/toadduser/'+id,
-//              		  content: '${path}/view/background/account/adduser.jsp?accountId='+id,
-             		  btn:['Close'],
-             		  anim: 0,		//0-6 窗口的弹出动画效果
-             		  tips:1	
+             		  btn:['Close']
+//              		  ,end:function(){
+//              			 alert('close');
+//                			// window.location.reload();
+//             		 }
              		}); 
              };
             function del(id){
@@ -232,6 +181,10 @@
             		    	        		 layer.msg(res.message);
             		    	        	 	//alert(res.message);
             		    	        	 }
+//             		    	        	 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+//             		 	               		 parent.layer.close(index);
+            		  						//window.parent.location.reload();
+            		  						window.location.reload();
             			    		},
             			    		error:function(err,err1,err2){
             			    		    //debugger;

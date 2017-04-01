@@ -46,5 +46,13 @@ public class UserServiceImpl implements UserService{
 		}
 		return user;
 	}
+
+	@Override
+	@Transactional
+	public void delUser(User user) {
+		// TODO Auto-generated method stub
+		userDao.delete(user);
+		
+	}
 	
 }

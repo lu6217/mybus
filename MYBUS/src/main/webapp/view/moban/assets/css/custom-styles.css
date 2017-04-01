@@ -139,8 +139,9 @@ border-radius: 0;
 ------------------------------------------------*/
 .page-header {
 padding-bottom: 9px;
-margin: 10px 0 20px;
+margin: 10px 0 10px;
 border-bottom: 1px solid transparent;
+font-size: 35px;
 }
 .panel-left{width: 90px;height: 90px;
 background: #1CC09F;
@@ -595,7 +596,7 @@ line-height: 1.428571429;
 .page-header small {
 display: block;
 padding-top: 14px;
-font-size: 19px;
+font-size: 22px;
 }
 .panel-left {
   width: 85px;
