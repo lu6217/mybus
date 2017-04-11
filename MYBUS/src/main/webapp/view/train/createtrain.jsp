@@ -37,7 +37,7 @@
 				</tr><br>
 				<tr>
 					发车时间：<div class="input-group clockpicker" style="width: 110px;margin-bottom: 10px;">
-							    <input type="text" id="StartTime" name="StartTime" class="form-control" value="08:00">
+							    <input type="text" id="departureTime" name="departureTime" class="form-control" value="08:00">
 							    <span class="input-group-addon">
 							        <span class="glyphicon glyphicon-time"></span>
 							    </span>

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.lu.entity.train.TrainNumber;
+import com.lu.entity.vo.TrainSearchVo;
 import com.lu.util.BaseDAO;
 import com.lu.util.DetachedCriteriaBuilder;
+import com.lu.util.PagingVO;
 @Repository
 public class TrainDao extends BaseDAO<TrainNumber>{
 
@@ -15,6 +17,26 @@ public class TrainDao extends BaseDAO<TrainNumber>{
 		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class);
 		builder.addEq("number",name);
 		return this.select(builder);
+	}
+
+	public PagingVO searchList(PagingVO pagingVo, TrainSearchVo trainSearchVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = initQueryCriteria(trainSearchVo);
+		DetachedCriteriaBuilder count = initQueryCriteria(trainSearchVo);
+		return this.selectPagingVO(query, pagingVo, count);
+	}
+
+	private DetachedCriteriaBuilder initQueryCriteria(
+			TrainSearchVo trainSearchVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(TrainNumber.class, "train");
+		query.addLikeAny("train.number", trainSearchVo.getNumber());
+		//这个乘车点和目的地站点要在站点列表中查询  通过这两个站点来查出是哪个车次  
+//		query.addEq("train.beginSite", trainSearchVo.getBeginSite());
+//		query.addEq("train.endSite", trainSearchVo.getEndSite());
+		//发车时间在这一天中的车次都要查出来  可能要用  between and 来表示一个范围 来查询车次信息
+//		query.addEq("train.departureTime", trainSearchVo.getDepartureTime());
+		return query;
 	}
 
 }

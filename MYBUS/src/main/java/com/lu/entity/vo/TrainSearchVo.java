@@ -4,21 +4,17 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class TrainVo {
-	
+public class TrainSearchVo {
+
 	private String number; //车次
 	
 	private String beginSite;//始发站
 	
 	private String endSite; //终点站
-	//1910/01/01 08:00:00
-	@DateTimeFormat(pattern = "HH:mm")
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date departureTime;//发车时间
 	
-	private String price; //票价
-	
-	private String num; //座位数
-
 	public String getNumber() {
 		return number;
 	}
@@ -50,21 +46,5 @@ public class TrainVo {
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		this.num = num;
-	}
-
+	
 }

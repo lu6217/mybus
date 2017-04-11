@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.TrainDao;
 import com.lu.entity.train.TrainNumber;
+import com.lu.entity.vo.TrainSearchVo;
 import com.lu.service.TrainService;
+import com.lu.util.PagingVO;
 @Service
 public class TrainServiceImpl implements TrainService{
 
@@ -30,6 +32,14 @@ public class TrainServiceImpl implements TrainService{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo, TrainSearchVo trainSearchVo) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=trainDao.searchList(pagingVo,trainSearchVo);
+		return vo;
 	}
 
 }

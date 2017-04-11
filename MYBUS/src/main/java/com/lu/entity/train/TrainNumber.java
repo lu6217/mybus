@@ -36,7 +36,7 @@ public class TrainNumber {
 	private Long endSite; //终点站
 	
 	@Column(name="startTime")
-	private Date StartTime;//发车时间
+	private Date departureTime;//发车时间
 	
 	@Column(name="price")
 	private String price; //全票价
@@ -73,14 +73,6 @@ public class TrainNumber {
 
 	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	public Date getStartTime() {
-		return StartTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		StartTime = startTime;
 	}
 
 	public String getPrice() {
@@ -153,6 +145,14 @@ public class TrainNumber {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public Date getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
 	}
 
 }
