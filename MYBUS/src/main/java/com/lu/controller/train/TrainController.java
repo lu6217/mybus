@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
+import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.entity.vo.TrainVo;
 import com.lu.service.SiteService;
@@ -42,6 +43,7 @@ public class TrainController {
 			Site beginsite=siteService.getSiteByName(trainVo.getBeginSite());
 			Site endsite=siteService.getSiteByName(trainVo.getEndSite());
 			if(beginsite!=null && endsite!=null){
+				Train_Site train_Site=new Train_Site();
 				TrainNumber train=new TrainNumber();
 				train.setNumber(trainVo.getNumber().trim());
 				train.setBeginSite(beginsite.getId());
@@ -51,6 +53,19 @@ public class TrainController {
 				train.setDepartureTime(trainVo.getDepartureTime());
 				train.setCreateTime(new Date());
 				trainService.save(train);
+				//保存 车站id  前一站id  后一站id   trainId 等信息 
+				//保存了train后要保存两个站点  始发站和终点站   始发站的price为0    终点站的price为全票价
+				
+				train_Site.setPrveSiteId(0L);
+				train_Site.setSiteId(beginsite.getId());
+				train_Site.setNextSiteId(endsite.getId());
+				train=trainService.getTrainByName(trainVo.getNumber().trim());
+				train_Site.setTrainId(train.getId());
+				//现在发车时间和到达时间还没有   有待添加 
+//				train_Site.setArrivalTime(arrivalTime);
+//				train_Site.setLeaveTime(leaveTime);
+//				train_Site.setPrice(price);
+				//还要建train_site的server和dao  并且保存train_site
 				result.setMessage("Success!");
 			}else{
 				result.setResult(Boolean.FALSE);

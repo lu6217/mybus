@@ -12,5 +12,7 @@ public interface TrainService {
 
 	PagingVO searchList(PagingVO pagingVo, TrainSearchVo trainSearchVo);
 
+	TrainNumber getTrainByName(String name);
+
 	
 }

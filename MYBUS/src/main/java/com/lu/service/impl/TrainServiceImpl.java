@@ -41,5 +41,15 @@ public class TrainServiceImpl implements TrainService{
 		vo=trainDao.searchList(pagingVo,trainSearchVo);
 		return vo;
 	}
+	@Override
+	@Transactional
+	public TrainNumber getTrainByName(String name) {
+		// TODO Auto-generated method stub
+		List<TrainNumber> lists=trainDao.getTrainByName(name);
+		if(lists!=null && lists.size()!=0){
+			return lists.get(0);
+		}
+		return null;
+	}
 
 }

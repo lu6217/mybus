@@ -38,6 +38,9 @@ public class TrainNumber {
 	@Column(name="startTime")
 	private Date departureTime;//发车时间
 	
+	@Column(name="arrivalTime")
+	private Date arrivalTime;
+	
 	@Column(name="price")
 	private String price; //全票价
 	
@@ -137,6 +140,14 @@ public class TrainNumber {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Date getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(Date arrivalTime) {
+		this.arrivalTime = arrivalTime;
 	}
 
 	public Date getTime() {

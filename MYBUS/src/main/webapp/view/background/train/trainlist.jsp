@@ -48,12 +48,12 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>车次</th>
-                                            <th>发车站</th>
-                                            <th>终点站</th>
-                                            <th>发车时间</th>
-                                            <th>运行时间</th>
-                                            <th>Option</th>
+                                            <th class="text-center">车次</th>
+                                            <th class="text-center">发车站</th>
+                                            <th class="text-center">终点站</th>
+                                            <th class="text-center">发车时间</th>
+                                            <th class="text-center">运行时间</th>
+                                            <th class="text-center">Option</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,17 +74,17 @@
 		                                        		<tr class="danger">
 		                                        	 </c:when> 
 												</c:choose>  
-	                                            <td title='<c:out value="${train.number } "></c:out>' class="text-center">${train.number }</td>
+	                                            <td title='<c:out value="${train.number } "></c:out>' class="text-center"><a href="javascript:void(0)" onclick="showSite('${train.id }')">${train.number }</a></td>
 	                                            <td title='<c:out value="${train.beginSite } "></c:out>' class="text-center">${train.beginSite }</td>
 	                                             <td title='<c:out value="${train.endSite } "></c:out>' class="text-center">${train.endSite }</td>
 	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td>
 	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
 	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
 	                                            <td class="text-center">
-													<button class="btn btn-success btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus"></i> Add</button>
-	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button>
-													<button class="btn btn-primary btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit "></i> Edit</button>
-													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-success btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus"></i> Reserve</button>
+<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
+<%-- 													<button class="btn btn-primary btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit "></i> Edit</button> --%>
+<!-- 													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button> -->
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
@@ -170,6 +170,24 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+            
+            function showSite(id){
+            	alert("id="+id);
+            	id=2;
+            	layer.open({
+             		  type: 2, 
+             		  title: ['Station Info','font-size:25px;'],
+             		  area:['600px','500px'],
+             		  content: '${path}/luwei/site/get/'+id,
+             		  shadeClose: true,//点击窗体外的任意处 关闭窗体
+             		  btn:['Close']
+//              		  end:function(){
+//              			// alert('close');
+//                 		 window.location.reload();
+//              		 }
+             		});
+            	
+            }
     </script>
          <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
