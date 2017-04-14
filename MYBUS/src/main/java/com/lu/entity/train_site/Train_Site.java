@@ -1,6 +1,5 @@
 package com.lu.entity.train_site;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,12 +16,11 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "tb_train_site")
 @DynamicInsert
 @DynamicUpdate
-public class Train_Site implements Serializable{
+public class Train_Site{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8070989379400521067L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -37,7 +35,7 @@ public class Train_Site implements Serializable{
 	private String price;
 	
 	@Column(name="leave_time")
-	private Date leaveTime;
+	private Date departureTime;
 	
 	@Column(name="arrival_time")
 	private Date arrivalTime;
@@ -83,12 +81,12 @@ public class Train_Site implements Serializable{
 		this.price = price;
 	}
 
-	public Date getLeaveTime() {
-		return leaveTime;
+	public Date getDepartureTime() {
+		return departureTime;
 	}
 
-	public void setLeaveTime(Date leaveTime) {
-		this.leaveTime = leaveTime;
+	public void setDepartureTime(Date departureTime) {
+		this.departureTime = departureTime;
 	}
 
 	public Date getArrivalTime() {

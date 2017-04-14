@@ -14,5 +14,7 @@ public interface TrainService {
 
 	TrainNumber getTrainByName(String name);
 
+	TrainNumber getTrainById(Long id);
+
 	
 }

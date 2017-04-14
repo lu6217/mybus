@@ -54,14 +54,16 @@
                             <label>Address</label>
                             <input class="form-control" placeholder="${user.address }" name="address" id="address" value="${user.address }" >
                         </div>
-                        <button type="submit" class="btn btn-success" id="reg">Submit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
+                        <a type="submit" class="btn btn-success" id="reg">Submit</a>
+                        <a type="reset" class="btn btn-default">Reset</a>
                     </form>
                 </div>
                 <!-- /.panel-body -->
             </div>
 <jsp:include page="/view/background/common/scripts.jsp" />
 <script>
+
+		//提交前还没有进行验证  还需要添加 	
 		$("#reg").bind("click",function(){
 			$.post("${path }/luwei/account/adduser",$("#addUserForm").serialize(),function(data) {
 				if(data && data.result) {
@@ -72,7 +74,7 @@
 				}
 // 				parent.layer.closeAll();
  				var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-	                parent.layer.close(index);
+	            parent.layer.close(index);
  				window.parent.location.reload();
 			});
 		});

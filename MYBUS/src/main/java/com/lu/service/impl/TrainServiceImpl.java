@@ -51,5 +51,16 @@ public class TrainServiceImpl implements TrainService{
 		}
 		return null;
 	}
+	@Override
+	@Transactional
+	public TrainNumber getTrainById(Long id) {
+		// TODO Auto-generated method stub
+		List<TrainNumber> lists=trainDao.getTrainById(id);
+		TrainNumber train=new TrainNumber();
+		if(lists!=null && lists.size()!=0){
+			train=lists.get(0);
+		}
+		return train;
+	}
 
 }

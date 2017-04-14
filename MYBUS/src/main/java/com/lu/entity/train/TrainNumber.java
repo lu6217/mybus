@@ -39,7 +39,7 @@ public class TrainNumber {
 	private Date departureTime;//发车时间
 	
 	@Column(name="arrivalTime")
-	private Date arrivalTime;
+	private Date arrivalTime;//到达时间
 	
 	@Column(name="price")
 	private String price; //全票价

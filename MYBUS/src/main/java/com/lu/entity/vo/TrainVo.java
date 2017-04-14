@@ -15,6 +15,9 @@ public class TrainVo {
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date departureTime;//发车时间
 	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date arrivalTime;//发车时间
+	
 	private String price; //票价
 	
 	private String num; //座位数
@@ -49,6 +52,14 @@ public class TrainVo {
 
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
+	}
+
+	public Date getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(Date arrivalTime) {
+		this.arrivalTime = arrivalTime;
 	}
 
 	public String getPrice() {
