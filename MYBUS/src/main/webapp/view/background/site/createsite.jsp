@@ -1,31 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <%
 	request.setAttribute("path", request.getContextPath());
 %>
-<script src="${path}/js/jquery-2.1.1.min.js"></script>
-<script src="${path}/js/layer/layer.js"></script>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Create Site</title>
+<%@ include file="/view/background/common/css.jsp" %>
 </head>
 <body>
-	
-	<form id="createsite" name="createsite" method="post" >
-		<center>
-			<table>
-				站点名:<input type="text" id="name" name="name" onblur="checkName()" /><br>
-				<span id="namespan"></span><br>
-				站点描述:<input type="text" name="description" id="description" /><br>
-				<input type="button" id="reg" value="提交" />
-				
-			</table>
-		</center>
-	</form>
 
-	<script type="text/javascript">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form role="form" id="createsite" name="createsite">
+                        <div class="form-group">
+                            <label>Site Name</label>
+                            <input class="form-control" placeholder="" id="name" name="name" value="" onblur="checkName()">
+                        </div>
+                          <div class="form-group">
+                            <label>Description</label>
+                            <input class="form-control" placeholder=""  name="description" id="description" value="" onblur="checkSite(this)">
+                        </div>
+                         
+						<!-- 下面这个按钮用button是提交就无法关闭弹出框   用a标签的时候就可以关闭  -->
+                        <a type="submit" class="btn btn-success" id="reg">Submit</a>
+                        <a type="reset" class="btn btn-default">Reset</a>
+                    </form>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+	<jsp:include page="/view/background/common/scripts.jsp" />
+
+<script type="text/javascript">
 	function checkName(){
 		var name=$("#name").val();
 		if(!name){

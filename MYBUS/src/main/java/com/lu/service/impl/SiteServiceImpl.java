@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.SiteDao;
+import com.lu.dao.Train_SiteDao;
 import com.lu.entity.site.Site;
+import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.ResultVO;
 import com.lu.service.SiteService;
 
@@ -16,6 +18,9 @@ public class SiteServiceImpl implements SiteService{
 
 	@Autowired
 	private SiteDao siteDao;
+	
+	@Autowired
+	private Train_SiteDao train_siteDao;
 	
 	@Override
 	@Transactional
@@ -53,6 +58,21 @@ public class SiteServiceImpl implements SiteService{
 			site=lists.get(0);
 		}
 		return site; 
+	}
+
+	@Override
+	@Transactional
+	public List<ResultVO> fuzzyQuerySite2(String queryKey, Long trainId,Long pr) {
+		// TODO Auto-generated method stub
+		List<Train_Site> lists=train_siteDao.getSitesBytrainId(trainId);
+		Long [] sites=null;
+		if(lists!=null && lists.size() > 0){
+			sites=new Long[lists.size()];
+			for (int i = 0; i < lists.size(); i++) {
+				sites[i]=lists.get(i).getSiteId();
+			}
+		}
+		return siteDao.fuzzyQuerySite(queryKey,sites,pr);
 	}
 
 	

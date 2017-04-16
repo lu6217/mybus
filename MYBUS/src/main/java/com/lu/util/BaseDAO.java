@@ -626,7 +626,7 @@ public abstract class BaseDAO<T> {
 	}
 
 	/**
-	 * Bulk update. ×¢ÒâÃüÃû²ÎÊı±ØĞë°´×ÖÄ¸ÅÅĞò
+	 * Bulk update. ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë°´ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½
 	 *
 	 * @param hql
 	 *            the hql

@@ -16,6 +16,7 @@ import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.entity.vo.TrainVo;
+import com.lu.entity.vo.Train_SiteVo;
 import com.lu.service.SiteService;
 import com.lu.service.TrainService;
 import com.lu.service.Train_SiteService;
@@ -129,10 +130,51 @@ public class TrainController {
 	}
 	
 	@RequestMapping("/toaddtrain/{id}")
-	public String toAdduser(@PathVariable("id")Long id, Model model){
+	public String toAddTrain(@PathVariable("id")Long id, Model model){
 		model.addAttribute("accountId", id);
 		return "view/background/train/addtrain";
 	}
+	
+	
+	@RequestMapping("/toaddtrainsite/{id}")
+	public String toAddSite(@PathVariable("id")Long id, Model model){
+		TrainNumber train=trainService.getTrainById(id);
+		model.addAttribute("train", train);
+		return "view/background/train/addtrainsite";
+	}
+	
+	
+	@RequestMapping("/addtrainsite")
+	@ResponseBody
+	public ResultResponse addTrainSite(HttpServletRequest request,Train_SiteVo train_SiteVo){
+		
+		ResultResponse result = new ResultResponse();
+		
+		if(train_SiteVo!=null){
+			Site site=siteService.getSiteByName(train_SiteVo.getSite().trim());
+			Site prevsite=siteService.getSiteByName(train_SiteVo.getPrevsite().trim());
+			if(train_SiteVo.getTrainId()!=null && site!=null && prevsite!=null){
+				Train_Site train_Site=new Train_Site();
+				train_Site.setTrainId(train_SiteVo.getTrainId());
+				train_Site.setSiteId(site.getId());
+				train_Site.setPrveSiteId(prevsite.getId());
+				train_Site.setPrice(train_SiteVo.getPrice());
+				train_Site.setArrivalTime(train_SiteVo.getArrivalTime());
+				train_Site.setDepartureTime(train_SiteVo.getDepartureTime());
+				//现在里面没有保存下一站点的ID  还要加上
+				train_siteService.save(train_Site);
+				result.setMessage("Success!");
+			}else{
+				result.setResult(Boolean.FALSE);
+				result.setMessage("failure! Site Error");
+			}
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("failure!");
+		}
+		return result;
+	}
+	
 	
 	
 	@RequestMapping("/trainlist")

@@ -64,11 +64,20 @@ public class SiteController {
 		
 		return result;
 	}
+
 	@RequestMapping(value = "fuzzy", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public List<ResultVO> fuzzy2(@RequestParam("q") String queryKey,@RequestParam("site") String site) {
+	public List<ResultVO> fuzzy(@RequestParam("q") String queryKey,@RequestParam("site") String site) {
 		System.out.println(queryKey);
 		return siteService.fuzzyQuerySite(queryKey.trim(),site.trim());
+	}
+	
+	@RequestMapping(value = "fuzzy2", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<ResultVO> fuzzy2(@RequestParam("q") String queryKey,@RequestParam("trainId") Long trainId
+			,@RequestParam("pr") Long pr) {
+		System.out.println(trainId+"----"+pr);
+		return siteService.fuzzyQuerySite2(queryKey.trim(),trainId,pr);
 	}
 	
 	@RequestMapping("/get/{id}")

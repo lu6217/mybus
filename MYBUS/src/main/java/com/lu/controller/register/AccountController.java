@@ -165,7 +165,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/toadduser/{id}")
-	public String toAdduser(@PathVariable("id")Long id, Model model){
+	public String toAddUser(@PathVariable("id")Long id, Model model){
 		model.addAttribute("accountId", id);
 		return "view/background/account/adduser";
 	}

@@ -35,4 +35,24 @@ public class SiteDao extends BaseDAO<Site>{
 		return selectTopNE(builder, 10);
 	}
 
+	public List<ResultVO> fuzzyQuerySite(String queryKey, Long[] sites, Long pr) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Site.class);
+		builder.setProjection(Projections.projectionList()
+				.add(Projections.property("id"), "id")
+				.add(Projections.property("name"),"name")
+				.add(Projections.property("description"), "description")
+				);
+		builder.addLikeStart("name",queryKey);
+		if(pr==1){
+			builder.addIn("id", sites);
+		}else{
+			for(int i=0;i<sites.length;i++){
+				builder.addNe("id", sites[i]);
+			}
+		}
+		builder.getDetachedCriteria().setResultTransformer(new AliasToBeanResultTransformer(ResultVO.class));
+		return selectE(builder);
+	}
+
 }

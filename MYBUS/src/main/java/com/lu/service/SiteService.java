@@ -15,4 +15,6 @@ public interface SiteService {
 
 	Site getSiteByName(String beginSite);
 
+	List<ResultVO> fuzzyQuerySite2(String queryKey, Long trainId, Long pr);
+
 }

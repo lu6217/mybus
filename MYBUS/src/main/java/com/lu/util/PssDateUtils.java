@@ -81,7 +81,7 @@ public final class PssDateUtils {
 			int month2 = cal.get(Calendar.MONTH) + 1;
 
 			if (year2 < 1900)
-				throw new BusinessRuntimeException("ÊäÈëÄê·ÝÐ¡ÓÚ1900");
+				throw new BusinessRuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½1900");
 
 			if (year != year2 || month != month2) {
 				throw new RuntimeException("error input date");
@@ -604,7 +604,7 @@ public final class PssDateUtils {
 	/**
 	 * Gets the days between two.
 	 *
-	 * @author Evan 2013¡¢4¡¢26
+	 * @author Evan 2013ï¿½ï¿½4ï¿½ï¿½26
 	 * @param startDate
 	 *            the start date
 	 * @param endDate
@@ -614,7 +614,7 @@ public final class PssDateUtils {
 	public static long getDaysBetweenTwo(Date startDate, Date endDate) {
 
 		if (startDate == null || endDate == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		startDate = PssDateWrapper.instance(startDate).toOneDayBegin().toDate();
@@ -641,7 +641,7 @@ public final class PssDateUtils {
 	public static double getDaysWithDecimal(Date startDate, Date endDate) {
 
 		if (startDate == null || endDate == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		double start = startDate.getTime();
@@ -667,7 +667,7 @@ public final class PssDateUtils {
 	public static long getMinutesBetweenTwo(Date startDate, Date endDate) {
 
 		if (startDate == null || endDate == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		Long start = startDate.getTime();
@@ -705,7 +705,7 @@ public final class PssDateUtils {
 	public static long getDaysOfMonth(Date date) {
 
 		if (date == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		Date startDate = PssDateWrapper.instance(date).toMonthBegin().toDate();
@@ -728,7 +728,7 @@ public final class PssDateUtils {
 	public static Date max(Date one, Date two) {
 
 		if (one == null || two == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		return one.compareTo(two) > 0 ? one : two;
@@ -748,7 +748,7 @@ public final class PssDateUtils {
 	public static Date min(Date one, Date two) {
 
 		if (one == null || two == null) {
-			throw new BusinessRuntimeException("ÈÕÆÚ²»ºÏ·¨");
+			throw new BusinessRuntimeException("ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ï·ï¿½");
 		}
 
 		return one.compareTo(two) < 0 ? one : two;
@@ -777,8 +777,8 @@ public final class PssDateUtils {
 		
 		  Calendar c = Calendar.getInstance();
 		  c.setTime(date);
-		  c.add(Calendar.YEAR, year);//¼ÓÒ»Äê
-		  c.add(Calendar.DAY_OF_MONTH, days);//¼õÒ»Ìì
+		  c.add(Calendar.YEAR, year);//ï¿½ï¿½Ò»ï¿½ï¿½
+		  c.add(Calendar.DAY_OF_MONTH, days);//ï¿½ï¿½Ò»ï¿½ï¿½
 		  return c.getTime();
 	 }
 	

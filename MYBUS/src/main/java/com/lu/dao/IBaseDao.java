@@ -5,19 +5,19 @@ import java.io.Serializable;
 public interface IBaseDao<T, PK extends Serializable> {  
 	  
 	   /** 
-     * ¸ù¾ÝID»ñÈ¡ÊµÌå¶ÔÏó. 
+     * ï¿½ï¿½ï¿½IDï¿½ï¿½È¡Êµï¿½ï¿½ï¿½ï¿½ï¿½. 
      *  
      * @param id 
-     *            ¼ÇÂ¼ID 
-     * @return ÊµÌå¶ÔÏó 
+     *            ï¿½ï¿½Â¼ID 
+     * @return Êµï¿½ï¿½ï¿½ï¿½ï¿½ 
      */  
     public T get(PK id);  
       
     /** 
-     * ±£´æÊµÌå¶ÔÏó. 
+     * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½. 
      *  
      * @param entity 
-     *            ¶ÔÏó 
+     *            ï¿½ï¿½ï¿½ï¿½ 
      * @return ID 
      */  
     public PK save(T entity);  

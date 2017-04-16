@@ -52,6 +52,7 @@
                                             <th class="text-center">发车站</th>
                                             <th class="text-center">终点站</th>
                                             <th class="text-center">发车时间</th>
+                                            <th class="text-center">到站时间</th>
                                             <th class="text-center">运行时间</th>
                                             <th class="text-center">Option</th>
                                         </tr>
@@ -78,10 +79,12 @@
 	                                            <td title='<c:out value="${train.beginSite } "></c:out>' class="text-center">${train.beginSite }</td>
 	                                             <td title='<c:out value="${train.endSite } "></c:out>' class="text-center">${train.endSite }</td>
 	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td>
+	                                            <td title='<c:out value="${train.arrivalTime } "></c:out>' class="text-center">${train.arrivalTime }</td>
 	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
 	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
 	                                            <td class="text-center">
 													<button class="btn btn-primary btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus "></i> Add</button>
+													<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
 													<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
 													<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button>
@@ -91,6 +94,14 @@
 	   									   </c:if>
 	  									 </c:if>
                                     </tbody>
+                                <div>
+                                	<button class="btn btn-primary btn-sm" onclick="adds('0')"><i class="fa fa-plus "></i> Add</button>
+									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
+									<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
+<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
+									<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+                                	<hr>
+                                </div>
                                 </table>
                             </div>
                             
@@ -129,7 +140,23 @@
 //              		 }
              		});
             }
-            
+           
+            		
+      		function addTrainSite(id){ 
+               	layer.open({
+               		  type: 2, 
+               		  title: ['AddTrain','font-size:25px;'],
+               		  area:['600px','500px'],
+               		  content:'${path}/luwei/train/toaddtrainsite/'+id,
+               		  btn:['Close']
+//                      		  ,end:function(){
+//                      			 alert('close');
+//                        			// window.location.reload();
+//                     		 }
+            		}); 
+            };
+   		
+            		
             function adds(id){ 
              	layer.open({
              		  type: 2, 
