@@ -125,7 +125,7 @@
 		}
 		//提交前进行验证 还没有做   还有添加  
  		$("#reg").bind("click",function(){
-			$.post("${path }/luwei/train/create",$("#createtrainform").serialize(),function(data) {
+			$.post("${path }/luwei/train/saveOrUpdateTrain",$("#createtrainform").serialize(),function(data) {
 				if(data && data.result) {
 					parent.layer.msg(data.message,{icon: 6,time: 3000});
 					//window.location.replace("${path}/arwen/userinfo/register/result");

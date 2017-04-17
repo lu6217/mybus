@@ -17,9 +17,9 @@ public class Train_SiteServiceImpl implements Train_SiteService{
 	
 	@Override
 	@Transactional
-	public void save(Train_Site train_Site) {
+	public void saveOrUpdate(Train_Site train_Site) {
 		// TODO Auto-generated method stub
-		train_siteDao.save(train_Site);
+		train_siteDao.saveOrUpdate(train_Site);
 	}
 
 	@Override
@@ -50,6 +50,17 @@ public class Train_SiteServiceImpl implements Train_SiteService{
 			}
 		}
 		train_siteDao.save(train_Site);
+	}
+
+	@Override
+	@Transactional
+	public Train_Site getTrainSiteByTrainIdAndNumber(Long trainId, long number) {
+		// TODO Auto-generated method stub
+		List<Train_Site> lists=train_siteDao.getTrainSiteByTrainIdAndNumber(trainId,number);
+		if(lists!=null && lists.size() > 0){
+		return lists.get(0);
+		}
+		return null;
 	}
 
 }

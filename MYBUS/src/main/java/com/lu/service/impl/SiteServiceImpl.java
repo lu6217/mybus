@@ -71,7 +71,7 @@ public class SiteServiceImpl implements SiteService{
 			sites=new Long[lists.size()];
 			for (int i = 0; i < lists.size(); i++) {
 				sites[i]=lists.get(i).getSiteId();
-				if(lists.get(i).getNumber()==0){
+				if(lists.get(i).getNumber()!=null && lists.get(i).getNumber()==0){
 					endSiteId=lists.get(i).getSiteId();
 				}
 			}

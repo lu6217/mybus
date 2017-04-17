@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TrainVo {
+	private Long id;
 	
 	private String number; //车次
 	
@@ -21,6 +22,14 @@ public class TrainVo {
 	private String price; //票价
 	
 	private String num; //座位数
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNumber() {
 		return number;

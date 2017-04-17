@@ -65,7 +65,7 @@
 
 		//提交前还没有进行验证  还需要添加 	
 		$("#reg").bind("click",function(){
-			$.post("${path }/luwei/account/adduser",$("#addUserForm").serialize(),function(data) {
+			$.post("${path }/luwei/account/saveOrUpdateUser",$("#addUserForm").serialize(),function(data) {
 				if(data && data.result) {
 					parent.layer.msg(data.message,{icon: 6,time: 3000});
 					//window.location.replace("${path}/luwei/account/userlist");

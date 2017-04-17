@@ -18,9 +18,9 @@ public class TrainServiceImpl implements TrainService{
 	private TrainDao trainDao;
 	@Override
 	@Transactional
-	public void save(TrainNumber train) {
+	public void saveOrUpdateUser(TrainNumber train) {
 		// TODO Auto-generated method stub
-		trainDao.save(train);
+		trainDao.saveOrUpdate(train);
 		
 	}
 	@Override
@@ -56,11 +56,10 @@ public class TrainServiceImpl implements TrainService{
 	public TrainNumber getTrainById(Long id) {
 		// TODO Auto-generated method stub
 		List<TrainNumber> lists=trainDao.getTrainById(id);
-		TrainNumber train=new TrainNumber();
 		if(lists!=null && lists.size()!=0){
-			train=lists.get(0);
+			return lists.get(0);
 		}
-		return train;
+		return null;
 	}
 
 }

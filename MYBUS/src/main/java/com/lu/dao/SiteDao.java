@@ -48,8 +48,10 @@ public class SiteDao extends BaseDAO<Site>{
 			builder.addIn("id", sites);
 			builder.addNe("id", endSiteId);//去掉终点站站点
 		}else{
-			for(int i=0;i<sites.length;i++){
-				builder.addNe("id", sites[i]);
+			if(sites!=null){
+				for(int i=0;i<sites.length;i++){
+					builder.addNe("id", sites[i]);
+				}
 			}
 		}
 		builder.getDetachedCriteria().setResultTransformer(new AliasToBeanResultTransformer(ResultVO.class));

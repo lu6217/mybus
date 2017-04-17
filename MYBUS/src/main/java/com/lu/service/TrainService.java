@@ -6,7 +6,7 @@ import com.lu.util.PagingVO;
 
 public interface TrainService {
 
-	void save(TrainNumber train);
+	void saveOrUpdateUser(TrainNumber train);
 
 	boolean checkName(String name);
 

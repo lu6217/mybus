@@ -176,7 +176,7 @@ public class AccountController {
 	 * @param userVo
 	 * @return
 	 */
-	@RequestMapping("/adduser")
+	@RequestMapping("/saveOrUpdateUser")
 	@ResponseBody
 	public ResultResponse addUser(HttpServletRequest request, UserVo userVo){
 		ResultResponse result = new ResultResponse();
@@ -192,6 +192,11 @@ public class AccountController {
 			result.setMessage("OK! success!");
 		}else if(userVo!=null && userVo.getId()==null){
 			if(userVo!=null && userVo.getAccountId()!=null){
+				if(accountService.checkName(userVo.getName().trim())){
+					result.setResult(Boolean.FALSE);
+					result.setMessage("failure! Name Exists" );
+					return result;
+				}
 				Account account=accountService.findById(userVo.getAccountId());
 				if(account!=null){
 					User user=new User();

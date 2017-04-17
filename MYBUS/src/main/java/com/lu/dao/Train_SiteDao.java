@@ -34,4 +34,13 @@ public class Train_SiteDao extends BaseDAO<Train_Site>{
 		return this.select(builder);
 	}
 
+	public List<Train_Site> getTrainSiteByTrainIdAndNumber(Long trainId,
+			long number) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Train_Site.class);
+		builder.addEq("trainId",trainId)
+		.addEq("number", number);
+		return this.select(builder);
+	}
+
 }

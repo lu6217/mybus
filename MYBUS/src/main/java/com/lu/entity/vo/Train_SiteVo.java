@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Train_SiteVo {
 
+	private Long id;
+	
 	private Long trainId;
 	
 	private String trainNumber;
@@ -28,6 +30,14 @@ public class Train_SiteVo {
 
 	private Long siteNumber;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Long getTrainId() {
 		return trainId;
 	}

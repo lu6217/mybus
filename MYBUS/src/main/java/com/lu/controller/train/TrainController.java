@@ -36,15 +36,33 @@ public class TrainController {
 	@Autowired
 	private Train_SiteService train_siteService;
 	
-	@RequestMapping("/create")
+	@RequestMapping("/saveOrUpdateTrain")
 	@ResponseBody
 	public ResultResponse addTrain(HttpServletRequest request,TrainVo trainVo){
 		
 		ResultResponse result = new ResultResponse();
-		if(trainVo!=null){
+		if(trainVo!=null && trainVo.getId()!=null){
+			Site beginsite=siteService.getSiteByName(trainVo.getBeginSite());
+			Site endsite=siteService.getSiteByName(trainVo.getEndSite());
+			TrainNumber train=trainService.getTrainById(trainVo.getId());
+			train.setNumber(trainVo.getNumber().trim());
+			train.setBeginSite(beginsite.getId());
+			train.setEndSite(endsite.getId());
+			train.setNum(Long.parseLong(trainVo.getNum().trim()));
+			train.setPrice(trainVo.getPrice().trim());
+			train.setDepartureTime(trainVo.getDepartureTime());
+			train.setArrivalTime(trainVo.getArrivalTime());
+			train.setCreateTime(new Date());
+			trainService.saveOrUpdateUser(train);
+			train=trainService.getTrainByName(trainVo.getNumber().trim());
+			saveBeginSite(beginsite,endsite,trainVo,train);
+			saveEndSite(beginsite,endsite,trainVo,train);
+			result.setMessage("Success!");
+		}else if(trainVo!=null){
 			if(trainService.checkName(trainVo.getNumber().trim())){
 				result.setResult(Boolean.FALSE);
 				result.setMessage("failure! Name Exists" );
+				return result;
 			}
 			Site beginsite=siteService.getSiteByName(trainVo.getBeginSite());
 			Site endsite=siteService.getSiteByName(trainVo.getEndSite());
@@ -59,7 +77,7 @@ public class TrainController {
 				train.setDepartureTime(trainVo.getDepartureTime());
 				train.setArrivalTime(trainVo.getArrivalTime());
 				train.setCreateTime(new Date());
-				trainService.save(train);
+				trainService.saveOrUpdateUser(train);
 				train=trainService.getTrainByName(trainVo.getNumber().trim());
 				saveBeginSite(beginsite,endsite,trainVo,train);
 				saveEndSite(beginsite,endsite,trainVo,train);
@@ -76,7 +94,15 @@ public class TrainController {
 	}
 	
 	public void saveBeginSite(Site beginsite,Site endsite,TrainVo trainVo, TrainNumber train){
-		Train_Site train_Site=new Train_Site();
+		//如果train_site表中已经有了始发站点   就更新始发站   若没有就新建一个始发站
+		Train_Site train_Site=train_siteService.getTrainSiteByTrainIdAndNumber(train.getId(),1L);
+		if(train_Site!=null){
+			train_Site.setSiteId(beginsite.getId());
+			train_Site.setDepartureTime(trainVo.getDepartureTime());
+			train_Site.setPrice("0");
+			train_siteService.saveOrUpdate(train_Site);
+		}else{
+		train_Site=new Train_Site();
 		//保存 车站id  前一站id  后一站id   trainId 等信息 
 		//保存了train后要保存两个站点  始发站和终点站   始发站的price为0    终点站的price为全票价
 		//设置始发站的前一站的id为0   终点站的下一站的id为-1
@@ -91,11 +117,20 @@ public class TrainController {
 		train_Site.setDepartureTime(trainVo.getDepartureTime());
 		train_Site.setPrice("0");
 //		//还要建train_site的server和dao  并且保存train_site
-		train_siteService.save(train_Site);
+		train_siteService.saveOrUpdate(train_Site);
+		}
 	}
 	
 	public void saveEndSite(Site beginsite,Site endsite,TrainVo trainVo, TrainNumber train){
-		Train_Site train_Site=new Train_Site();
+		Train_Site train_Site=train_siteService.getTrainSiteByTrainIdAndNumber(train.getId(),0L);
+		if(train_Site!=null){
+			train_Site.setSiteId(endsite.getId());
+			train_Site.setArrivalTime(trainVo.getArrivalTime());
+			train_Site.setPrice(trainVo.getPrice());
+			train_siteService.saveOrUpdate(train_Site);
+		}else{
+		
+		train_Site=new Train_Site();
 		
 //		train_Site.setPrveSiteId(beginsite.getId());//设置上一站点
 		train_Site.setSiteId(endsite.getId());
@@ -108,8 +143,8 @@ public class TrainController {
 //		train_Site.setDepartureTime(trainVo.getDepartureTime());
 		train_Site.setPrice(trainVo.getPrice());
 //		//还要建train_site的server和dao  并且保存train_site
-		train_siteService.save(train_Site);
-		
+		train_siteService.saveOrUpdate(train_Site);
+		}
 	}
 	
 	
