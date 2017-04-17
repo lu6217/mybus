@@ -145,7 +145,7 @@
       		function addTrainSite(id){ 
                	layer.open({
                		  type: 2, 
-               		  title: ['AddTrain','font-size:25px;'],
+               		  title: ['AddTrainSite','font-size:25px;'],
                		  area:['600px','500px'],
                		  content:'${path}/luwei/train/toaddtrainsite/'+id,
                		  btn:['Close']

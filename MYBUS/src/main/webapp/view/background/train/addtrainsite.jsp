@@ -21,7 +21,7 @@
                         <input type="hidden" name="trainId" id="trainId" value="${train.id }">
                         <div class="form-group">
                             <label>TrainNumber</label>
-                            <input class="form-control" placeholder="${train.number }" id="number" name="number" value="${train.number }" onblur="checkName()" disabled="">
+                            <input class="form-control" placeholder="${train.number }" id="trainNumber" name="trainNumber" value="${train.number }" onblur="checkName()" disabled="">
                         </div>
                           <div class="form-group">
                             <label>prevsite</label>

@@ -80,15 +80,16 @@ public class TrainController {
 		//保存 车站id  前一站id  后一站id   trainId 等信息 
 		//保存了train后要保存两个站点  始发站和终点站   始发站的price为0    终点站的price为全票价
 		//设置始发站的前一站的id为0   终点站的下一站的id为-1
-		train_Site.setPrveSiteId(0L);
+//		train_Site.setPrveSiteId(0L);//设置上一站点
 		train_Site.setSiteId(beginsite.getId());
-		train_Site.setNextSiteId(endsite.getId());
+//		train_Site.setNextSiteId(endsite.getId());//设置下一站点
 		train_Site.setTrainId(train.getId());
+		train_Site.setNumber(1L);//始发站的number为1
 //		//现在发车时间和到达时间还没有   有待添加 
 		//始发站应该没有到达时间
 		//train_Site.setArrivalTime(trainVo.getArrivalTime());
 		train_Site.setDepartureTime(trainVo.getDepartureTime());
-		train_Site.setPrice(trainVo.getPrice());
+		train_Site.setPrice("0");
 //		//还要建train_site的server和dao  并且保存train_site
 		train_siteService.save(train_Site);
 	}
@@ -96,10 +97,11 @@ public class TrainController {
 	public void saveEndSite(Site beginsite,Site endsite,TrainVo trainVo, TrainNumber train){
 		Train_Site train_Site=new Train_Site();
 		
-		train_Site.setPrveSiteId(beginsite.getId());
+//		train_Site.setPrveSiteId(beginsite.getId());//设置上一站点
 		train_Site.setSiteId(endsite.getId());
-		train_Site.setNextSiteId(-1L);
+//		train_Site.setNextSiteId(-1L);//设置下一站点
 		train_Site.setTrainId(train.getId());
+		train_Site.setNumber(0L);//设置终点站的number为0 
 //		//现在发车时间和到达时间还没有   有待添加 
 		//终点站应该没有离开时间
 		train_Site.setArrivalTime(trainVo.getArrivalTime());
@@ -154,15 +156,20 @@ public class TrainController {
 			Site site=siteService.getSiteByName(train_SiteVo.getSite().trim());
 			Site prevsite=siteService.getSiteByName(train_SiteVo.getPrevsite().trim());
 			if(train_SiteVo.getTrainId()!=null && site!=null && prevsite!=null){
+				Long trainId=train_SiteVo.getTrainId();
+				Train_Site train_Site2=train_siteService.getTrainSiteByTrainIdAndSiteId(trainId,prevsite.getId());
+				Long number=train_Site2.getNumber();
 				Train_Site train_Site=new Train_Site();
-				train_Site.setTrainId(train_SiteVo.getTrainId());
+				train_Site.setTrainId(trainId);
 				train_Site.setSiteId(site.getId());
-				train_Site.setPrveSiteId(prevsite.getId());
+				train_Site.setNumber(number+1);
+//				train_Site.setPrveSiteId(prevsite.getId());//设置此站点的前一站点
+				//现在里面没有保存下一站点的ID  还要加上
 				train_Site.setPrice(train_SiteVo.getPrice());
 				train_Site.setArrivalTime(train_SiteVo.getArrivalTime());
 				train_Site.setDepartureTime(train_SiteVo.getDepartureTime());
-				//现在里面没有保存下一站点的ID  还要加上
-				train_siteService.save(train_Site);
+				//要把此站点后面的所有站点的number+1
+				train_siteService.saveAndChange(train_Site,trainId,number);
 				result.setMessage("Success!");
 			}else{
 				result.setResult(Boolean.FALSE);

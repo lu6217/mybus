@@ -66,13 +66,17 @@ public class SiteServiceImpl implements SiteService{
 		// TODO Auto-generated method stub
 		List<Train_Site> lists=train_siteDao.getSitesBytrainId(trainId);
 		Long [] sites=null;
+		Long endSiteId=null;
 		if(lists!=null && lists.size() > 0){
 			sites=new Long[lists.size()];
 			for (int i = 0; i < lists.size(); i++) {
 				sites[i]=lists.get(i).getSiteId();
+				if(lists.get(i).getNumber()==0){
+					endSiteId=lists.get(i).getSiteId();
+				}
 			}
 		}
-		return siteDao.fuzzyQuerySite(queryKey,sites,pr);
+		return siteDao.fuzzyQuerySite(queryKey,sites,pr,endSiteId);
 	}
 
 	

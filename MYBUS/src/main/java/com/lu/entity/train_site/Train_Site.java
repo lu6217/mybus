@@ -49,6 +49,9 @@ public class Train_Site{
 	@Column(name="next_site_id")
 	private Long nextSiteId;
 
+	@Column(name="number")
+	private Long number;
+	
 	public Long getId() {
 		return id;
 	}
@@ -119,6 +122,14 @@ public class Train_Site{
 
 	public void setNextSiteId(Long nextSiteId) {
 		this.nextSiteId = nextSiteId;
+	}
+
+	public Long getNumber() {
+		return number;
+	}
+
+	public void setNumber(Long number) {
+		this.number = number;
 	}
 	
 }

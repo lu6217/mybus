@@ -35,7 +35,7 @@ public class SiteDao extends BaseDAO<Site>{
 		return selectTopNE(builder, 10);
 	}
 
-	public List<ResultVO> fuzzyQuerySite(String queryKey, Long[] sites, Long pr) {
+	public List<ResultVO> fuzzyQuerySite(String queryKey, Long[] sites, Long pr, Long endSiteId) {
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Site.class);
 		builder.setProjection(Projections.projectionList()
@@ -46,6 +46,7 @@ public class SiteDao extends BaseDAO<Site>{
 		builder.addLikeStart("name",queryKey);
 		if(pr==1){
 			builder.addIn("id", sites);
+			builder.addNe("id", endSiteId);//去掉终点站站点
 		}else{
 			for(int i=0;i<sites.length;i++){
 				builder.addNe("id", sites[i]);

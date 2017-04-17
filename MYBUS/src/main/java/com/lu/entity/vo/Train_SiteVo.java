@@ -8,7 +8,7 @@ public class Train_SiteVo {
 
 	private Long trainId;
 	
-	private String number;
+	private String trainNumber;
 	
 	private String site;
 	
@@ -26,6 +26,8 @@ public class Train_SiteVo {
 	
 	private String nextSite;
 
+	private Long siteNumber;
+	
 	public Long getTrainId() {
 		return trainId;
 	}
@@ -34,12 +36,20 @@ public class Train_SiteVo {
 		this.trainId = trainId;
 	}
 
-	public String getNumber() {
-		return number;
+	public String getTrainNumber() {
+		return trainNumber;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setTrainNumber(String trainNumber) {
+		this.trainNumber = trainNumber;
+	}
+
+	public Long getSiteNumber() {
+		return siteNumber;
+	}
+
+	public void setSiteNumber(Long siteNumber) {
+		this.siteNumber = siteNumber;
 	}
 
 	public String getSite() {
