@@ -61,5 +61,11 @@ public class TrainServiceImpl implements TrainService{
 		}
 		return null;
 	}
+	@Override
+	@Transactional
+	public void delTrain(TrainNumber train) {
+		// TODO Auto-generated method stub
+		trainDao.delete(train);
+	}
 
 }

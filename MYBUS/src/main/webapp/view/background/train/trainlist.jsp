@@ -192,7 +192,7 @@
             		  yes: function(){
             			  $.ajax({
             				 type:"POST",
-      		    		     url:"${path}/luwei/account/deltrain/",
+      		    		     url:"${path}/luwei/train/deltrain",
       		    		     data: {id:id},
       		    	         success:function(res){
       		    	        	 if(res && res.result){

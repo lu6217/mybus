@@ -218,6 +218,21 @@ public class TrainController {
 	}
 	
 	
+	@RequestMapping("/deltrain")
+	@ResponseBody
+	public ResultResponse delTrain(HttpServletRequest request){
+		ResultResponse result = new ResultResponse();
+		Long id=Long.parseLong(request.getParameter("id").trim());
+		TrainNumber train=trainService.getTrainById(id);
+		if(train!=null){
+			trainService.delTrain(train);
+			result.setMessage("OK! 删除成功!");
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("falure!");
+		}
+		return result;
+	}
 	
 	@RequestMapping("/trainlist")
 	public String accountSearchList(PagingVO pagingVo,TrainSearchVo trainSearchVo,Model model, HttpServletRequest request){

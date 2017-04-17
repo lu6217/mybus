@@ -16,5 +16,7 @@ public interface TrainService {
 
 	TrainNumber getTrainById(Long id);
 
+	void delTrain(TrainNumber train);
+
 	
 }
