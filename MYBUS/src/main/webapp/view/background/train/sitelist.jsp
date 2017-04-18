@@ -22,183 +22,55 @@
          <div class="panel-body">
              <div class="table-responsive">
              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                     <thead>
+                     <thead >
                          <tr>
-                             <th>#</th>
-                             <th>First Name</th>
-                             <th>Last Name</th>
-                             <th>Username</th>
+                             <th class="text-center" width="20%">站序</th>
+                             <th class="text-center" width="20%">站名</th>
+                             <th class="text-center" width="20%">到站时间</th>
+                             <th class="text-center" width="20%">发车时间</th>
+                             <th class="text-center" width="20%">停留时间</th>
                          </tr>
                      </thead>
                      <tbody>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
-                         <tr class="success">
-                             <td>1</td>
-                             <td>Mark</td>
-                             <td>Otto</td>
-                             <td>@mdo</td>
-                         </tr>
-                         <tr class="info">
-                             <td>2</td>
-                             <td>Jacob</td>
-                             <td>Thornton</td>
-                             <td>@fat</td>
-                         </tr>
-                         <tr class="warning">
-                             <td>3</td>
-                             <td>Larry</td>
-                             <td>the Bird</td>
-                             <td>@twitter</td>
-                         </tr>
-                         <tr class="danger">
-                             <td>4</td>
-                             <td>John</td>
-                             <td>Smith</td>
-                             <td>@jsmith</td>
-                         </tr>
+                     <c:if test="${not empty train_sites}">
+                     	<c:forEach varStatus="vs" var="train_site" items="${train_sites}">
+	                        <c:choose>  
+							 	 <c:when test="${vs.count%4==0}">  
+                                 <tr class="success">
+                               	 </c:when> 
+                               	 <c:when test="${vs.count%4==1}">  
+                               		<tr class="info">
+                               	 </c:when> 
+                               	 <c:when test="${vs.count%4==2}">  
+                               		<tr class="warning">
+                               	 </c:when> 
+                               	 <c:when test="${vs.count%4==3}">  
+                               		<tr class="danger">
+                               	 </c:when> 
+							</c:choose>  
+	                             <td>${vs.count }</td>
+	                             <td>${train_site.id }</td>
+<!-- 	                             vs.count的第一个是1 不是0 -->
+	                             <c:choose>
+   									<c:when test="${train_site.number==1}">  
+   										<td>---</td>
+	                             	</c:when>
+	                            	<c:otherwise>
+	                             		<td>${train_site.arrivalTime }</td>
+								  	</c:otherwise>
+								 </c:choose>
+								 <c:choose>
+   									<c:when test="${train_site.number==0}">  
+   										<td>---</td>
+	                             	</c:when>
+	                            	<c:otherwise>
+	                             		<td>${train_site.departureTime }</td>
+								  	</c:otherwise>
+								 </c:choose>
+	                             <td>time</td>
+	                         </tr>
+                         </c:forEach>
+                       </c:if>
                      </tbody>
                  </table>
              </div>

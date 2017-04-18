@@ -54,6 +54,7 @@
                             <label>Address</label>
                             <input class="form-control" placeholder="${user.address }" name="address" id="address" value="${user.address }" >
                         </div>
+                       
                         <a type="submit" class="btn btn-success" id="reg">Submit</a>
                         <a type="reset" class="btn btn-default">Reset</a>
                     </form>

@@ -37,7 +37,7 @@
 	                        <label>Price</label>
 	                        <div class="input-group">
 	                            <span class="input-group-addon">￥</span>
-	                            <input class="form-control" placeholder="${train.price }"  name="price" id="price" value="${train.price }">
+	                            <input class="form-control" type="number" placeholder="${train.price }"  name="price" id="price" value="${train.price }">
 	                            <span class="input-group-addon">.00</span>
 	                        </div>
                         </div>
@@ -63,6 +63,12 @@
 							  	  </span>
 							  	  </div>
 							</div>
+						</div>
+						 <div class="layui-inline">
+						  <input class="layui-input" placeholder="自定义日期格式" id="LAY_demorange_s" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})">
+						</div>
+						 <div class="layui-inline">
+						  <input class="layui-input" placeholder="自定义日期格式" id="LAY_demorange_e" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})">
 						</div>
 						
 						<!-- 下面这个按钮用button是提交就无法关闭弹出框   用a标签的时候就可以关闭  -->
@@ -225,6 +231,44 @@
 		
 		
 </script>
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  var start = {
+	format: 'YYYY/MM/DD hh:mm',
+    min: laydate.now()
+    ,max: '2099-06-16 23:59:59'
+    ,istoday: false
+    ,istime: true
+    ,choose: function(datas){
+      end.min = datas; //开始日选好后，重置结束日的最小日期
+      end.start = datas //将结束日的初始值设定为开始日
+    }
+  };
+  
+  var end = {
+	format: 'YYYY/MM/DD hh:mm',
+    min: laydate.now()
+    ,max: '2099-06-16 23:59:59'
+    ,istoday: false
+    ,istime: true
+    ,choose: function(datas){
+      start.max = datas; //结束日选好后，重置开始日的最大日期
+    }
+  };
+  
+  document.getElementById('LAY_demorange_s').onclick = function(){
+    start.elem = this;
+    laydate(start);
+  }
+  document.getElementById('LAY_demorange_e').onclick = function(){
+    end.elem = this
+    laydate(end);
+  }
+  
+});
+</script>	  
 	  
 </body>
 </html>

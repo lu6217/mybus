@@ -15,6 +15,7 @@ public class Train_SiteDao extends BaseDAO<Train_Site>{
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Train_Site.class);
 		builder.addEq("trainId",trainId);
+		builder.addAscOrder("number");
 		return this.select(builder);
 	}
 

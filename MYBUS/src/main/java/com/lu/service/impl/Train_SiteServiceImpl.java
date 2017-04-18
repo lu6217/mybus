@@ -63,4 +63,18 @@ public class Train_SiteServiceImpl implements Train_SiteService{
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public List<Train_Site> getTrainSiteById(Long id) {
+		// TODO Auto-generated method stub
+		
+		List<Train_Site> lists=train_siteDao.getSitesBytrainId(id);
+		if(lists!=null && lists.size()>0){
+			Train_Site train_Site=lists.get(0);
+			lists.remove(0);
+			lists.add(train_Site);
+		}
+		return lists;
+	}
+
 }

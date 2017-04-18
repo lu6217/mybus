@@ -36,7 +36,7 @@
 	                        <label>Price</label>
 	                        <div class="input-group">
 	                            <span class="input-group-addon">￥</span>
-	                            <input class="form-control" placeholder="${train.price }"  name="price" id="price" value="${train.price }">
+	                            <input class="form-control" type="number" placeholder="${train.price }"  name="price" id="price" value="${train.price }">
 	                            <span class="input-group-addon">.00</span>
 	                        </div>
                         </div>

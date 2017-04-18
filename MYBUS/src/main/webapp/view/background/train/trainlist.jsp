@@ -125,13 +125,11 @@
             });
             
             function showSite(id){
-            	alert("id="+id);
-            	id=2;
             	layer.open({
              		  type: 2, 
              		  title: ['Station Info','font-size:25px;'],
-             		  area:['600px','500px'],
-             		  content: '${path}/luwei/site/get/'+id,
+             		  area:['550px','400px'],
+             		  content: '${path}/luwei/train_site/get/'+id,
              		  shadeClose: true,//点击窗体外的任意处 关闭窗体
              		  btn:['Close']
 //              		  end:function(){

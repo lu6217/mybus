@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,13 +74,6 @@ public class SiteController {
 	public List<ResultVO> fuzzy2(@RequestParam("q") String queryKey,@RequestParam("trainId") Long trainId
 			,@RequestParam("pr") Long pr) {
 		return siteService.fuzzyQuerySite2(queryKey.trim(),trainId,pr);
-	}
-	
-	@RequestMapping("/get/{id}")
-	public String getSiteList(@PathVariable("id")Long id, Model model){
-//		List<Site> sites=siteService.getSiteList(id);
-//		model.addAttribute("Sites", sites);
-		return "view/background/train/sitelist";
 	}
 	
 }
