@@ -24,6 +24,6 @@ public class Train_SiteController {
 		
 		List<Train_Site> lists=train_SiteService.getTrainSiteById(id);
 		model.addAttribute("train_sites", lists);
-		return "view/background/train/sitelist";
+		return "view/background/train/trainsitelist";
 	}
 }

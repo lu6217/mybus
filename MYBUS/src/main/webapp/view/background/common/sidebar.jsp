@@ -11,23 +11,23 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                        <a class="active-menu" href="${path }/luwei/account/accountlist"><i class="fa fa-dashboard"></i> Account Management</a>
                     </li>
                     <li>
-                        <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
+                        <a href="${path }/luwei/account/userlist"><i class="fa fa-desktop"></i>User Management</a>
                     </li>
 					<li>
-                        <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                        <a href="${path }/luwei/train/trainlist"><i class="fa fa-bar-chart-o"></i> Train Management</a>
                     </li>
                     <li>
-                        <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                        <a href="${path }/luwei/site/sitelist"><i class="fa fa-qrcode"></i>Site Management</a>
                     </li>
                     
                     <li>
-                        <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+                        <a href=""><i class="fa fa-table"></i> Order Management</a>
                     </li>
                     <li>
-                        <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+                        <a href=""><i class="fa fa-edit"></i> Authority Management </a>
                     </li>
 
 

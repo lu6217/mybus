@@ -10,6 +10,7 @@ import com.lu.entity.site.Site;
 import com.lu.entity.vo.ResultVO;
 import com.lu.util.BaseDAO;
 import com.lu.util.DetachedCriteriaBuilder;
+import com.lu.util.PagingVO;
 
 @Repository
 public class SiteDao extends BaseDAO<Site>{
@@ -58,4 +59,17 @@ public class SiteDao extends BaseDAO<Site>{
 		return selectE(builder);
 	}
 
+	public PagingVO getAllSite(PagingVO pagingVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = initQueryCriteria();
+		DetachedCriteriaBuilder count = initQueryCriteria();
+		return this.selectPagingVO(query, pagingVo, count);
+	}
+
+	private DetachedCriteriaBuilder initQueryCriteria() {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Site.class);
+		return query;
+	}
+	
 }

@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.site.Site;
 import com.lu.entity.vo.ResultVO;
+import com.lu.entity.vo.UserVo;
 import com.lu.service.SiteService;
+import com.lu.util.PagingVO;
 import com.lu.util.ResultResponse;
 
 @Controller
@@ -26,6 +30,12 @@ public class SiteController {
 	@Autowired
 	private MessageSource messageSource;
 
+	
+	@RequestMapping("/tocreatesite/{id}")
+	public String toAddTrain(@PathVariable("id")Long id, Model model){
+//		model.addAttribute("accountId", id);
+		return "view/background/site/createsite";
+	}
 	
 	@RequestMapping("/create")
 	@ResponseBody
@@ -76,4 +86,11 @@ public class SiteController {
 		return siteService.fuzzyQuerySite2(queryKey.trim(),trainId,pr);
 	}
 	
+	
+	@RequestMapping("/sitelist")
+	public String userSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
+		PagingVO vo =siteService.searchAllSiteList(pagingVo);
+		model.addAttribute("pageVO", vo);
+		return "view/background/site/sitelist";
+	}
 }

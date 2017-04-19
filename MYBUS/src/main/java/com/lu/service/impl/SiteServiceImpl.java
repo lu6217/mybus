@@ -12,6 +12,7 @@ import com.lu.entity.site.Site;
 import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.ResultVO;
 import com.lu.service.SiteService;
+import com.lu.util.PagingVO;
 
 @Service
 public class SiteServiceImpl implements SiteService{
@@ -77,6 +78,13 @@ public class SiteServiceImpl implements SiteService{
 			}
 		}
 		return siteDao.fuzzyQuerySite(queryKey,sites,pr,endSiteId);
+	}
+
+	@Override
+	@Transactional
+	public PagingVO searchAllSiteList(PagingVO pagingVo) {
+		// TODO Auto-generated method stub
+		return siteDao.getAllSite(pagingVo);
 	}
 
 	

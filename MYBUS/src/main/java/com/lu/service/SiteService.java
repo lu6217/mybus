@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lu.entity.site.Site;
 import com.lu.entity.vo.ResultVO;
+import com.lu.util.PagingVO;
 
 public interface SiteService {
 
@@ -16,5 +17,7 @@ public interface SiteService {
 	Site getSiteByName(String beginSite);
 
 	List<ResultVO> fuzzyQuerySite2(String queryKey, Long trainId, Long pr);
+
+	PagingVO searchAllSiteList(PagingVO pagingVo);
 
 }
