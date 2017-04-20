@@ -42,11 +42,11 @@
 		<img src="${path}/images/avtar.png" />
 	</div>
 			<form id="registerform" name="registerform" method="post" action="${path }/luwei/account/logon/register" >
-					<input type="text" id="name" name="name" class="text" value="Username" onfocus="this.value = '';" onblur="checkName()" ><br>
+					<input type="text" id="name" name="name" class="text" value=" " onfocus="this.value = '';" onblur="checkName()" ><br>
 					<span id="namespan"></span>
-					<input type="password" id="password" name="password" value="Password" onfocus="this.value = '';" onblur="checkPwd()" ><br>
+					<input type="password" id="password" name="password" value=" " onfocus="this.value = '';" onblur="checkPwd()" ><br>
 					<span id="pwdspan"></span>
-					<input type="password" id="password2" name="password2" value="Password" onfocus="this.value = '';" onblur="checkPwd2()"><br>
+					<input type="password" id="password2" name="password2" value=" " onfocus="this.value = '';" onblur="checkPwd2()"><br>
 					<span id="pwd2span"></span>
 					<br><br>
 			</form>
@@ -56,7 +56,7 @@
 </div>
    <div class="copy-rights">
  
- 		<p><a href="${path }/view/login/login.jsp">go Login</a></p>	
+ 		<p><a href="${path }/luwei/account/logon/tologin">go Login</a></p>	
 		<p>Copyright &copy; 2017.Company name All rights reserved.</p>
    </div>
 
@@ -71,7 +71,7 @@
 		}
 		
 		function checkName(){
-			var name=$("#name").val();
+			var name=$("#name").val().trim();
 			//if(!name) return;
 			if(!name){
 				//alert("name==null");
@@ -109,9 +109,9 @@
 		}
 	
 		function checkPwd(){
-			var pwd=$("#password").val();
+			var pwd=$("#password").val().trim();
 			if(!judgePassword(pwd)){
-				layer.tips('6到18个字符!', '#password',{
+				layer.tips('不能为空格,6到18个字符!', '#password',{
 					tips: [2,'#F14164'],
 					time: 5000
 				});

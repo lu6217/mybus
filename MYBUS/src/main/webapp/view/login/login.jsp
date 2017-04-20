@@ -49,7 +49,7 @@
 	</div>
 </div>
    <div class="copy-rights">
- 		<p><a href="${path }/view/register/register.jsp" >new user Register</a></p>
+ 		<p><a href="${path }/luwei/account/logon/toregister" >new user Register</a></p>
 		<p>Copyright &copy; 2017.Company name All rights reserved.</p>
    </div>
 <script type="text/javascript">
@@ -87,7 +87,7 @@
 			
 			if (data && data.result) {
 				layer.msg(data.message,{icon: 6});
-				//window.location.replace("${path}/arwen/userinfo/register/result");
+				window.location.replace("${path}/luwei/account/accountlist");
 			}else if (data){
 				alert(data.message,{icon: 5});
 			}
