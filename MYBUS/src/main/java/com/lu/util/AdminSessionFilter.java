@@ -31,14 +31,15 @@ public class AdminSessionFilter implements Filter {
 		String uriPath = request.getContextPath()+"/luwei/account/logon/";
 		String uri = request.getRequestURI();
 		Object accountObj = WebUtils.getSessionAttribute(request, "account");
-		if(accountObj!=null){
-			chain.doFilter(arg0, arg1);
-		}else if(accountObj==null){
+		if(accountObj==null){
 			if(!uri.contains(uriPath)){
 				response.sendRedirect(request.getContextPath() + "/luwei/account/logon/tologin");
 			}
 			chain.doFilter(arg0, arg1);
-		}
+		}else if(accountObj!=null){
+			chain.doFilter(arg0, arg1);
+		} 
+		
 //		if (accountObj != null|| uriPath.contains(uri)) {
 //			chain.doFilter(arg0, arg1);
 //		} else {
