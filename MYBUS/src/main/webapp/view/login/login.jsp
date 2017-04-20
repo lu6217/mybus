@@ -38,10 +38,10 @@
 	<div class="avtar">
 		<img src="${path}/images/avtar.png" />
 	</div>
-			<form id="loginform" name="loginform" method="post" action="${path }/luwei/account/login">
-					<input type="text" id="name" name="name" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" >
+			<form id="loginform" name="loginform" method="post" action="${path }/luwei/account/logon/login">
+					<input type="text" id="name" name="name" class="text" value=" " onfocus="this.value = '';" onblur="checkName()" >
 						<div class="key">
-					<input type="password" id="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+					<input type="password" id="password" name="password" value=" " onfocus="this.value = '';" onblur="checkPwd()">
 						</div><br><br>
 			</form>
 	<div class="signin">
@@ -54,15 +54,44 @@
    </div>
 <script type="text/javascript">
 
+	function checkName(){
+		var name=$("#name").val();
+		if(!name){
+			layer.tips('Name Not Null!', '#name',{
+				tips: [2,'#F14164'],
+				time: 5000
+			});
+			return;
+		}
+	}
+	
+	function checkPwd(){
+		var pwd=$("#password").val();
+		if(!pwd){
+			layer.tips('Password Not Null', '#password',{
+				tips: [2,'#F14164'],
+				time: 5000
+			});
+			//$("#pwdspan").text("以字母开头的6-18位");
+			return;
+		}
+		//$("#pwdspan").text("");
+	}
+	
+
 	$("#loginbtn").bind("click",function(){
 	
-		$.post("${path }/luwei/account/login",$("#loginform").serialize(),function(data) {
-			if(data!=null){
-				alert(data);
-				if(data=="success!"){
-					window.location.replace("${path}/luwei/account/login/result");
-				}
+		checkName();
+		checkPwd();
+		$.post("${path }/luwei/account/logon/login",$("#loginform").serialize(),function(data) {
+			
+			if (data && data.result) {
+				layer.msg(data.message,{icon: 6});
+				//window.location.replace("${path}/arwen/userinfo/register/result");
+			}else if (data){
+				alert(data.message,{icon: 5});
 			}
+			
 		});
 	});
 

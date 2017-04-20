@@ -40,36 +40,64 @@ public class AccountController {
 	 * @param password
 	 * @return
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("/logon/login")
 	@ResponseBody
-	public String login(HttpServletRequest request,@RequestParam(value = "name", required = false) String name,
+	public ResultResponse login(HttpServletRequest request,@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "password", required = false) String password){
-		String result=null;
+		ResultResponse result=new ResultResponse();
+		if(name==null){
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Login Failure!");
+			return result;
+		}
 		Account account=accountService.findByName(name);
 		Md5PasswordEncoder md5=new Md5PasswordEncoder();
 		String pwd=md5.encodePassword(password, null);
 		if(account==null){
-			result="user not exis!";
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Login Failure!");
+			return result;
 		}else if(pwd.equals(account.getPassword())){
-			result="success!";
-			request.getSession().setAttribute("acount", account);
+			result.setMessage("Register Success!");
+			request.getSession().setAttribute("account", account);
 		}else{
-			result="wrong password!";
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Login Failure!");
 		}
 		return result;
 	}
 	
+	@RequestMapping("/logon/tologin")
+	public String toLogin(Model model,HttpServletRequest request){
+		return "view/login/login";
+	}
 	
-	@RequestMapping("/login/result")
+	@RequestMapping("/logon/logout")
+	public String logout(Model model,HttpServletRequest request){
+		request.getSession().removeAttribute("account");
+		return "view/login/login";
+	}
+	
+	@RequestMapping("/logon/login/result")
 	public String loginResult(){
 		return "view/loginsuccess";
 	}
 	
-	@RequestMapping("/register")
+	@RequestMapping("/logon/toregister")
+	public String toRegister(Model model,HttpServletRequest request){
+		return "view/register/register";
+	}
+	
+	@RequestMapping("/logon/register")
 	@ResponseBody
 	public ResultResponse register(HttpServletRequest request, AccountRegisterVo accountVo){
 		//ResultResponse result = new ResultResponse();
 		ResultResponse result = new ResultResponse();
+		if(null==accountVo || null==accountVo.getName().trim()){
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Failure!");
+			return result;
+		}
 		String name=accountVo.getName().trim();
 		if(!accountService.checkName(name)){
 			String password=accountVo.getPassword().trim();//去除空格
@@ -92,7 +120,7 @@ public class AccountController {
 		return result;
 	}
 	
-	@RequestMapping("/register/checkname")
+	@RequestMapping("/logon/register/checkname")
 	@ResponseBody
 	public ResultResponse checkName(HttpServletRequest request){
 		

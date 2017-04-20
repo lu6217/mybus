@@ -21,8 +21,8 @@
        <jsp:include page="/view/background/common/header.jsp" />
         <!--/. NAV TOP  -->
          <nav class="navbar-default navbar-side" role="navigation">
-		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
-             <jsp:include page="/view/background/common/sidebar.jsp"/>
+<!-- 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div> -->
+             <jsp:include page="/view/background/common/sidebar.jsp?item=trainList"/>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >

@@ -41,7 +41,7 @@
 	<div class="avtar">
 		<img src="${path}/images/avtar.png" />
 	</div>
-			<form id="registerform" name="registerform" method="post" action="${path }/luwei/account/register" >
+			<form id="registerform" name="registerform" method="post" action="${path }/luwei/account/logon/register" >
 					<input type="text" id="name" name="name" class="text" value="Username" onfocus="this.value = '';" onblur="checkName()" ><br>
 					<span id="namespan"></span>
 					<input type="password" id="password" name="password" value="Password" onfocus="this.value = '';" onblur="checkPwd()" ><br>
@@ -91,7 +91,7 @@
 			$.ajax(
 		    		{
 		    			 type:"POST",
-		    		     url:"${path }/luwei/account/register/checkname",
+		    		     url:"${path }/luwei/account/logon/register/checkname",
 		    		     data: {name:name},
 		    	         success:function(res){
 		    	        	 if(res && res.result){
@@ -136,10 +136,11 @@
 			var regex = /^[a-zA-Z]\w{5,17}$/;
 			var name = $("#name").val();
 			
-			
+			checkName();
 			checkPwd(); //验证密码
 			checkPwd2();
-			$.post("${path }/luwei/account/register",$("#registerform").serialize(),function(data) {
+		
+			$.post("${path }/luwei/account/logon/register",$("#registerform").serialize(),function(data) {
 // 				if(data!=null){
 // 					alert(data);
 // 				}
