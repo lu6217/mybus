@@ -56,12 +56,27 @@
 							  	  </div>
 							  	  <span class="input-group-addon">~</span>
 							  	  <div class="input-group clockpicker2">
+							  	   <select class="form-control" id="numberDay" name="numberDay" >
+	                                       <option value="0">即日</option>
+	                                       <option value="1">次日</option>
+	                                       <option value="2">隔日</option>
+	                                  </select>
 							  	  <input type="text" id="arrivalTime" name="arrivalTime" class="form-control" value="08:00">
 							    	<span class="input-group-addon">
 							        <span class="glyphicon glyphicon-time"></span>
 							  	  </span>
 							  	  </div>
 							</div>
+<!-- 							<div class="input-group"></div> -->
+<!-- 							<div class="layui-inline"> -->
+<!-- 							  <input class="layui-input" placeholder="DepartureTime" name="departureTime" id="departureTime" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})"> -->
+<!-- 							</div> -->
+<!-- 							<div class="layui-inline"> ~ </div> -->
+<!-- 							<div class="layui-inline"> -->
+<!-- 							  <input class="layui-input" placeholder="ArrivalTime" name="arrivalTime" id="arrivalTime" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})"> -->
+<!-- 							</div> -->
+						</div>
+							
 						</div>
 						
 						<!-- 下面这个按钮用button是提交就无法关闭弹出框   用a标签的时候就可以关闭  -->
@@ -225,6 +240,44 @@
 		
 		
 </script>
-	  
+<!-- <script> -->
+<!-- layui.use('laydate', function(){ -->
+<!--   var laydate = layui.laydate; -->
+  
+<!--   var start = { -->
+<!-- 	format: 'YYYY-MM-DD hh:mm', -->
+<!--     min: laydate.now() -->
+<!--     ,max: '2099-06-16 23:59:59' -->
+<!--     ,istoday: false -->
+<!--     ,istime: true -->
+<!--     ,choose: function(datas){ -->
+<!--       end.min = datas; //开始日选好后，重置结束日的最小日期 -->
+<!--       end.start = datas //将结束日的初始值设定为开始日 -->
+<!--     } -->
+<!--   }; -->
+  
+<!--   var end = { -->
+<!-- 	format: 'YYYY-MM-DD hh:mm', -->
+<!--     min: laydate.now() -->
+<!--     ,max: '2099-06-16 23:59:59' -->
+<!--     ,istoday: false -->
+<!--     ,istime: true -->
+<!--     ,choose: function(datas){ -->
+<!--       start.max = datas; //结束日选好后，重置开始日的最大日期 -->
+<!--     } -->
+<!--   }; -->
+  
+<!--   document.getElementById('departureTime').onclick = function(){ -->
+<!--     start.elem = this; -->
+<!--     laydate(start); -->
+<!--   } -->
+<!--   document.getElementById('arrivalTime').onclick = function(){ -->
+<!--     end.elem = this -->
+<!--     laydate(end); -->
+<!--   } -->
+  
+<!-- }); -->
+<!-- </script> -->
+
 </body>
 </html>

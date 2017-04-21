@@ -77,9 +77,22 @@
 												</c:choose>  
 	                                            <td title='<c:out value="${train.number } "></c:out>' class="text-center"><a href="javascript:void(0)" onclick="showSite('${train.id }')">${train.number }</a></td>
 	                                            <td title='<c:out value="${train.beginSite } "></c:out>' class="text-center">${train.beginSite }</td>
+	                                            
 	                                             <td title='<c:out value="${train.endSite } "></c:out>' class="text-center">${train.endSite }</td>
-	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td>
-	                                            <td title='<c:out value="${train.arrivalTime } "></c:out>' class="text-center">${train.arrivalTime }</td>
+<%-- 	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td> --%>
+<%-- 	                                            <td title='<c:out value="${train.arrivalTime } "></c:out>' class="text-center">${train.arrivalTime }</td> --%>
+	                                            <td title='<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />' class="text-center">
+													<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />
+												</td>
+												 <td title='<fmt:formatDate value="${train.arrivalTime }" pattern="HH:mm" />' class="text-center">
+													<fmt:formatDate value="${train.arrivalTime }" pattern="HH:mm" />
+													<c:choose>
+														<c:when test="${train.numberDay==0}">(即日)</c:when>
+														<c:when test="${train.numberDay==1}">(次日)</c:when>
+														<c:when test="${train.numberDay==2}">(隔日)</c:when>
+														<c:otherwise></c:otherwise>
+													</c:choose>
+												</td>
 	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
 	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
 	                                            <td class="text-center">
@@ -88,6 +101,8 @@
 													<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
 													<button class="btn btn-danger btn-sm"  onclick="del('${train.id }','${train.number }')"><i class="fa fa-trash-o"></i> Delete</button>
+	                                         		<button class="btn btn-danger btn-sm"  onclick="product('${train.id }')"><i class="fa fa-fire"></i> Schedule</button>
+	                                            
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
@@ -123,7 +138,41 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
-            
+             function product(trainId){
+            	 alert(trainId);
+//             	 var index =layer.load(2,
+//             			 {shade: [0.4, '#393D49']
+//             	 });
+            	 
+            	 $.ajax({
+    				 type:"POST",
+		    		     url:"${path}/luwei/schedule/addschedule",
+		    		     data: {trainId:trainId},
+		    	         success:function(res){
+		    	        	 if(res && res.result){
+		    	        		 layer.msg(res.message);
+		    	        	 }else{
+		    	        		 layer.msg(res.message);
+		    	        	 }
+// 		  						window.location.reload();
+			    		},
+			    		error:function(err,err1,err2){
+			    		    //debugger;
+			            }
+		    		  });
+            	 
+            	 
+            	 
+            	 
+            	 //可以写成生成成功了之后关闭loading
+            	//此处演示关闭
+//             	setTimeout(function(){
+//     	            layer.close(index);
+//             	 // layer.closeAll('loading');
+//             	}, 2000);
+            	 
+            	 
+             }
             function showSite(id){
             	layer.open({
              		  type: 2, 

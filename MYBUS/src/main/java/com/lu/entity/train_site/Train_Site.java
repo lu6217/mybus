@@ -37,6 +37,9 @@ public class Train_Site{
 	@Column(name="leave_time")
 	private Date departureTime;
 	
+	@Column(name="numberDay")
+	private Long numberDay;
+	
 	@Column(name="arrival_time")
 	private Date arrivalTime;
 	
@@ -55,7 +58,7 @@ public class Train_Site{
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -90,6 +93,14 @@ public class Train_Site{
 
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
+	}
+
+	public Long getNumberDay() {
+		return numberDay;
+	}
+
+	public void setNumberDay(Long numberDay) {
+		this.numberDay = numberDay;
 	}
 
 	public Date getArrivalTime() {

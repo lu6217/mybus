@@ -37,6 +37,9 @@ public class AdminSessionFilter implements Filter {
 			}
 			chain.doFilter(arg0, arg1);
 		}else if(accountObj!=null){
+			if(uri.contains(uriPath)){
+				request.getSession().removeAttribute("account");
+			}
 			chain.doFilter(arg0, arg1);
 		} 
 		

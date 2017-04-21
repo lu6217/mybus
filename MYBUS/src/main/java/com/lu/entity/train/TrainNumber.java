@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -36,9 +38,14 @@ public class TrainNumber {
 	private Long endSite; //终点站
 	
 	@Column(name="startTime")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date departureTime;//发车时间
 	
+	@Column(name="numberDay")
+	private Long numberDay;
+	
 	@Column(name="arrivalTime")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date arrivalTime;//到达时间
 	
 	@Column(name="price")
@@ -60,6 +67,7 @@ public class TrainNumber {
 	private Integer status=TrainStatus.ON.getStatus();// 0禁用   10正常使用 
 	
 	@Column(name="createTime")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;//创建时间
 	
 	public Long getId() {
@@ -140,6 +148,14 @@ public class TrainNumber {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Long getNumberDay() {
+		return numberDay;
+	}
+
+	public void setNumberDay(Long numberDay) {
+		this.numberDay = numberDay;
 	}
 
 	public Date getArrivalTime() {

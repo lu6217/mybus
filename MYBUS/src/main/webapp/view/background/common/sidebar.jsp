@@ -32,7 +32,9 @@
                     <li>
                         <a <c:if test="${param.item=='authority'}" >class="active-menu"</c:if> href=""><i class="fa fa-edit"></i> Authority Management </a>
                     </li>
-
+					<li>
+                        <a <c:if test="${param.item=='schedule'}" >class="active-menu"</c:if> href=""><i class="fa fa-edit"></i> Schedule Management </a>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

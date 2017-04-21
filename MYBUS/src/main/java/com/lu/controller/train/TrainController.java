@@ -51,6 +51,7 @@ public class TrainController {
 			train.setNum(Long.parseLong(trainVo.getNum().trim()));
 			train.setPrice(trainVo.getPrice().trim());
 			train.setDepartureTime(trainVo.getDepartureTime());
+			train.setNumberDay(trainVo.getNumberDay());
 			train.setArrivalTime(trainVo.getArrivalTime());
 			train.setCreateTime(new Date());
 			trainService.saveOrUpdateUser(train);
@@ -75,6 +76,7 @@ public class TrainController {
 				train.setNum(Long.parseLong(trainVo.getNum().trim()));
 				train.setPrice(trainVo.getPrice().trim());
 				train.setDepartureTime(trainVo.getDepartureTime());
+				train.setNumberDay(trainVo.getNumberDay());
 				train.setArrivalTime(trainVo.getArrivalTime());
 				train.setCreateTime(new Date());
 				trainService.saveOrUpdateUser(train);
@@ -114,6 +116,7 @@ public class TrainController {
 //		//现在发车时间和到达时间还没有   有待添加 
 		//始发站应该没有到达时间
 		//train_Site.setArrivalTime(trainVo.getArrivalTime());
+		train_Site.setNumberDay(0L);
 		train_Site.setDepartureTime(trainVo.getDepartureTime());
 		train_Site.setPrice("0");
 //		//还要建train_site的server和dao  并且保存train_site
@@ -125,6 +128,7 @@ public class TrainController {
 		Train_Site train_Site=train_siteService.getTrainSiteByTrainIdAndNumber(train.getId(),0L);
 		if(train_Site!=null){
 			train_Site.setSiteId(endsite.getId());
+			train_Site.setNumberDay(trainVo.getNumberDay());
 			train_Site.setArrivalTime(trainVo.getArrivalTime());
 			train_Site.setPrice(trainVo.getPrice());
 			train_siteService.saveOrUpdate(train_Site);
@@ -139,6 +143,7 @@ public class TrainController {
 		train_Site.setNumber(0L);//设置终点站的number为0 
 //		//现在发车时间和到达时间还没有   有待添加 
 		//终点站应该没有离开时间
+		train_Site.setNumberDay(trainVo.getNumberDay());
 		train_Site.setArrivalTime(trainVo.getArrivalTime());
 //		train_Site.setDepartureTime(trainVo.getDepartureTime());
 		train_Site.setPrice(trainVo.getPrice());
@@ -201,6 +206,7 @@ public class TrainController {
 //				train_Site.setPrveSiteId(prevsite.getId());//设置此站点的前一站点
 				//现在里面没有保存下一站点的ID  还要加上
 				train_Site.setPrice(train_SiteVo.getPrice());
+				train_Site.setNumberDay(train_SiteVo.getNumberDay());
 				train_Site.setArrivalTime(train_SiteVo.getArrivalTime());
 				train_Site.setDepartureTime(train_SiteVo.getDepartureTime());
 				//要把此站点后面的所有站点的number+1

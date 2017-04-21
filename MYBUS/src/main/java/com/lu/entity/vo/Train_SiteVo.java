@@ -16,6 +16,14 @@ public class Train_SiteVo {
 	
 	private String price;
 
+//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+//	private Date departureTime;
+//	
+//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+//	private Date arrivalTime;
+	
+	private Long numberDay;
+	
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date departureTime;
 	
@@ -76,6 +84,14 @@ public class Train_SiteVo {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public Long getNumberDay() {
+		return numberDay;
+	}
+
+	public void setNumberDay(Long numberDay) {
+		this.numberDay = numberDay;
 	}
 
 	public Date getDepartureTime() {

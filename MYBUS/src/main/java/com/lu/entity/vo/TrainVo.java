@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TrainVo {
+	
 	private Long id;
 	
 	private String number; //车次
@@ -13,8 +14,16 @@ public class TrainVo {
 	
 	private String endSite; //终点站
 	//1910/01/01 08:00:00
+//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+//	private Date departureTime;//发车时间
+//	
+//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+//	private Date arrivalTime;//发车时间
+//	
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date departureTime;//发车时间
+	
+	private Long numberDay;
 	
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date arrivalTime;//发车时间
@@ -61,6 +70,14 @@ public class TrainVo {
 
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
+	}
+
+	public Long getNumberDay() {
+		return numberDay;
+	}
+
+	public void setNumberDay(Long numberDay) {
+		this.numberDay = numberDay;
 	}
 
 	public Date getArrivalTime() {
