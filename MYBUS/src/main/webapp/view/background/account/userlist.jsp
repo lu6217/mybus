@@ -104,6 +104,9 @@
     									   </c:if>
    										  </c:if>
                                     </tbody>
+                                    <div>
+                                    	<button class="btn btn-success btn-sm" onclick="adds(0)"><i class="fa fa-plus"></i> Add</button>
+                                    </div>
                                 </table>
                             </div>
                             

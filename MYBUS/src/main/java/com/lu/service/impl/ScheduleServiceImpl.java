@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.ScheduleDao;
 import com.lu.dao.ScheduleSiteDao;
+import com.lu.dao.TrainDao;
 import com.lu.dao.Train_SiteDao;
 import com.lu.entity.schedule.Schedule;
 import com.lu.entity.schedule.ScheduleSite;
@@ -16,6 +17,7 @@ import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.ScheduleSearchVo;
+import com.lu.entity.vo.view.ScheduleView;
 import com.lu.service.ScheduleService;
 import com.lu.service.SiteService;
 import com.lu.util.PagingVO;
@@ -30,6 +32,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	@Autowired
 	private Train_SiteDao train_siteDao;
+	
+	@Autowired
+	private TrainDao trainDao;
 	
 	@Autowired
 	private SiteService siteService;
@@ -128,11 +133,24 @@ public class ScheduleServiceImpl implements ScheduleService{
 				}
 				PagingVO pageVo=scheduleDao.searchList(pagingVo,scheduleSearchVo,scheduleIds);
 				//train显示的时候 trainSite显示有问题  还要修改 
-//				@SuppressWarnings("unchecked")
-//				List<Schedule> datas = (List<Schedule>) pageVo.getDetails();
-//				for (Schedule schedule : datas) {
-//					
-//				}
+				@SuppressWarnings("unchecked")
+				List<ScheduleView> datas = (List<ScheduleView>) pageVo.getDetails();
+				
+				for (ScheduleView scheduleView : datas) {
+					
+					List<TrainNumber> trains=trainDao.getTrainById(scheduleView.getTrainId());
+					if(trains!=null && trains.size()>0){
+						scheduleView.setTrain(trains.get(0));
+					}
+					scheduleView.setBeginSite(beginsite);
+					scheduleView.setEndSite(endsite);
+					ScheduleSite begin=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(scheduleView.getId(), scheduleView.getBeginSite().getId());
+					ScheduleSite end=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(scheduleView.getId(), scheduleView.getEndSite().getId());
+					scheduleView.setNumberDay(end.getNumberDay()-begin.getNumberDay());
+					scheduleView.setDepartureTime(begin.getDepartureTime());
+					scheduleView.setArrivalTime(end.getArrivalTime());
+					scheduleView.setPrice(Integer.parseInt(end.getPrice())-Integer.parseInt(begin.getPrice())+"");
+				}
 				return pageVo;
 			}
 		}

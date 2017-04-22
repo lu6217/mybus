@@ -193,8 +193,13 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/toadduser/{id}")
-	public String toAddUser(@PathVariable("id")Long id, Model model){
-		model.addAttribute("accountId", id);
+	public String toAddUser(@PathVariable("id")Long id, Model model,HttpServletRequest request){
+		if(id!=0){
+			model.addAttribute("accountId", id);
+		}else{
+			Account account = (Account)request.getSession().getAttribute("account");
+			model.addAttribute("accountId", account.getId());
+		}
 		return "view/background/account/adduser";
 	}
 	

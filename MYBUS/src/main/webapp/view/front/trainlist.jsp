@@ -137,6 +137,22 @@
 	            		}
             	});
             });
+            
+            function showSite(id){
+            	layer.open({
+           		  type: 2, 
+           		  title: ['Station Info','font-size:25px;'],
+           		  area:['550px','400px'],
+           		  content: '${path}/luwei/front/train_site/get/'+id,
+           		  shadeClose: true,//点击窗体外的任意处 关闭窗体
+           		  btn:['Close']
+//            		  end:function(){
+//            			// alert('close');
+//               		 window.location.reload();
+//            		 }
+           		});
+            }
+            
             $("#reg").bind("click",function(){
             	var beginsite=$('#beginSite').val().trim();
             	var endsite=$('#endSite').val().trim();

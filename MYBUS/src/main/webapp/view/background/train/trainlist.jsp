@@ -147,10 +147,9 @@
                 $('#dataTables-example').dataTable();
             });
              function product(trainId){
-            	 alert(trainId);
-//             	 var index =layer.load(2,
-//             			 {shade: [0.4, '#393D49']
-//             	 });
+            	 var index =layer.load(2,
+            			 {shade: [0.4, '#393D49']
+            	 });
             	 
             	 $.ajax({
     				 type:"POST",
@@ -163,21 +162,12 @@
 		    	        		 layer.msg(res.message);
 		    	        	 }
 // 		  						window.location.reload();
+		    	        	 layer.close(index);
 			    		},
 			    		error:function(err,err1,err2){
 			    		    //debugger;
 			            }
 		    		  });
-            	 
-            	 
-            	 
-            	 
-            	 //可以写成生成成功了之后关闭loading
-            	//此处演示关闭
-//             	setTimeout(function(){
-//     	            layer.close(index);
-//             	 // layer.closeAll('loading');
-//             	}, 2000);
             	 
             	 
              }

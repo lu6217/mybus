@@ -10,7 +10,7 @@ public class ScheduleView {
 	
 //	private String name;
 	
-//	private Long trainId;
+	private Long trainId;
 	
 	private TrainNumber train;
 	
@@ -46,6 +46,14 @@ public class ScheduleView {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getTrainId() {
+		return trainId;
+	}
+
+	public void setTrainId(Long trainId) {
+		this.trainId = trainId;
 	}
 
 	public TrainNumber getTrain() {

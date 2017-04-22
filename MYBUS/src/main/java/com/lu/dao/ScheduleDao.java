@@ -29,20 +29,20 @@ public class ScheduleDao extends BaseDAO<Schedule>{
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query = initQueryCriteria(scheduleSearchVo,scheduleIds);
 		DetachedCriteriaBuilder count = initQueryCriteria(scheduleSearchVo,scheduleIds);
-//		setProjectionInfo(query);
+		setProjectionInfo(query);
 		return this.selectPagingVO(query, pagingVo, count);
 	}
 
 	private void setProjectionInfo(DetachedCriteriaBuilder dcb){
 		dcb.setProjection(Projections.property("id"), "id");
-		dcb.setProjection(Projections.property("train"), "train");
+		dcb.setProjection(Projections.property("trainId"), "trainId");
 //		dcb.setProjection(Projections.property("departureTime"), "departureTime");
 //		dcb.setProjection(Projections.property("arrivalTime"), "arrivalTime");
 //		dcb.setProjection(Projections.property("numberDay"), "numberDay");
 //		dcb.setProjection(Projections.property("beginSite"), "beginSite");
 //		dcb.setProjection(Projections.property("endSite"), "endSite");
 //		dcb.setProjection(Projections.property("price"), "price");
-//		dcb.setProjection(Projections.property("scheduleMessage"),"scheduleMessage");
+		dcb.setProjection(Projections.property("seatNum"),"seatNum");
 		dcb.addDTOTransform(ScheduleView.class);
 	}
 	
