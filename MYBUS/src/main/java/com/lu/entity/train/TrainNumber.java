@@ -70,6 +70,9 @@ public class TrainNumber {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createTime;//创建时间
 	
+	@Column(name="is_delete")
+	private Boolean isDelete=Boolean.FALSE;
+	
 	public Long getId() {
 		return id;
 	}
@@ -180,6 +183,14 @@ public class TrainNumber {
 
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
+	}
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }

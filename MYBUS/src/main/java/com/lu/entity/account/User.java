@@ -48,6 +48,9 @@ public class User {
 	@JoinColumn(name = "accountId", updatable = false, insertable = false)
 	private Account account;
 
+	@Column(name="is_delete")
+	private Boolean isDelete=Boolean.FALSE;
+	
 	public Long getId() {
 		return id;
 	}
@@ -118,6 +121,14 @@ public class User {
 
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
+	}
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 }

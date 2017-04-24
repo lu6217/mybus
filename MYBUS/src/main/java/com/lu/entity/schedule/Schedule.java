@@ -38,6 +38,12 @@ public class Schedule {
 	@Column(name="numberDay")
 	private Long numberDay;
 	
+	@Column(name="beginSiteId")
+	private Long beginSiteId;
+	
+	@Column(name="endSiteId")
+	private Long endSiteId;
+	
 	@Column(name="arrivalTime")
 	private Date arrivalTime;
 	
@@ -113,6 +119,22 @@ public class Schedule {
 
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
+	}
+
+	public Long getBeginSiteId() {
+		return beginSiteId;
+	}
+
+	public void setBeginSiteId(Long beginSiteId) {
+		this.beginSiteId = beginSiteId;
+	}
+
+	public Long getEndSiteId() {
+		return endSiteId;
+	}
+
+	public void setEndSiteId(Long endSiteId) {
+		this.endSiteId = endSiteId;
 	}
 
 	public Double getMiles() {

@@ -36,6 +36,9 @@ public class ScheduleSite {
 	@Column(name="departureTime")
 	private Date departureTime;
 	
+	@Column
+	private Long numberDay;
+	
 	@Column(name="arrivalTime")
 	private Date arrivalTime;
 	
@@ -89,6 +92,14 @@ public class ScheduleSite {
 
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
+	}
+
+	public Long getNumberDay() {
+		return numberDay;
+	}
+
+	public void setNumberDay(Long numberDay) {
+		this.numberDay = numberDay;
 	}
 
 	public Date getArrivalTime() {

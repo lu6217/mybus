@@ -55,6 +55,9 @@ public class Train_Site{
 	@Column(name="number")
 	private Long number;
 	
+	@Column(name="is_delete")
+	private Boolean isDelete=Boolean.FALSE;
+	
 	public Long getId() {
 		return id;
 	}
@@ -142,5 +145,13 @@ public class Train_Site{
 	public void setNumber(Long number) {
 		this.number = number;
 	}
-	
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
+	}
+
 }

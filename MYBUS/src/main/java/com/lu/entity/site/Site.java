@@ -29,6 +29,9 @@ public class Site {
 	private String description;//站点描述
 	//private Long trainId;//车次id
 	
+	@Column(name="is_delete")
+	private Boolean isDelete=Boolean.FALSE;
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +54,14 @@ public class Site {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }

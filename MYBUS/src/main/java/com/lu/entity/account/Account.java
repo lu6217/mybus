@@ -45,6 +45,9 @@ public class Account implements Serializable{
 	@Column(name="type")
 	private Long type=GENERAL_USERTYPE; //账户类型
 	
+	@Column(name="is_delete")
+	private Boolean isDelete=Boolean.FALSE;
+	
 	@Transient
 	private List<User> users; //user
 	
@@ -97,6 +100,14 @@ public class Account implements Serializable{
 
 	public void setType(Long type) {
 		this.type = type;
+	}
+
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 
 }

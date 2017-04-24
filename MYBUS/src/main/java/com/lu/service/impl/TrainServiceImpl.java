@@ -79,6 +79,8 @@ public class TrainServiceImpl implements TrainService{
 				train_siteDao.delete(lists.get(i));
 			}
 		}
+		//还要删除train的调度信息
+		
 		trainDao.delete(train);
 	}
 

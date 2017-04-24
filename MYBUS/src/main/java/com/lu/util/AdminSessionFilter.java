@@ -30,6 +30,8 @@ public class AdminSessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String uriPath = request.getContextPath()+"/luwei/account/logon/";
 		String uri = request.getRequestURI();
+//		Account account = (Account)WebUtils.getSessionAttribute(request, "account");
+		//还要通过用户的类型进行判断用户是否可以访问某一个页面  
 		Object accountObj = WebUtils.getSessionAttribute(request, "account");
 		if(accountObj==null){
 			if(!uri.contains(uriPath)){
