@@ -15,6 +15,7 @@
     <%@ include file="/view/background/common/css.jsp" %>
     <!-- TABLE STYLES-->
     <link href="${path}/view/moban/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="${path}/css/jquery-ui.min.css">
 </head>
 <body>
  <div id="wrapper">
@@ -44,38 +45,48 @@
                              Train table
                         </div>
                         <div class="panel-body">
-                       <form role="form" id="createtrainform" name="createtrainform" >
-<%--                         <input type="hidden" name="accountId" id="accountId" value="${accountId }"> --%>
-<%--                         <input type="hidden" name="id" id="id" value="${train.id }"> --%>
+                       <form role="form" id="searchtrainform" name="searchtrainform" >
                         <div class="form-group">
-							<div class="input-group " style="width: 400px;margin-bottom: 10px;">
-                        		<span class="input-group-addon">出发地</span>
-							   	 <div class="input-group ">
-							   	  <input class="form-control" placeholder="${train.beginSite }"  name="beginSite" id="beginSite" value="${train.beginSite }" onblur="checkSite(this)">
-							  	 </div>
-							  	  <span class="input-group-addon">~ 目的地</span>
-							  	  <div class="input-group ">
-								  	  <input class="form-control" placeholder="${train.endSite }"  name="endSite" id="endSite" value="${train.endSite }" onblur="checkSite(this)">
-							  	 </div>
+						  <div class="input-group ">
+							  <div class="input-group-addon">
+                                  <input class="" type="radio" name="optionsRadios" id="single" value="single" checked="">单程
+                                  <input class="" type="radio" name="optionsRadios" id="round" value="round">往返
+                             </div>
+                        	 <span class="input-group-addon">出发地 <i class="fa fa-map-marker"></i></span>
+							 <div class="input-group ">
+							  	<input class="form-control" placeholder=""  name="beginSite" id="beginSite" value="" onblur="checkSite(this)">
+<!-- 							 	<div class="input-group-addon"> -->
+<!--                                    <i class="fa fa-map-marker"></i> -->
+<!--                                 </div>	 -->
+							 </div>
+							 <span class="input-group-addon">目的地 <i class="fa fa-map-marker"></i></span>
+							 <div class="input-group ">
+								<input class="form-control" placeholder=""  name="endSite" id="endSite" value="" onblur="checkSite(this)">
+<!-- 							 	<div class="input-group-addon"> -->
+<!--                                    <i class="fa fa-map-marker"></i> -->
+<!--                                 </div>	 -->
+							 </div>
+							 <span class="input-group-addon">出发日</span>
+							 <div class="input-group">
+							  	<input class="form-control" placeholder="" name="departureDate" id="departureDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
+								<div class="input-group-addon">
+                                   <i class="fa fa-calendar"></i>
+                                </div>													
+							</div>
+							<span class="input-group-addon">返程日</span>
+							<div class="input-group">
+							 	<input class="form-control" placeholder="" name="backDate" id="backDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})" disabled="true">
+								<div class="input-group-addon">
+                             	   <i class="fa fa-calendar"></i>
+                           		 </div>	
+							</div>
+							<span class="input-group-addon"></span>
+							<div class="input-group">
+								<a class="form-control btn btn-success" type="submit" id="reg" value=""><i class="fa fa-search"></i> Search</a>
+							</div>
 							</div>
                         </div>
-						<!--        时间还是有一点问题  还不能显示出对应的时间 还需要修改                  -->
-                        <div class="form-group">
-                        	<label>DepartureTime ~ ArrivalTime</label>
-
-							<div class="layui-inline">
-							  <input class="layui-input" placeholder="DepartureTime" name="departureTime" id="departureTime" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})">
-							</div>
-							<div class="layui-inline"> ~ </div>
-							<div class="layui-inline">
-							  <input class="layui-input" placeholder="ArrivalTime" name="arrivalTime" id="arrivalTime" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm'})">
-							</div>
-						</div>
-						<!-- 下面这个按钮用button是提交就无法关闭弹出框   用a标签的时候就可以关闭  -->
-                        <a type="submit" class="btn btn-success" id="reg">Submit</a>
-                        <a type="reset" class="btn btn-default">Reset</a>
                     </form>
-                        
                         
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -90,65 +101,10 @@
                                             <th class="text-center">Option</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-	                                    <c:if test="${not empty pageVO}">
-	     									<c:if test="${not empty pageVO.details}">
-	     									<c:forEach varStatus="vs" var="train" items="${pageVO.details}">
-		                                       <c:choose>  
-	   												 <c:when test="${vs.count%4==0}">  
-		                                        		<tr class="success">
-		                                        	 </c:when> 
-		                                        	 <c:when test="${vs.count%4==1}">  
-		                                        		<tr class="info">
-		                                        	 </c:when> 
-		                                        	 <c:when test="${vs.count%4==2}">  
-		                                        		<tr class="warning">
-		                                        	 </c:when> 
-		                                        	 <c:when test="${vs.count%4==3}">  
-		                                        		<tr class="danger">
-		                                        	 </c:when> 
-												</c:choose>  
-	                                            <td title='<c:out value="${train.number } "></c:out>' class="text-center"><a href="javascript:void(0)" onclick="showSite('${train.id }')">${train.number }</a></td>
-	                                            <td title='<c:out value="${train.beginSite } "></c:out>' class="text-center">${train.beginSite }</td>
-	                                            
-	                                             <td title='<c:out value="${train.endSite } "></c:out>' class="text-center">${train.endSite }</td>
-<%-- 	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td> --%>
-<%-- 	                                            <td title='<c:out value="${train.arrivalTime } "></c:out>' class="text-center">${train.arrivalTime }</td> --%>
-	                                            <td title='<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />' class="text-center">
-													<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />
-												</td>
-												 <td title='<fmt:formatDate value="${train.arrivalTime }" pattern="HH:mm" />' class="text-center">
-													<fmt:formatDate value="${train.arrivalTime }" pattern="HH:mm" />
-													<c:choose>
-														<c:when test="${train.numberDay==0}">(即日)</c:when>
-														<c:when test="${train.numberDay==1}">(次日)</c:when>
-														<c:when test="${train.numberDay==2}">(隔日)</c:when>
-														<c:otherwise></c:otherwise>
-													</c:choose>
-												</td>
-	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
-	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
-	                                            <td class="text-center">
-													<button class="btn btn-primary btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus "></i> Add</button>
-													<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
-													<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
-<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-													<button class="btn btn-danger btn-sm"  onclick="del('${train.id }','${train.number }')"><i class="fa fa-trash-o"></i> Delete</button>
-	                                         		<button class="btn btn-danger btn-sm"  onclick="product('${train.id }')"><i class="fa fa-fire"></i> Schedule</button>
-	                                            
-	                                            </td>
-	                                        </tr>
-	                                        </c:forEach>
-	   									   </c:if>
-	  									 </c:if>
+                                    <tbody id="trainlistId">
+
                                     </tbody>
                                 <div>
-                                	<button class="btn btn-primary btn-sm" onclick="adds('0')"><i class="fa fa-plus "></i> Add</button>
-									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
-									<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
-<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-									<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button>
-                                	<hr>
                                 </div>
                                 </table>
                             </div>
@@ -167,185 +123,160 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="${path}/view/moban/assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="${path}/view/moban/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="${path}/js/jquery-ui.min.js"></script>
+	<script src="${path}/js/jquery-ui.custom.min.js"></script>
     <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
+                $(':radio').click(function(){
+	            	var radioVal=$('input[name="optionsRadios"]:checked').val();
+	            		if(radioVal=="single"){
+	            			searchtrainform.backDate.disabled=true;
+	            		}else{
+	            			searchtrainform.backDate.disabled=false;
+	            		}
+            	});
             });
-             function product(trainId){
-            	 alert(trainId);
-//             	 var index =layer.load(2,
-//             			 {shade: [0.4, '#393D49']
-//             	 });
-            	 
-            	 $.ajax({
-    				 type:"POST",
-		    		     url:"${path}/luwei/schedule/addschedule",
-		    		     data: {trainId:trainId},
-		    	         success:function(res){
-		    	        	 if(res && res.result){
-		    	        		 layer.msg(res.message);
-		    	        	 }else{
-		    	        		 layer.msg(res.message);
-		    	        	 }
-// 		  						window.location.reload();
-			    		},
-			    		error:function(err,err1,err2){
-			    		    //debugger;
-			            }
-		    		  });
-            	 
-            	 
-            	 
-            	 
-            	 //可以写成生成成功了之后关闭loading
-            	//此处演示关闭
-//             	setTimeout(function(){
-//     	            layer.close(index);
-//             	 // layer.closeAll('loading');
-//             	}, 2000);
-            	 
-            	 
-             }
-            function showSite(id){
-            	layer.open({
-             		  type: 2, 
-             		  title: ['Station Info','font-size:25px;'],
-             		  area:['550px','400px'],
-             		  content: '${path}/luwei/train_site/get/'+id,
-             		  shadeClose: true,//点击窗体外的任意处 关闭窗体
-             		  btn:['Close']
-//              		  end:function(){
-//              			// alert('close');
-//                 		 window.location.reload();
-//              		 }
-             		});
-            }
-           
-            		
-      		function addTrainSite(id){ 
-               	layer.open({
-               		  type: 2, 
-               		  title: ['AddTrainSite','font-size:25px;'],
-               		  area:['600px','500px'],
-               		  content:'${path}/luwei/train/toaddtrainsite/'+id,
-               		  btn:['Close']
-//                      		  ,end:function(){
-//                      			 alert('close');
-//                        			// window.location.reload();
-//                     		 }
-            		}); 
-            };
-   		
-            		
-            function adds(id){ 
-             	layer.open({
-             		  type: 2, 
-             		  title: ['AddTrain','font-size:25px;'],
-             		  area:['600px','500px'],
-             		  content:'${path}/luwei/train/toaddtrain/'+id,
-             		  btn:['Close']
-//              		  ,end:function(){
-//              			 alert('close');
-//                			// window.location.reload();
-//             		 }
-             		}); 
-             };
+            $("#reg").bind("click",function(){
+            	var beginsite=$('#beginSite').val().trim();
+            	var endsite=$('#endSite').val().trim();
+            	var depDate=$('#departureDate').val().trim();
+            	if(beginsite==null || beginsite==''){
+            		layer.msg('Site Not Null!');
+            		return false;
+            	}
+            	if(endsite==null || endsite==''){
+            		layer.msg('Site Not Null!');
+            		return false;
+            	}
+            	if(depDate==null || depDate==''){
+            		layer.msg('Please choose a date!');
+            		return false;
+            	}
+    			$.post("${path }/luwei/front/train/searchlist",$("#searchtrainform").serialize(),function(data) {
+    				$("#trainlistId").html(data);
+    				
+    			}); 
+    		});
             
-             function edits(id){
-               	layer.open({
-            		  type: 2, 
-            		  title: ['UserInfo','font-size:25px;'],
-            		  area:['600px','500px'],
-            		  content: '${path}/luwei/train/get/'+id,
-            		  btn:['Close']
-//             		  end:function(){
-//             			// alert('close');
-//                		 window.location.reload();
-//             		 }
-            		});
-               }
-             
-             function del(id,number){
-            	 layer.msg('确定要删除  '+number+' 列车', {
-            		  time: 20000, //20s后自动关闭
-            		  btn: ['残忍删除', '火速取消'],
-            		  yes: function(){
-            			  $.ajax({
-            				 type:"POST",
-      		    		     url:"${path}/luwei/train/deltrain",
-      		    		     data: {id:id},
-      		    	         success:function(res){
-      		    	        	 if(res && res.result){
-      		    	        		 layer.msg(res.message);
-//       		    	        		 alert(res.message); 
-      		    	        	 }else{
-      		    	        		 layer.msg(res.message);
-      		    	        	 	//alert(res.message);
-      		    	        	 }
-//       		    	        	 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-//       		 	               		 parent.layer.close(index);
-      		  						//window.parent.location.reload();
-      		  						window.location.reload();
-      			    		},
-      			    		error:function(err,err1,err2){
-      			    		    //debugger;
-      			            }
-      		    		  });
-            		  }
-            		});
-            	 
-             }
-             
-               // 需要修改 还不能实现功能   
-/* 			function del(id){
-            	 layer.open({
-             		type: 2
-                     ,title: '是否删除此用户？'
-                     ,closeBtn: false
-                     ,area: ['250px','360px']
-                     ,shade: 0.8
-                     ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                     ,btn: ['残忍删除','火速取消']
-                     ,moveType: 1 //拖拽模式，0或者1
-//                      ,content:'${path}/view/background/account/userinfo.jsp'
-                     ,content: '${path}/luwei/account/getuserinfo/'+id
-                     ,yes: function(){
-                     	$.ajax(
-             		    		{
-             		    			 type:"POST",
-             		    		     url:"${path}/luwei/account/deluser/",
-             		    		     data: {id:id},
-             		    	         success:function(res){
-             		    	        	 if(res && res.result){
-             		    	        		 layer.msg(res.message);
-//              		    	        		 alert(res.message); 
-             		    	        	 }else{
-             		    	        		 layer.msg(res.message);
-             		    	        	 	//alert(res.message);
-             		    	        	 }
-//              		    	        	 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-//              		 	               		 parent.layer.close(index);
-             		  						//window.parent.location.reload();
-             		  						window.location.reload();
-             			    		},
-             			    		error:function(err,err1,err2){
-             			    		    //debugger;
-             			            }
-             		    		});
-                     }
-//                      ,success: function(layero){
-//                        var btn = layero.find('.layui-layer-btn');
-//                        btn.css('text-align', 'center');
-//                        btn.find('.layui-layer-btn0').attr({
-//                          href: '${path}/luwei/account/toadduser/'+id
-                        
-//                        });
-//                      }	
-            		});  
-             }  */
-             
+       $(document).ready(function () {	
+			$("#beginSite").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+						url : "${path}/luwei/site/fuzzy",
+						dataType : "json",
+						type : 'post',
+						data : {
+							q : request.term ,
+							//request.term 表示获取文本框输入的值
+							site: $('#endSite').val()
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									label:item.name,
+									value:item.id,
+									name:item.name
+								}
+							}));
+						}
+				})
+			},
+			focus: function(event, ui) { 
+ 				return false;
+ 			},
+ 			select:function(event,ui){
+				$(this).next("input").val(ui.item['lable']);
+	 			$(this).val(ui.item['name']);
+				return false;
+ 			},
+ 			change:function(event,ui){
+ 				if(null==ui.item){
+ 					$(this).next("input").val("");
+ 					//$("#parentCourse").val("");
+ 				}
+ 			},
+ 			minLength : 0
+		});	
+		$("#endSite").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+						url : "${path}/luwei/site/fuzzy",
+						dataType : "json",
+						type : 'post',
+						data : {
+							q : request.term,
+							//request.term 表示获取文本框输入的值
+							site: $('#beginSite').val()
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									label:item.name,
+									value:item.id,
+									name:item.name
+								}
+							}));
+						}
+				})
+			},
+			focus: function(event, ui) { 
+ 				return false;
+ 			},
+ 			select:function(event,ui){
+				$(this).next("input").val(ui.item['lable']);
+	 			$(this).val(ui.item['name']);
+				return false;
+ 			},
+ 			change:function(event,ui){
+ 				if(null==ui.item){
+ 					$(this).next("input").val("");
+ 					//$("#parentCourse").val("");
+ 				}
+ 			},
+ 			minLength : 0
+		});	
+	})
              
     </script>
+	<script>
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  
+		  var start = {
+			format: 'YYYY-MM-DD',
+		    min: laydate.now()
+		    ,max: laydate.now(+30)
+		    ,istoday: false
+// 		    ,istime: true
+		    ,choose: function(datas){
+		      end.min = datas; //开始日选好后，重置结束日的最小日期
+		      end.start = datas //将结束日的初始值设定为开始日
+		    }
+		  };
+		  
+		  var end = {
+			format: 'YYYY-MM-DD',
+		    min: laydate.now()
+		    ,max: laydate.now(+30)
+		    ,istoday: false
+// 		    ,istime: true
+		    ,choose: function(datas){
+		      start.max = datas; //结束日选好后，重置开始日的最大日期
+		    }
+		  };
+		  
+		  document.getElementById('departureDate').onclick = function(){
+		    start.elem = this;
+		    laydate(start);
+		  }
+		  document.getElementById('backDate').onclick = function(){
+		    end.elem = this
+		    laydate(end);
+		  }
+		  
+		});
+	</script>
          <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
     

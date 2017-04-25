@@ -5,15 +5,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.ScheduleDao;
 import com.lu.dao.ScheduleSiteDao;
 import com.lu.dao.Train_SiteDao;
 import com.lu.entity.schedule.Schedule;
 import com.lu.entity.schedule.ScheduleSite;
+import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
+import com.lu.entity.vo.ScheduleSearchVo;
 import com.lu.service.ScheduleService;
+import com.lu.service.SiteService;
+import com.lu.util.PagingVO;
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
 
@@ -25,6 +30,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 	
 	@Autowired
 	private Train_SiteDao train_siteDao;
+	
+	@Autowired
+	private SiteService siteService;
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -90,6 +98,38 @@ public class ScheduleServiceImpl implements ScheduleService{
 			}
 		}
 		
+	}
+
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo,
+			ScheduleSearchVo scheduleSearchVo) {
+		// TODO Auto-generated method stub
+		Site beginsite=siteService.getSiteByName(scheduleSearchVo.getBeginSite());
+		Site endsite=siteService.getSiteByName(scheduleSearchVo.getEndSite());
+		Date date=scheduleSearchVo.getDepartureDate();
+		Date date2=new Date(date.getTime()+(long)24*3600*1000);
+		List<Schedule> lists=scheduleDao.getScheduleBySiteIdAndTime(beginsite.getId(),date,date2);
+		if(lists!=null && lists.size()>0){
+			Long [] Ids=new Long[lists.size()];
+			int j=0;
+			for(int i=0;i<lists.size();i++){
+				ScheduleSite scheduleSite=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(lists.get(i).getId(),endsite.getId());
+				if(scheduleSite!=null){
+					Ids[j]=lists.get(i).getId();
+					j++;
+				}
+			}
+			if(j!=0){
+				Long [] scheduleIds=new Long[j];
+				for(int i=0;i<j;i++){
+					scheduleIds[i]=Ids[i];
+				}
+				return scheduleDao.searchList(pagingVo,scheduleSearchVo,scheduleIds);
+			}
+		}
+		
+		return null;
 	}
 
 }

@@ -241,7 +241,7 @@ public class TrainController {
 	}
 	
 	@RequestMapping("/trainlist")
-	public String accountSearchList(PagingVO pagingVo,TrainSearchVo trainSearchVo,Model model, HttpServletRequest request){
+	public String trainSearchList(PagingVO pagingVo,TrainSearchVo trainSearchVo,Model model, HttpServletRequest request){
 		PagingVO vo =trainService.searchList(pagingVo,trainSearchVo);
 		model.addAttribute("pageVO", vo);
 		return "view/background/train/trainlist";

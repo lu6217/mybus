@@ -4,11 +4,9 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class TrainSearchVo {
+public class ScheduleSearchVo {
 
-	private String number; //车次
-	
-	private String beginSite;//始发站
+private String beginSite;//始发站
 	
 	private String endSite; //终点站
 	
@@ -17,15 +15,6 @@ public class TrainSearchVo {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date backDate;//发车时间
-	
-	
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
 
 	public String getBeginSite() {
 		return beginSite;
@@ -58,5 +47,6 @@ public class TrainSearchVo {
 	public void setBackDate(Date backDate) {
 		this.backDate = backDate;
 	}
+	
 	
 }
