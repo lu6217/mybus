@@ -163,7 +163,7 @@
 			$("#beginSite").autocomplete({
 			source : function(request, response) {
 				$.ajax({
-						url : "${path}/luwei/site/fuzzy",
+						url : "${path}/luwei/front/site/fuzzy",
 						dataType : "json",
 						type : 'post',
 						data : {
@@ -201,7 +201,7 @@
 		$("#endSite").autocomplete({
 			source : function(request, response) {
 				$.ajax({
-						url : "${path}/luwei/site/fuzzy",
+						url : "${path}/luwei/front/site/fuzzy",
 						dataType : "json",
 						type : 'post',
 						data : {
