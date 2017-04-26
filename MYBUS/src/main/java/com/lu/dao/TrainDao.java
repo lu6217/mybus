@@ -14,7 +14,8 @@ public class TrainDao extends BaseDAO<TrainNumber>{
 
 	public List<TrainNumber> getTrainByName(String name) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class);
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class,"train");
+		builder.leftJoin("train.beginSite", "beginsite").leftJoin("train.endSite", "endsite");
 		builder.addEq("number",name);
 		return this.select(builder);
 	}
@@ -30,6 +31,7 @@ public class TrainDao extends BaseDAO<TrainNumber>{
 			TrainSearchVo trainSearchVo) {
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(TrainNumber.class, "train");
+		query.leftJoin("train.beginSite", "beginsite").leftJoin("train.endSite", "endsite");
 		query.addLikeAny("train.number", trainSearchVo.getNumber());
 		//这个乘车点和目的地站点要在站点列表中查询  通过这两个站点来查出是哪个车次  
 //		query.addEq("train.beginSite", trainSearchVo.getBeginSite());
@@ -41,7 +43,8 @@ public class TrainDao extends BaseDAO<TrainNumber>{
 
 	public List<TrainNumber> getTrainById(Long id) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class);
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class,"train");
+		builder.leftJoin("train.beginSite", "beginsite").leftJoin("train.endSite", "endsite");
 		builder.addEq("id",id);
 		return this.select(builder);
 	}

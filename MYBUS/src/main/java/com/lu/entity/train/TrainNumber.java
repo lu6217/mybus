@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,10 +35,18 @@ public class TrainNumber {
 	private String number; //车次
 	
 	@Column(name="beginSite_id")
-	private Long beginSite;//始发站
+	private Long beginSiteId;//始发站
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "beginSite_id", updatable = false, insertable = false)
+	private Site beginSite;
 	
 	@Column(name="endSite_id")
-	private Long endSite; //终点站
+	private Long endSiteId; //终点站
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "endSite_id", updatable = false, insertable = false)
+	private Site endSite;
 	
 	@Column(name="startTime")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -113,19 +124,35 @@ public class TrainNumber {
 		this.category = category;
 	}
 
-	public Long getBeginSite() {
+	public Long getBeginSiteId() {
+		return beginSiteId;
+	}
+
+	public void setBeginSiteId(Long beginSiteId) {
+		this.beginSiteId = beginSiteId;
+	}
+
+	public Site getBeginSite() {
 		return beginSite;
 	}
 
-	public void setBeginSite(Long beginSite) {
+	public void setBeginSite(Site beginSite) {
 		this.beginSite = beginSite;
 	}
 
-	public Long getEndSite() {
+	public Long getEndSiteId() {
+		return endSiteId;
+	}
+
+	public void setEndSiteId(Long endSiteId) {
+		this.endSiteId = endSiteId;
+	}
+
+	public Site getEndSite() {
 		return endSite;
 	}
 
-	public void setEndSite(Long endSite) {
+	public void setEndSite(Site endSite) {
 		this.endSite = endSite;
 	}
 

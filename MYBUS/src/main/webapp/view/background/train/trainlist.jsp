@@ -54,6 +54,7 @@
                                             <th class="text-center">发车时间</th>
                                             <th class="text-center">到站时间</th>
                                             <th class="text-center">运行时间</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Option</th>
                                         </tr>
                                     </thead>
@@ -76,9 +77,9 @@
 		                                        	 </c:when> 
 												</c:choose>  
 	                                            <td title='<c:out value="${train.number } "></c:out>' class="text-center"><a href="javascript:void(0)" onclick="showSite('${train.id }')">${train.number }</a></td>
-	                                            <td title='<c:out value="${train.beginSite } "></c:out>' class="text-center">${train.beginSite }</td>
+	                                            <td title='<c:out value="${train.beginSite.name } "></c:out>' class="text-center">${train.beginSite.name }</td>
 	                                            
-	                                             <td title='<c:out value="${train.endSite } "></c:out>' class="text-center">${train.endSite }</td>
+	                                             <td title='<c:out value="${train.endSite.name } "></c:out>' class="text-center">${train.endSite.name }</td>
 <%-- 	                                            <td title='<c:out value="${train.departureTime } "></c:out>' class="text-center">${train.departureTime }</td> --%>
 <%-- 	                                            <td title='<c:out value="${train.arrivalTime } "></c:out>' class="text-center">${train.arrivalTime }</td> --%>
 	                                            <td title='<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />' class="text-center">
@@ -95,6 +96,13 @@
 												</td>
 	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
 	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
+	                                             <td title='<c:out value="${train.status } "></c:out>' class="text-center">
+	                                             	<c:choose>
+														<c:when test="${train.status==0}">已禁用</c:when>
+														<c:when test="${train.status==10}">正常运营</c:when>
+														<c:otherwise></c:otherwise>
+													</c:choose>
+	                                             </td>
 	                                            <td class="text-center">
 													<button class="btn btn-primary btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus "></i> Add</button>
 													<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>

@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lu.dao.ScheduleDao;
+import com.lu.dao.ScheduleSiteDao;
 import com.lu.dao.TrainDao;
 import com.lu.dao.Train_SiteDao;
+import com.lu.entity.enumType.TrainStatus;
+import com.lu.entity.schedule.Schedule;
+import com.lu.entity.schedule.ScheduleSite;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.TrainSearchVo;
@@ -21,6 +26,12 @@ public class TrainServiceImpl implements TrainService{
 	
 	@Autowired
 	private Train_SiteDao train_siteDao;
+	
+	@Autowired
+	private ScheduleDao scheduleDao;
+	
+	@Autowired
+	private ScheduleSiteDao scheduleSiteDao;
 	
 	@Override
 	@Transactional
@@ -75,13 +86,34 @@ public class TrainServiceImpl implements TrainService{
 		Long trainId=train.getId();
 		List<Train_Site> lists=train_siteDao.getSitesBytrainId(trainId);
 		if(lists!=null && lists.size()>0){
+			Train_Site train_Site=null;
 			for(int i=0;i<lists.size();i++){
-				train_siteDao.delete(lists.get(i));
+				train_Site=lists.get(i);
+				train_Site.setIsDelete(Boolean.TRUE);
+				train_siteDao.update(train_Site);
+				//将是否删除的字段 改为TRUE
+//				train_siteDao.delete(lists.get(i));
 			}
 		}
 		//还要删除train的调度信息
-		
-		trainDao.delete(train);
+		List<Schedule> schedules=scheduleDao.getScheduleByTrainId(trainId);
+		if(schedules!=null && schedules.size()>0){
+			for (int i = 0; i < schedules.size(); i++) {
+				scheduleDao.delete(schedules.get(i));
+			}
+		}
+		//删除Site的调度信息
+		List<ScheduleSite> scheduleSites=scheduleSiteDao.getScheduleSiteByTrainId(trainId);
+		if(scheduleSites!=null && scheduleSites.size()>0){
+			for (int i = 0; i < scheduleSites.size(); i++) {
+				scheduleSiteDao.delete(scheduleSites.get(i));
+			}
+		}
+		train.setIsDelete(Boolean.TRUE);
+		train.setStatus(TrainStatus.OFF.getStatus());
+		trainDao.update(train);
+//		将是否删除字段改为TRUE
+//		trainDao.delete(train);
 	}
 
 }

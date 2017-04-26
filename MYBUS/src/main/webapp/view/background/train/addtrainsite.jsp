@@ -4,6 +4,9 @@
 <%
 	request.setAttribute("path", request.getContextPath());
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,18 +28,18 @@
                         </div>
                           <div class="form-group">
                             <label>prevsite</label>
-                            <input class="form-control" placeholder="${train.beginSite }"  name="prevsite" id="prevsite" value="${train.beginSite }" onblur="checkSite(this)">
+                            <input class="form-control" placeholder="${train.beginSite.name }"  name="prevsite" id="prevsite" value="${train.beginSite.name }" onblur="checkSite(this)">
                         </div>
                          
                           <div class="form-group">
                             <label>Site</label>
-                            <input class="form-control" placeholder="${train.endSite }"  name="site" id="site" value="${train.endSite }" onblur="checkSite(this)">
+                            <input class="form-control" placeholder=""  name="site" id="site" value="" onblur="checkSite(this)">
                         </div>
                         <div class="form-group">
 	                        <label>Price</label>
 	                        <div class="input-group">
 	                            <span class="input-group-addon">￥</span>
-	                            <input class="form-control" type="number" placeholder="${train.price }"  name="price" id="price" value="${train.price }">
+	                            <input class="form-control" type="number" placeholder="${train.price }"  name="price" id="price" value="">
 	                            <span class="input-group-addon">.00</span>
 	                        </div>
                         </div>
@@ -49,7 +52,7 @@
                         	<label>DepartureTime ~ ArrivalTime</label>
 							<div class="input-group clockpicker" style="width: 350px;margin-bottom: 10px;">
 							   	 <div class="input-group clockpicker1">
-							   	 <input type="text" id="departureTime" name="departureTime" class="form-control" value="08:00">
+							   	 <input type="text" id="departureTime" name="departureTime" class="form-control" value='<fmt:formatDate value="${train.departureTime }" pattern="HH:mm" />'>
 							    	<span class="input-group-addon">
 							        <span class="glyphicon glyphicon-time"></span>
 							  	  </span>
@@ -57,11 +60,25 @@
 							  	  <span class="input-group-addon">~</span>
 							  	  <div class="input-group clockpicker2">
 							  	   <select class="form-control" id="numberDay" name="numberDay" >
-	                                       <option value="0">即日</option>
-	                                       <option value="1">次日</option>
-	                                       <option value="2">隔日</option>
+	                                        <c:choose>
+												<c:when test="${train.numberDay==1 }">
+													<option value="0">即日</option>
+													<option value="1" selected = "selected">次日</option>
+													<option value="2">隔日</option>
+												</c:when>
+												<c:when test="${train.numberDay==2 }">
+													<option value="0">即日</option>
+													<option value="1">次日</option>
+													<option value="2" selected = "selected">隔日</option>
+												</c:when>
+	                                       		<c:otherwise>
+	                                       			<option value="0">即日</option>
+													<option value="1">次日</option>
+													<option value="2">隔日</option>
+	                                       		</c:otherwise>
+											</c:choose>
 	                                  </select>
-							  	  <input type="text" id="arrivalTime" name="arrivalTime" class="form-control" value="08:00">
+							  	  <input type="text" id="arrivalTime" name="arrivalTime" class="form-control" value='<fmt:formatDate value="${train.arrivalTime }" pattern="HH:mm" />'>
 							    	<span class="input-group-addon">
 							        <span class="glyphicon glyphicon-time"></span>
 							  	  </span>

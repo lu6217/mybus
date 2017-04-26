@@ -27,8 +27,8 @@ public class ScheduleSite {
 	@Column(name="siteId")
 	private Long siteId;
 	
-//	@Column(name="trainId")
-//	private Long trainId;
+	@Column(name="trainId")
+	private Long trainId;
 	
 	@Column(name="scheduleId")
 	private Long scheduleId;
@@ -68,6 +68,14 @@ public class ScheduleSite {
 
 	public void setSiteId(Long siteId) {
 		this.siteId = siteId;
+	}
+
+	public Long getTrainId() {
+		return trainId;
+	}
+
+	public void setTrainId(Long trainId) {
+		this.trainId = trainId;
 	}
 
 	public Long getScheduleId() {

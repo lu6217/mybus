@@ -39,8 +39,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public void saveScheduleAndSite(TrainNumber train) {
 		// TODO Auto-generated method stub
 		Schedule schedule=new Schedule();
-		schedule.setBeginSiteId(train.getBeginSite());
-		schedule.setEndSiteId(train.getEndSite());
+		schedule.setBeginSiteId(train.getBeginSiteId());
+		schedule.setEndSiteId(train.getEndSiteId());
 		Date departureDate=new Date();
 		Date arrivalDate=new Date();
 		//生成明天的车辆的调度
@@ -105,18 +105,19 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public PagingVO searchList(PagingVO pagingVo,
 			ScheduleSearchVo scheduleSearchVo) {
 		// TODO Auto-generated method stub
+		
 		Site beginsite=siteService.getSiteByName(scheduleSearchVo.getBeginSite());
 		Site endsite=siteService.getSiteByName(scheduleSearchVo.getEndSite());
 		Date date=scheduleSearchVo.getDepartureDate();
 		Date date2=new Date(date.getTime()+(long)24*3600*1000);
-		List<Schedule> lists=scheduleDao.getScheduleBySiteIdAndTime(beginsite.getId(),date,date2);
+		List<ScheduleSite> lists=schedulesiteDao.getScheduleSiteBySiteIdAndTime(beginsite.getId(),date,date2);
 		if(lists!=null && lists.size()>0){
 			Long [] Ids=new Long[lists.size()];
 			int j=0;
 			for(int i=0;i<lists.size();i++){
-				ScheduleSite scheduleSite=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(lists.get(i).getId(),endsite.getId());
+				ScheduleSite scheduleSite=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(lists.get(i).getScheduleId(),endsite.getId());
 				if(scheduleSite!=null){
-					Ids[j]=lists.get(i).getId();
+					Ids[j]=lists.get(i).getScheduleId();
 					j++;
 				}
 			}
@@ -125,7 +126,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 				for(int i=0;i<j;i++){
 					scheduleIds[i]=Ids[i];
 				}
-				return scheduleDao.searchList(pagingVo,scheduleSearchVo,scheduleIds);
+				PagingVO pageVo=scheduleDao.searchList(pagingVo,scheduleSearchVo,scheduleIds);
+				//train显示的时候 trainSite显示有问题  还要修改 
+//				@SuppressWarnings("unchecked")
+//				List<Schedule> datas = (List<Schedule>) pageVo.getDetails();
+//				for (Schedule schedule : datas) {
+//					
+//				}
+				return pageVo;
 			}
 		}
 		

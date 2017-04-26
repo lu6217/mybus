@@ -5,14 +5,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.lu.entity.site.Site;
+import com.lu.entity.train.TrainNumber;
 @Entity
 @Table(name="tb_schedule")
 @DynamicInsert
@@ -29,6 +35,10 @@ public class Schedule {
 	@Column(name="trainId")
 	private Long trainId;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "trainId", updatable = false, insertable = false)
+	private TrainNumber train;
+	
 	@Column(name="direction")
 	private String direction;//方向
 	
@@ -41,8 +51,16 @@ public class Schedule {
 	@Column(name="beginSiteId")
 	private Long beginSiteId;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "beginSiteId", updatable = false, insertable = false)
+	private Site beginSite;
+	
 	@Column(name="endSiteId")
 	private Long endSiteId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "endSiteId", updatable = false, insertable = false)
+	private Site endSite;
 	
 	@Column(name="arrivalTime")
 	private Date arrivalTime;
@@ -89,6 +107,14 @@ public class Schedule {
 		this.trainId = trainId;
 	}
 
+	public TrainNumber getTrain() {
+		return train;
+	}
+
+	public void setTrain(TrainNumber train) {
+		this.train = train;
+	}
+
 	public String getDirection() {
 		return direction;
 	}
@@ -127,6 +153,22 @@ public class Schedule {
 
 	public void setBeginSiteId(Long beginSiteId) {
 		this.beginSiteId = beginSiteId;
+	}
+
+	public Site getBeginSite() {
+		return beginSite;
+	}
+
+	public void setBeginSite(Site beginSite) {
+		this.beginSite = beginSite;
+	}
+
+	public Site getEndSite() {
+		return endSite;
+	}
+
+	public void setEndSite(Site endSite) {
+		this.endSite = endSite;
 	}
 
 	public Long getEndSiteId() {

@@ -46,8 +46,8 @@ public class TrainController {
 			Site endsite=siteService.getSiteByName(trainVo.getEndSite());
 			TrainNumber train=trainService.getTrainById(trainVo.getId());
 			train.setNumber(trainVo.getNumber().trim());
-			train.setBeginSite(beginsite.getId());
-			train.setEndSite(endsite.getId());
+			train.setBeginSiteId(beginsite.getId());
+			train.setEndSiteId(endsite.getId());
 			train.setNum(Long.parseLong(trainVo.getNum().trim()));
 			train.setPrice(trainVo.getPrice().trim());
 			train.setDepartureTime(trainVo.getDepartureTime());
@@ -71,8 +71,8 @@ public class TrainController {
 				
 				TrainNumber train=new TrainNumber();
 				train.setNumber(trainVo.getNumber().trim());
-				train.setBeginSite(beginsite.getId());
-				train.setEndSite(endsite.getId());
+				train.setBeginSiteId(beginsite.getId());
+				train.setEndSiteId(endsite.getId());
 				train.setNum(Long.parseLong(trainVo.getNum().trim()));
 				train.setPrice(trainVo.getPrice().trim());
 				train.setDepartureTime(trainVo.getDepartureTime());
@@ -248,7 +248,7 @@ public class TrainController {
 	}
 	
 	@RequestMapping("/get/{id}")
-	public String getUser(@PathVariable("id")Long id, Model model){
+	public String getTrain(@PathVariable("id")Long id, Model model){
 		TrainNumber train=trainService.getTrainById(id);
 		model.addAttribute("train", train);
 		return "view/background/train/addtrain";
