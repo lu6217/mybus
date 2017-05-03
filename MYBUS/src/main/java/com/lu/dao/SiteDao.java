@@ -71,5 +71,13 @@ public class SiteDao extends BaseDAO<Site>{
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Site.class);
 		return query;
 	}
+
+	public List<Site> getSiteById(Long siteId) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Site.class);
+		query.addEq("id",siteId);
+		
+		return this.select(query);
+	}
 	
 }

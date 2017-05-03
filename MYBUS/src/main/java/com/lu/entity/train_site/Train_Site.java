@@ -4,13 +4,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.lu.entity.site.Site;
+import com.lu.entity.train.TrainNumber;
 
 @Entity
 @Table(name = "tb_train_site")
@@ -28,8 +34,16 @@ public class Train_Site{
 	@Column(name = "train_id")
 	private Long trainId;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "train_id", updatable = false, insertable = false)
+	private TrainNumber train;
+	
 	@Column(name="site_id")
 	private Long siteId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "site_id", updatable = false, insertable = false)
+	private Site site;
 	
 	@Column(name="price")
 	private String price;
@@ -152,6 +166,22 @@ public class Train_Site{
 
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public TrainNumber getTrain() {
+		return train;
+	}
+
+	public void setTrain(TrainNumber train) {
+		this.train = train;
+	}
+
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 }

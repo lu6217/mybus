@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TrainList</title>
+    <title>TrainSiteList</title>
     <%@ include file="/view/background/common/css.jsp" %>
     <!-- TABLE STYLES-->
     <link href="${path}/view/moban/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
@@ -48,26 +48,32 @@
                                		<tr class="danger">
                                	 </c:when> 
 							</c:choose>  
-	                             <td>${vs.count }</td>
-	                             <td>${train_site.id }</td>
+	                             <td class="text-center">${vs.count }</td>
+	                             <td class="text-center">${train_site.site.name }</td>
 <!-- 	                             vs.count的第一个是1 不是0 -->
 	                             <c:choose>
    									<c:when test="${train_site.number==1}">  
-   										<td>---</td>
+   										<td class="text-center">---</td>
 	                             	</c:when>
 	                            	<c:otherwise>
-	                             		<td>${train_site.arrivalTime }</td>
+<%-- 	                             		<td>${train_site.arrivalTime }</td> --%>
+	                             		<td title='<fmt:formatDate value="${train_site.arrivalTime }" pattern="HH:mm" />' class="text-center">
+													<fmt:formatDate value="${train_site.arrivalTime }" pattern="HH:mm" />
+												</td>
 								  	</c:otherwise>
 								 </c:choose>
 								 <c:choose>
    									<c:when test="${train_site.number==0}">  
-   										<td>---</td>
+   										<td class="text-center">---</td>
 	                             	</c:when>
 	                            	<c:otherwise>
-	                             		<td>${train_site.departureTime }</td>
+<%-- 	                             		<td>${train_site.departureTime }</td> --%>
+	                             		<td title='<fmt:formatDate value="${train_site.departureTime }" pattern="HH:mm" />' class="text-center">
+													<fmt:formatDate value="${train_site.departureTime }" pattern="HH:mm" />
+												</td>
 								  	</c:otherwise>
 								 </c:choose>
-	                             <td>time</td>
+	                             <td class="text-center">time</td>
 	                         </tr>
                          </c:forEach>
                        </c:if>

@@ -87,5 +87,17 @@ public class SiteServiceImpl implements SiteService{
 		return siteDao.getAllSite(pagingVo);
 	}
 
+	@Override
+	@Transactional
+	public Site getSiteById(Long siteId) {
+		// TODO Auto-generated method stub
+		List<Site> lists=siteDao.getSiteById(siteId);
+		Site site=null;
+		if(lists!=null && lists.size()!=0){
+			site=lists.get(0);
+		}
+		return site; 
+	}
+
 	
 }

@@ -20,4 +20,6 @@ public interface SiteService {
 
 	PagingVO searchAllSiteList(PagingVO pagingVo);
 
+	Site getSiteById(Long siteId);
+
 }

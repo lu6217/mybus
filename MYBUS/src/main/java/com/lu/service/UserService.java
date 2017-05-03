@@ -1,5 +1,7 @@
 package com.lu.service;
 
+import java.util.List;
+
 import com.lu.entity.account.User;
 import com.lu.entity.vo.UserVo;
 import com.lu.util.PagingVO;
@@ -13,5 +15,7 @@ public interface UserService {
 	public User getUserById(Long id);
 
 	public void delUser(User user);
+
+	public List<User> getUserByAccountId(Long accountId);
 
 }

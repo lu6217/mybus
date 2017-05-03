@@ -13,9 +13,10 @@ public class Train_SiteDao extends BaseDAO<Train_Site>{
 
 	public List<Train_Site> getSitesBytrainId(Long trainId) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Train_Site.class);
-		builder.addEq("trainId",trainId);
-		builder.addAscOrder("number");
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Train_Site.class,"train_site");
+		builder.leftJoin("train_site.train", "train").leftJoin("train_site.site", "site");
+		builder.addEq("train_site.trainId",trainId);
+		builder.addAscOrder("train_site.number");
 		return this.select(builder);
 	}
 

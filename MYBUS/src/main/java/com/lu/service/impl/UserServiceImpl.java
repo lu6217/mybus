@@ -54,5 +54,13 @@ public class UserServiceImpl implements UserService{
 		userDao.delete(user);
 		
 	}
+
+	@Override
+	@Transactional
+	public List<User> getUserByAccountId(Long accountId) {
+		// TODO Auto-generated method stub
+		List<User> lists=userDao.getUserByAccountId(accountId);
+		return null;
+	}
 	
 }

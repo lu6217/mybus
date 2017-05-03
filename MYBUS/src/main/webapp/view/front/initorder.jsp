@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TrainList</title>
+    <title>initOrder</title>
     <%@ include file="/view/background/common/css.jsp" %>
     <!-- TABLE STYLES-->
     <link href="${path}/view/moban/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
@@ -42,51 +42,51 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Train table
+                             Train Info
                         </div>
                         <div class="panel-body">
-                       <form role="form" id="searchtrainform" name="searchtrainform" >
-                        <div class="form-group">
-						  <div class="input-group ">
-							  <div class="input-group-addon">
-                                  <input class="" type="radio" name="optionsRadios" id="single" value="single" checked="">单程
-                                  <input class="" type="radio" name="optionsRadios" id="round" value="round">往返
-                             </div>
-                        	 <span class="input-group-addon">出发地 <i class="fa fa-map-marker"></i></span>
-							 <div class="input-group ">
-							  	<input class="form-control" placeholder=""  name="beginSite" id="beginSite" value="" onblur="checkSite(this)">
-<!-- 							 	<div class="input-group-addon"> -->
-<!--                                    <i class="fa fa-map-marker"></i> -->
-<!--                                 </div>	 -->
-							 </div>
-							 <span class="input-group-addon">目的地 <i class="fa fa-map-marker"></i></span>
-							 <div class="input-group ">
-								<input class="form-control" placeholder=""  name="endSite" id="endSite" value="" onblur="checkSite(this)">
-<!-- 							 	<div class="input-group-addon"> -->
-<!--                                    <i class="fa fa-map-marker"></i> -->
-<!--                                 </div>	 -->
-							 </div>
-							 <span class="input-group-addon">出发日</span>
-							 <div class="input-group">
-							  	<input class="form-control" placeholder="" name="departureDate" id="departureDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})">
-								<div class="input-group-addon">
-                                   <i class="fa fa-calendar"></i>
-                                </div>													
-							</div>
-							<span class="input-group-addon">返程日</span>
-							<div class="input-group">
-							 	<input class="form-control" placeholder="" name="backDate" id="backDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})" disabled="true">
-								<div class="input-group-addon">
-                             	   <i class="fa fa-calendar"></i>
-                           		 </div>	
-							</div>
-							<span class="input-group-addon"></span>
-							<div class="input-group">
-								<a class="form-control btn btn-success" type="submit" id="reg" value=""><i class="fa fa-search"></i> Search</a>
-							</div>
-							</div>
-                        </div>
-                    </form>
+<!--                        <form role="form" id="searchtrainform" name="searchtrainform" > -->
+<!--                         <div class="form-group"> -->
+<!-- 						  <div class="input-group "> -->
+<!-- 							  <div class="input-group-addon"> -->
+<!--                                   <input class="" type="radio" name="optionsRadios" id="single" value="single" checked="">单程 -->
+<!--                                   <input class="" type="radio" name="optionsRadios" id="round" value="round">往返 -->
+<!--                              </div> -->
+<!--                         	 <span class="input-group-addon">出发地 <i class="fa fa-map-marker"></i></span> -->
+<!-- 							 <div class="input-group "> -->
+<!-- 							  	<input class="form-control" placeholder=""  name="beginSite" id="beginSite" value="" onblur="checkSite(this)"> -->
+<!-- <!-- 							 	<div class="input-group-addon"> --> -->
+<!-- <!--                                    <i class="fa fa-map-marker"></i> --> -->
+<!-- <!--                                 </div>	 --> -->
+<!-- 							 </div> -->
+<!-- 							 <span class="input-group-addon">目的地 <i class="fa fa-map-marker"></i></span> -->
+<!-- 							 <div class="input-group "> -->
+<!-- 								<input class="form-control" placeholder=""  name="endSite" id="endSite" value="" onblur="checkSite(this)"> -->
+<!-- <!-- 							 	<div class="input-group-addon"> --> -->
+<!-- <!--                                    <i class="fa fa-map-marker"></i> --> -->
+<!-- <!--                                 </div>	 --> -->
+<!-- 							 </div> -->
+<!-- 							 <span class="input-group-addon">出发日</span> -->
+<!-- 							 <div class="input-group"> -->
+<!-- 							  	<input class="form-control" placeholder="" name="departureDate" id="departureDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})"> -->
+<!-- 								<div class="input-group-addon"> -->
+<!--                                    <i class="fa fa-calendar"></i> -->
+<!--                                 </div>													 -->
+<!-- 							</div> -->
+<!-- 							<span class="input-group-addon">返程日</span> -->
+<!-- 							<div class="input-group"> -->
+<!-- 							 	<input class="form-control" placeholder="" name="backDate" id="backDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})" disabled="true"> -->
+<!-- 								<div class="input-group-addon"> -->
+<!--                              	   <i class="fa fa-calendar"></i> -->
+<!--                            		 </div>	 -->
+<!-- 							</div> -->
+<!-- 							<span class="input-group-addon"></span> -->
+<!-- 							<div class="input-group"> -->
+<!-- 								<a class="form-control btn btn-success" type="submit" id="reg" value=""><i class="fa fa-search"></i> Search</a> -->
+<!-- 							</div> -->
+<!-- 							</div> -->
+<!--                         </div> -->
+<!--                     </form> -->
                         
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -138,70 +138,13 @@
             	});
             });
             
-            function product(id,trainId,beginSiteId,endSiteId,departureTime,arrivalTime,numberDay,price){
+            function product(id){
             	
-            	var data= {id:id
-   		    	 ,trainId:trainId
-   		    	 ,beginSiteId:beginSiteId
-   		    	 ,endSiteId:endSiteId
-   		    	 ,departureTime:departureTime
-   		    	 ,arrivalTime:arrivalTime
-   		    	 ,numberDay:numberDay
-   		    	 ,price:price}
             	
+            	alert(id);
 //             	layer.open({
-//              		  type: 2, 
-//              		  title: ['Station Info','font-size:25px;'],
-//              		  area:['550px','400px'],
-//              		  content: '${path}/luwei/order/initorder/'+data,
-//              		  shadeClose: true,//点击窗体外的任意处 关闭窗体
-//              		  btn:['Close']
-// //              		  end:function(){
-// //              			// alert('close');
-// //                 		 window.location.reload();
-// //              		 }
-//              		});
-            	
-            	
-            	
-            	$.post("${path}/luwei/order/initorder",data,function(res){
-//             		window.location.reload();
-alert("kk");
-            		window.location.replace("${path}/view/front/initorder.jsp");
-            	}); 
-            	
-            	
-//            	 	$.ajax({
-//    				 type:"POST",
-// 		    		     url:"${path}/luwei/order/initorder",
-// 		    		     data: {id:id
-// 		    		    	 ,trainId:trainId
-// 		    		    	 ,beginSiteId:beginSiteId
-// 		    		    	 ,endSiteId:endSiteId
-// 		    		    	 ,departureTime:departureTime
-// 		    		    	 ,arrivalTime:arrivalTime
-// 		    		    	 ,numberDay:numberDay
-// 		    		    	 ,price:price},
-// 		    	         	success:function(res){
-// 		    	        	 alert("kk");
-		    	        	 
-// 		    	        	 $(this).html(res);
-// // 		    	        	 if(res && res.result){
-// // 		    	        		 layer.msg(res.message);
-// // 		    	        	 }else{
-// // 		    	        		 layer.msg(res.message);
-// // 		    	        	 }
-// //		  						window.location.reload();
-// // 		    	        	 layer.close(index);
-// 			    		},
-// 			    		error:function(err,err1,err2){
-// 			    		    //debugger;
-// 			            }
-// 		    		  });
-            	
-// //             	layer.open({
 
-// //             	});
+//             	});
             	
             }
             

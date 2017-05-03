@@ -38,5 +38,11 @@ public class UserDao extends BaseDAO<User>{
 		builder.addEq("id",id);
 		return this.select(builder);
 	}
+	public List<User> getUserByAccountId(Long accountId) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class);
+		builder.addEq("accountId",accountId);
+		return this.select(builder);
+	}
 	
 }

@@ -95,6 +95,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 					scheduleSite.setDepartureTime(depDate);
 					scheduleSite.setArrivalTime(arrDate);
 				}
+				scheduleSite.setTrainId(train.getId());
 				scheduleSite.setPrice(train_site.getPrice());
 				scheduleSite.setSiteId(train_site.getSiteId());
 				scheduleSite.setNumberDay(train_site.getNumberDay());

@@ -20,7 +20,6 @@ public class Train_SiteController {
 	
 	@RequestMapping("/get/{id}")
 	public String getSiteList(@PathVariable("id")Long id, Model model){
-		System.out.println(id);
 		
 		List<Train_Site> lists=train_SiteService.getTrainSiteById(id);
 		model.addAttribute("train_sites", lists);
