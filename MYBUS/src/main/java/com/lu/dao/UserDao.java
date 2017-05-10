@@ -34,15 +34,25 @@ public class UserDao extends BaseDAO<User>{
 	}
 	public List<User> getUserById(Long id) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class);
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class, "user");
+		builder.leftJoin("user.account", "account");
 		builder.addEq("id",id);
 		return this.select(builder);
 	}
 	public List<User> getUserByAccountId(Long accountId) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class);
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(User.class,"user");
+		builder.leftJoin("user.account", "account");
 		builder.addEq("accountId",accountId);
 		return this.select(builder);
+	}
+	public List<User> checkName(String name) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(User.class,"user");
+		query.leftJoin("user.account", "account");
+		query.addEq("name",name);
+		
+		return this.select(query);
 	}
 	
 }

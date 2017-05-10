@@ -1,6 +1,8 @@
 package com.lu.controller.schedule;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,28 @@ public class ScheduleController {
 		//model.addAttribute("accountId", trainId);
 		return result;
 	}
+	
+	
+	@RequestMapping("/addallschedule")
+	@ResponseBody
+	public ResultResponse addAllSchedule(HttpServletRequest request, Model model){
+		ResultResponse result = new ResultResponse();
+		List<TrainNumber> lists=trainService.getTrain();
+		if (lists!=null && lists.size()>0 ) {
+			TrainNumber train=new TrainNumber();
+			for (int i = 0; i < lists.size(); i++) {
+				train=lists.get(i);
+				if(train!=null){
+					scheduleService.saveScheduleAndSite(train);
+					result.setMessage("ok");
+				}else{
+					result.setMessage("failure");
+				}
+			}
+		}
+		//model.addAttribute("accountId", trainId);
+		return result;
+	}
+	
 	
 }

@@ -32,7 +32,7 @@ public class SiteController {
 
 	
 	@RequestMapping("/tocreatesite/{id}")
-	public String toAddTrain(@PathVariable("id")Long id, Model model){
+	public String toAddTrainSite(@PathVariable("id")Long id, Model model){
 //		model.addAttribute("accountId", id);
 		return "view/background/site/createsite";
 	}
@@ -50,7 +50,6 @@ public class SiteController {
 				result.setMessage("Failure! Name Exists");
 			}
 		}
-		
 		return result; 
 	}
 	

@@ -42,7 +42,9 @@
 <!-- 		   发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
              <td title='<c:out value="${scheduleview.time } "></c:out>' class="text-center">${scheduleview.time }</td>
              <td class="text-center">
-          		<button class="btn btn-danger btn-sm"  onclick="product('${scheduleview.id }','${scheduleview.train.id }','${scheduleview.beginSite.id }','${scheduleview.endSite.id }','${scheduleview.departureTime }','${scheduleview.arrivalTime }','${scheduleview.numberDay }','${scheduleview.price }')"><i class="fa fa-check-circle"></i> Schedule</button>
+<%--           		<button class="btn btn-danger btn-sm"  onclick="product('${scheduleview.id }','${scheduleview.train.id }','${scheduleview.beginSite.id }','${scheduleview.endSite.id }','${scheduleview.departureTime }','${scheduleview.arrivalTime }','${scheduleview.numberDay }','${scheduleview.price }')"><i class="fa fa-check-circle"></i> Schedule</button> --%>
+<%--           		<a class="btn btn-danger btn-sm" href="${path}/view/front/initorder.jsp?id=${scheduleview.id } &trainId=${scheduleview.train.id }&beginSiteId=${scheduleview.beginSite.id }&endSiteId=${scheduleview.endSite.id }"  ><i class="fa fa-check-circle"></i> Schedule</a> --%>
+          		<a class="btn btn-danger btn-sm" href="${path}/luwei/order/initorder/${scheduleview.id } /${scheduleview.train.id }/${scheduleview.beginSite.id }/${scheduleview.endSite.id }/${scheduleview.departureTime }/${scheduleview.arrivalTime }/${scheduleview.numberDay }/${scheduleview.price }"  ><i class="fa fa-check-circle"></i> 预定</a>
              </td>
          </tr>
        </c:forEach>

@@ -49,4 +49,11 @@ public class TrainDao extends BaseDAO<TrainNumber>{
 		return this.select(builder);
 	}
 
+	public List<TrainNumber> getTrain() {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(TrainNumber.class,"train");
+		builder.leftJoin("train.beginSite", "beginsite").leftJoin("train.endSite", "endsite");
+		return this.select(builder);
+	}
+
 }

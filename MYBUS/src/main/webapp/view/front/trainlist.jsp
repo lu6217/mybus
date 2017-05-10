@@ -167,7 +167,10 @@
             	$.post("${path}/luwei/order/initorder",data,function(res){
 //             		window.location.reload();
 alert("kk");
-            		window.location.replace("${path}/view/front/initorder.jsp");
+// alert("id="+res.id+" trainId="+res.trainId+" beginid="+res.beginSiteId+"endId="+res.endSiteId);
+					window.location.href="${path}/view/front/initorder.jsp?id="+id+"&trainId="+trainId+"&beginSiteId="+beginSiteId+"&endSiteId="+endSiteId;
+					//还是有点问题  穿过去的id   再通过ID进行查询  查出所需的内容   
+//             		window.location.replace("${path}/view/front/initorder.jsp?id="+id);
             	}); 
             	
             	

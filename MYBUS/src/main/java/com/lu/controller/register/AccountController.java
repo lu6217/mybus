@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
@@ -213,6 +214,7 @@ public class AccountController {
 	@ResponseBody
 	public ResultResponse addUser(HttpServletRequest request, UserVo userVo){
 		ResultResponse result = new ResultResponse();
+		Account account = (Account)WebUtils.getSessionAttribute(request, "account");
 		if(userVo!=null && userVo.getId()!=null){
 			User user=userService.getUserById(userVo.getId());
 			user.setAddress(userVo.getAddress().trim());
@@ -224,16 +226,14 @@ public class AccountController {
 			userService.saveOrUpdateUser(user);
 			result.setMessage("OK! success!");
 		}else if(userVo!=null && userVo.getId()==null){
-			if(userVo!=null && userVo.getAccountId()!=null){
-				if(accountService.checkName(userVo.getName().trim())){
+				if(userService.checkName(userVo.getName().trim())){
 					result.setResult(Boolean.FALSE);
 					result.setMessage("failure! Name Exists" );
 					return result;
 				}
-				Account account=accountService.findById(userVo.getAccountId());
 				if(account!=null){
 					User user=new User();
-					user.setAccountId(userVo.getAccountId());
+					user.setAccountId(account.getId());
 					user.setAddress(userVo.getAddress().trim());
 					user.setAge(Long.parseLong(userVo.getAge().trim()));
 					user.setIDcard(userVo.getIDcard().trim());
@@ -246,10 +246,6 @@ public class AccountController {
 					result.setResult(Boolean.FALSE);
 					result.setMessage("failure!");
 				}
-			}else{
-				result.setResult(Boolean.FALSE);
-				result.setMessage("failure!");
-			}
 		}else {
 			result.setResult(Boolean.FALSE);
 			result.setMessage("failure!");

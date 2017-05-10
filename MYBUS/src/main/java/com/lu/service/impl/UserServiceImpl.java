@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lu.dao.OrderDao;
 import com.lu.dao.UserDao;
+import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
+import com.lu.entity.order.Order;
 import com.lu.entity.vo.UserVo;
 import com.lu.service.UserService;
 import com.lu.util.PagingVO;
@@ -17,6 +20,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired 
+	private OrderDao orderDao; 
 
 	@Override
 	@Transactional
@@ -51,6 +57,14 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public void delUser(User user) {
 		// TODO Auto-generated method stub
+		List<Order> lists=orderDao.getOrderByUserId(user.getId());
+		if(lists!=null && lists.size()>0){
+			Order order=new Order();
+			for (int i = 0; i < lists.size(); i++) {
+				order=lists.get(i);
+				orderDao.delete(order);
+			}
+		}
 		userDao.delete(user);
 		
 	}
@@ -60,7 +74,21 @@ public class UserServiceImpl implements UserService{
 	public List<User> getUserByAccountId(Long accountId) {
 		// TODO Auto-generated method stub
 		List<User> lists=userDao.getUserByAccountId(accountId);
+		if(lists!=null && lists.size()>0){
+			return lists;
+		}
 		return null;
+	}
+
+	@Override
+	@Transactional
+	public boolean checkName(String name) {
+		// TODO Auto-generated method stub
+		List<User> lists=userDao.checkName(name);
+		if(lists!=null && lists.size()!=0){
+			return true;
+		}
+		return false;
 	}
 	
 }

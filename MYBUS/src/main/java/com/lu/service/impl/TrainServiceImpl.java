@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lu.dao.OrderDao;
 import com.lu.dao.ScheduleDao;
 import com.lu.dao.ScheduleSiteDao;
 import com.lu.dao.TrainDao;
 import com.lu.dao.Train_SiteDao;
 import com.lu.entity.enumType.TrainStatus;
+import com.lu.entity.order.Order;
 import com.lu.entity.schedule.Schedule;
 import com.lu.entity.schedule.ScheduleSite;
 import com.lu.entity.train.TrainNumber;
@@ -32,6 +34,9 @@ public class TrainServiceImpl implements TrainService{
 	
 	@Autowired
 	private ScheduleSiteDao scheduleSiteDao;
+	
+	@Autowired
+	private OrderDao orderDao; 
 	
 	@Override
 	@Transactional
@@ -109,11 +114,31 @@ public class TrainServiceImpl implements TrainService{
 				scheduleSiteDao.delete(scheduleSites.get(i));
 			}
 		}
+		//删除对应车次的订单
+		List<Order> orders=orderDao.getOrderByTrainId(trainId);
+		if (orders!=null && orders.size()>0) {
+			Order order=new Order();
+			for(int i=0;i<orders.size();i++){
+				order=orders.get(i);
+				orderDao.delete(order);
+			}
+		}
 		train.setIsDelete(Boolean.TRUE);
 		train.setStatus(TrainStatus.OFF.getStatus());
 		trainDao.update(train);
 //		将是否删除字段改为TRUE
 //		trainDao.delete(train);
+	}
+	@Override
+	@Transactional
+	public List<TrainNumber> getTrain() {
+		// TODO Auto-generated method stub
+		List<TrainNumber> lists=trainDao.getTrain();
+		if(lists!=null && lists.size()!=0){
+			return lists;
+		}
+		
+		return null;
 	}
 
 }

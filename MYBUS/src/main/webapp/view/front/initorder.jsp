@@ -3,6 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	request.setAttribute("path", request.getContextPath());
+// 	request.setAttribute("scheduleViewId", request.getParameter("id"));
+// 	request.setAttribute("trainId", request.getParameter("trainId"));
+// 	request.setAttribute("beginSiteId", request.getParameter("beginSiteId"));
+// 	request.setAttribute("endSiteId", request.getParameter("endSiteId"));
+
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -42,76 +47,62 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Train Info
+                             
                         </div>
                         <div class="panel-body">
-<!--                        <form role="form" id="searchtrainform" name="searchtrainform" > -->
-<!--                         <div class="form-group"> -->
-<!-- 						  <div class="input-group "> -->
-<!-- 							  <div class="input-group-addon"> -->
-<!--                                   <input class="" type="radio" name="optionsRadios" id="single" value="single" checked="">单程 -->
-<!--                                   <input class="" type="radio" name="optionsRadios" id="round" value="round">往返 -->
-<!--                              </div> -->
-<!--                         	 <span class="input-group-addon">出发地 <i class="fa fa-map-marker"></i></span> -->
-<!-- 							 <div class="input-group "> -->
-<!-- 							  	<input class="form-control" placeholder=""  name="beginSite" id="beginSite" value="" onblur="checkSite(this)"> -->
-<!-- <!-- 							 	<div class="input-group-addon"> --> -->
-<!-- <!--                                    <i class="fa fa-map-marker"></i> --> -->
-<!-- <!--                                 </div>	 --> -->
-<!-- 							 </div> -->
-<!-- 							 <span class="input-group-addon">目的地 <i class="fa fa-map-marker"></i></span> -->
-<!-- 							 <div class="input-group "> -->
-<!-- 								<input class="form-control" placeholder=""  name="endSite" id="endSite" value="" onblur="checkSite(this)"> -->
-<!-- <!-- 							 	<div class="input-group-addon"> --> -->
-<!-- <!--                                    <i class="fa fa-map-marker"></i> --> -->
-<!-- <!--                                 </div>	 --> -->
-<!-- 							 </div> -->
-<!-- 							 <span class="input-group-addon">出发日</span> -->
-<!-- 							 <div class="input-group"> -->
-<!-- 							  	<input class="form-control" placeholder="" name="departureDate" id="departureDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})"> -->
-<!-- 								<div class="input-group-addon"> -->
-<!--                                    <i class="fa fa-calendar"></i> -->
-<!--                                 </div>													 -->
-<!-- 							</div> -->
-<!-- 							<span class="input-group-addon">返程日</span> -->
-<!-- 							<div class="input-group"> -->
-<!-- 							 	<input class="form-control" placeholder="" name="backDate" id="backDate" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD'})" disabled="true"> -->
-<!-- 								<div class="input-group-addon"> -->
-<!--                              	   <i class="fa fa-calendar"></i> -->
-<!--                            		 </div>	 -->
-<!-- 							</div> -->
-<!-- 							<span class="input-group-addon"></span> -->
-<!-- 							<div class="input-group"> -->
-<!-- 								<a class="form-control btn btn-success" type="submit" id="reg" value=""><i class="fa fa-search"></i> Search</a> -->
-<!-- 							</div> -->
-<!-- 							</div> -->
-<!--                         </div> -->
-<!--                     </form> -->
-                        
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">车次</th>
-                                            <th class="text-center">发车站</th>
-                                            <th class="text-center">终点站</th>
-                                            <th class="text-center">发车时间</th>
-                                            <th class="text-center">到站时间</th>
-                                            <th class="text-center">运行时间</th>
-                                            <th class="text-center">Option</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="trainlistId">
-
-                                    </tbody>
-                                <div>
-                                </div>
-                                </table>
+                       <form role="form" id="orderform" name="orderform" >
+                        <div class="form-group">
+						  <div class="input-group ">
+						  
+						  <div class="input-group ">
+                               <label>Train Info</label>
+                                <input type="hidden" name="scheduleId" id="scheduleId" value="${scheduleView.id }">
+                                <input type="hidden" name="trainId" id="trainId" value="${scheduleView.train.id }">
+                                <input type="hidden" name="numberDay" id="numberDay" value="${scheduleView.numberDay }">
+                                <input type="hidden" name="beginSiteId" id="beginSiteId" value="${scheduleView.beginSite.id }">
+                                <input type="hidden" name="departureTime" id="departureTime" value="${scheduleView.departureTime }">
+                                <input type="hidden" name="endSiteId" id="endSiteId" value="${scheduleView.endSite.id }">
+                                <input type="hidden" name="arrivalTime" id="arrivalTime" value="${scheduleView.arrivalTime }">
+                                 <input type="hidden" name="price" id="price" value="${scheduleView.price }">
+                              <p class=""><span id=""><fmt:formatDate value="${scheduleView.departureTime }" pattern="yyyy-MM-dd" /> </span>
+                              		&nbsp;<span id="" name="">${scheduleView.train.number }次</span>
+                              		&nbsp;<span id="" name="" value="">${scheduleView.beginSite.name } (</span> 
+                              		&nbsp;<span id="" name="" ><fmt:formatDate value="${scheduleView.departureTime }" pattern="HH:mm" /> 开)</span>
+                              		&nbsp;-- <span id="" name="" value="">${scheduleView.endSite.name } (</span> 
+                              		
+                              		<c:if test="${scheduleView.numberDay ==1}">
+                              		<span>次日</span>
+                              		</c:if>
+                              		<c:if test="${scheduleView.numberDay ==2}">
+                              		<span>隔日</span>
+                              		</c:if>
+                              		&nbsp;<span id="" name=""><fmt:formatDate value="${scheduleView.arrivalTime }" pattern="HH:mm" /> 到)</span>
+                              </p>
+                          </div>
+                          <br>
+                           <div class="input-group ">
+                              <label>User Info</label>
+                           </div>
+                           
+                           <div class="form-group">
+                           <i class="fa fa-user fa-fw"></i>
+	                         <c:forEach varStatus="vs" var="user" items="${users}">
+	                           <label class="checkbox-inline">
+	                                    <input type="checkbox" name="userLists" value="${user.id }">${user.name }
+	                                </label>
+	                           </c:forEach>
                             </div>
-                            
+                            <hr>
+                            <div class="input-group">
+                            	<a class="form-control btn btn-success" type="" id="back" value=""></i> 上一步</a>
+								<span class="input-group-addon"></span>
+                            	<a class="form-control btn btn-success" type="submit" id="reg" value=""><!-- <i class="fa fa-search"> --></i> 提交订单</a>
+							</div>
+							</div>
                         </div>
+                    </form>
+                     </div>
                     </div>
-                    <!--End Advanced Tables -->
                 </div>
             </div>
 
@@ -127,6 +118,7 @@
 	<script src="${path}/js/jquery-ui.custom.min.js"></script>
     <script>
             $(document).ready(function () {
+            	
                 $('#dataTables-example').dataTable();
                 $(':radio').click(function(){
 	            	var radioVal=$('input[name="optionsRadios"]:checked').val();
@@ -138,132 +130,31 @@
             	});
             });
             
-            function product(id){
-            	
-            	
-            	alert(id);
-//             	layer.open({
-
-//             	});
-            	
-            }
-            
-            
-            function showSite(id){
-            	layer.open({
-           		  type: 2, 
-           		  title: ['Station Info','font-size:25px;'],
-           		  area:['550px','400px'],
-           		  content: '${path}/luwei/front/train_site/get/'+id,
-           		  shadeClose: true,//点击窗体外的任意处 关闭窗体
-           		  btn:['Close']
-//            		  end:function(){
-//            			// alert('close');
-//               		 window.location.reload();
-//            		 }
-           		});
-            }
             
             $("#reg").bind("click",function(){
-            	var beginsite=$('#beginSite').val().trim();
-            	var endsite=$('#endSite').val().trim();
-            	var depDate=$('#departureDate').val().trim();
-            	if(beginsite==null || beginsite==''){
-            		layer.msg('Site Not Null!');
-            		return false;
-            	}
-            	if(endsite==null || endsite==''){
-            		layer.msg('Site Not Null!');
-            		return false;
-            	}
-            	if(depDate==null || depDate==''){
-            		layer.msg('Please choose a date!');
-            		return false;
-            	}
-    			$.post("${path }/luwei/front/train/searchlist",$("#searchtrainform").serialize(),function(data) {
-    				$("#trainlistId").html(data);
-    				
+            //提交之前要先判断有没有选择用户
+    			$.post("${path }/luwei/order/createorder",$("#orderform").serialize(),function(data) {
+//     				$("#trainlistId").html(data);
+    				if(data && data.result){
+//    	        			 layer.msg(data.message);
+   	        			layer.open({
+   	             		  type: 1, 
+   	             		  title: ['Tip Info'],
+   	             		  area:['260px','180px'],
+   	             		  content: '<center><p>订单已提交</p> <p> 支付请点击<a href="${path}/luwei/order/topay" style="color:blue;">订单支付</a></p> <p>查看订单情况请点击<a href="${path }/luwei/order/orderlist" style="color:blue;">未完成订单</a></p></center>',
+   	             		  shadeClose: true,//点击窗体外的任意处 关闭窗体
+   	             		  btn:['Close']
+//   	              		  end:function(){
+//   	              			// alert('close');
+//   	                 		 window.location.reload();
+//   	              		 }
+   	             		});
+   	        	 	}else{
+   	        			 layer.msg(data.message);
+   	        		 }
     			}); 
     		});
             
-       $(document).ready(function () {	
-			$("#beginSite").autocomplete({
-			source : function(request, response) {
-				$.ajax({
-						url : "${path}/luwei/front/site/fuzzy",
-						dataType : "json",
-						type : 'post',
-						data : {
-							q : request.term ,
-							//request.term 表示获取文本框输入的值
-							site: $('#endSite').val()
-						},
-						success : function(data) {
-							response($.map(data, function(item) {
-								return {
-									label:item.name,
-									value:item.id,
-									name:item.name
-								}
-							}));
-						}
-				})
-			},
-			focus: function(event, ui) { 
- 				return false;
- 			},
- 			select:function(event,ui){
-				$(this).next("input").val(ui.item['lable']);
-	 			$(this).val(ui.item['name']);
-				return false;
- 			},
- 			change:function(event,ui){
- 				if(null==ui.item){
- 					$(this).next("input").val("");
- 					//$("#parentCourse").val("");
- 				}
- 			},
- 			minLength : 0
-		});	
-		$("#endSite").autocomplete({
-			source : function(request, response) {
-				$.ajax({
-						url : "${path}/luwei/front/site/fuzzy",
-						dataType : "json",
-						type : 'post',
-						data : {
-							q : request.term,
-							//request.term 表示获取文本框输入的值
-							site: $('#beginSite').val()
-						},
-						success : function(data) {
-							response($.map(data, function(item) {
-								return {
-									label:item.name,
-									value:item.id,
-									name:item.name
-								}
-							}));
-						}
-				})
-			},
-			focus: function(event, ui) { 
- 				return false;
- 			},
- 			select:function(event,ui){
-				$(this).next("input").val(ui.item['lable']);
-	 			$(this).val(ui.item['name']);
-				return false;
- 			},
- 			change:function(event,ui){
- 				if(null==ui.item){
- 					$(this).next("input").val("");
- 					//$("#parentCourse").val("");
- 				}
- 			},
- 			minLength : 0
-		});	
-	})
              
     </script>
 	<script>

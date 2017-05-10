@@ -41,7 +41,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             User table
+                             Account table
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">

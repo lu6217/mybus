@@ -11,32 +11,23 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UserInfo</title>
+    <title>OrderInfo</title>
 </head>
 <body style="padding: 10px; line-height: 10px; background-color: #393D49; color: #fff; font-weight: 300;">
       <form role="form">
-            <p>Name: <span>${user.name }</span></p>
+      
+            <p>Train: ${order.train.number } &nbsp; ${order.beginSite.name } - ${order.endSite.name }</span></p>
           
-            <p>IDcard: <span>${user.IDcard }</span></p>
-           
-            <p>Age: <span>${user.age }</span></p>
+            <p>Seat: <span>${order.seat.compartmentNumber }车厢   ${order.seat.seatNumber }号</span></p>
+
+            <p>User: <span>${order.user.name }</span></p>
+
+          	<p>DepartureTime：<span><fmt:formatDate value="${order.departureTime }" pattern="yyyy-MM-dd HH:mm" /></p>
+          	
+          	<p>ArrivalTime：<span><fmt:formatDate value="${order.arrivalTime }" pattern="yyyy-MM-dd HH:mm" /></p>
+          	
+            <p>Price: ${order.price } 元 </p>
           
-            <p>Sex: 
-	            <c:choose>
-	  				<c:when test="${user.sex == 1}">
-	  					<span>男</span>
-	  				</c:when>
-	  				<c:when test="${user.sex == 0}">
-	  					<span>女</span>
-	  				</c:when>
-	 			</c:choose>
-            </p>
-          
-            <p>Telphone: <span>${user.telphone }</span></p>
-           
-            <p>Address: <span>${user.address }</span></p>
-          
-           <p>Account: <span>${user.account.name }</span></p>
    	</form>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.lu.service;
 
+import java.util.List;
+
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.util.PagingVO;
@@ -17,6 +19,8 @@ public interface TrainService {
 	TrainNumber getTrainById(Long id);
 
 	void delTrain(TrainNumber train);
+
+	List<TrainNumber> getTrain();
 
 	
 }
