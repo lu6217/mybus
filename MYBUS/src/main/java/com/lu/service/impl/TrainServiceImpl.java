@@ -17,6 +17,7 @@ import com.lu.entity.schedule.Schedule;
 import com.lu.entity.schedule.ScheduleSite;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
+import com.lu.entity.vo.ResultVO;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.service.TrainService;
 import com.lu.util.PagingVO;
@@ -139,6 +140,13 @@ public class TrainServiceImpl implements TrainService{
 		}
 		
 		return null;
+	}
+	@Override
+	@Transactional
+	public List<ResultVO> fuzzyQueryTrain(String queryKey) {
+		// TODO Auto-generated method stub
+		
+		return trainDao.fuzzyQuerySite(queryKey);
 	}
 
 }

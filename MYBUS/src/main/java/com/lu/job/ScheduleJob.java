@@ -24,6 +24,7 @@ public class ScheduleJob {
 	@Scheduled(cron="0 0 23 * * ?")
 	@Transactional
 	public void execute(){
+		//添加车次调度
 		List<TrainNumber> lists=trainService.getTrain();
 		if (lists!=null && lists.size()>0 ) {
 			TrainNumber train=new TrainNumber();
@@ -34,5 +35,7 @@ public class ScheduleJob {
 				}
 			}
 		}
+		/////删除车次和站点调度
+		scheduleService.delExpiredSchedule();
 	}
 }

@@ -33,7 +33,7 @@
                         <a <c:if test="${param.item=='authority'}" >class="active-menu"</c:if> href=""><i class="fa fa-edit"></i> Authority Management </a>
                     </li>
 					<li>
-                        <a <c:if test="${param.item=='schedule'}" >class="active-menu"</c:if> href=""><i class="fa fa-edit"></i> Schedule Management </a>
+                        <a <c:if test="${param.item=='schedule'}" >class="active-menu"</c:if> href="${path }/luwei/schedule/schedulelist"><i class="fa fa-edit"></i> Schedule Management </a>
                     </li>
 
                     <li>

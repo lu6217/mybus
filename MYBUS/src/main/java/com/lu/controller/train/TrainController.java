@@ -1,6 +1,7 @@
 package com.lu.controller.train;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
+import com.lu.entity.vo.ResultVO;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.entity.vo.TrainVo;
 import com.lu.entity.vo.Train_SiteVo;
@@ -252,5 +255,12 @@ public class TrainController {
 		TrainNumber train=trainService.getTrainById(id);
 		model.addAttribute("train", train);
 		return "view/background/train/addtrain";
+	}
+	
+	@RequestMapping(value = "fuzzy", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public List<ResultVO> fuzzy(@RequestParam("q") String queryKey) {
+		return trainService.fuzzyQueryTrain(queryKey.trim());
+		
 	}
 }

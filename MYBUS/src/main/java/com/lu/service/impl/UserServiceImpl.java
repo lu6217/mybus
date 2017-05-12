@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.OrderDao;
 import com.lu.dao.UserDao;
-import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
 import com.lu.entity.order.Order;
 import com.lu.entity.vo.UserVo;

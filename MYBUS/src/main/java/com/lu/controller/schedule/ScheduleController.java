@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.train.TrainNumber;
+import com.lu.entity.vo.ScheduleVo;
 import com.lu.service.ScheduleService;
 import com.lu.service.TrainService;
+import com.lu.util.PagingVO;
 import com.lu.util.ResultResponse;
 
 @Controller
@@ -61,6 +63,51 @@ public class ScheduleController {
 			}
 		}
 		//model.addAttribute("accountId", trainId);
+		return result;
+	}
+	
+	@RequestMapping("/delschedule")
+	@ResponseBody
+	public ResultResponse delSchedule(HttpServletRequest request, Model model){
+		ResultResponse result = new ResultResponse();
+		scheduleService.delExpiredSchedule();
+		
+		result.setMessage("success");
+		return result;
+	}
+	
+	@RequestMapping("/schedulelist")
+	public String trainSearchList(PagingVO pagingVo,ScheduleVo scheduleVo,Model model, HttpServletRequest request){
+		PagingVO vo =scheduleService.searchList(pagingVo,scheduleVo);
+		model.addAttribute("pageVO", vo);
+		return "view/background/schedule/schedulelist";
+	}
+	
+	@RequestMapping("/toaddschedule")
+	public String toAddSchedule(HttpServletRequest request, Model model){
+		
+//		model.addAttribute("accountId", trainId);
+		return "view/background/schedule/addschedule";
+	}
+	
+	
+	@RequestMapping("/addschedule2")
+	@ResponseBody
+	public ResultResponse addSchedule2(HttpServletRequest request, Model model,ScheduleVo scheduleVo){
+		ResultResponse result = new ResultResponse();
+		if(scheduleVo==null || scheduleVo.getTrainName()==null || scheduleVo.getStartDate()==null || scheduleVo.getEndDate()==null){
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Failure!");
+		}
+		System.out.println(scheduleVo.getTrainName());
+		
+		TrainNumber train=trainService.getTrainByName(scheduleVo.getTrainName());
+		if(train!=null){
+			scheduleService.saveScheduleAndSite(train,scheduleVo.getStartDate(),scheduleVo.getEndDate());
+			result.setMessage("Success");
+		}else{
+			result.setMessage("Failure!");
+		}
 		return result;
 	}
 	

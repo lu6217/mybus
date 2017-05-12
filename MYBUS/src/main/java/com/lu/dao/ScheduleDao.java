@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lu.entity.schedule.Schedule;
 import com.lu.entity.vo.ScheduleSearchVo;
+import com.lu.entity.vo.ScheduleVo;
 import com.lu.entity.vo.view.ScheduleView;
 import com.lu.util.BaseDAO;
 import com.lu.util.DetachedCriteriaBuilder;
@@ -77,5 +78,28 @@ public class ScheduleDao extends BaseDAO<Schedule>{
 		return select(query);
 	}
 
+	public List<Schedule> getExpiredSchedule() {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Schedule.class,"schedule");
+		query.addLe("schedule.arrivalTime", new Date());
+		return select(query);
+	}
+
+	public PagingVO searchList(PagingVO pagingVo, ScheduleVo scheduleVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = initQueryCriteria(scheduleVo);
+		DetachedCriteriaBuilder count = initQueryCriteria(scheduleVo);
+		return this.selectPagingVO(query, pagingVo, count);
+	}
+
+	private DetachedCriteriaBuilder initQueryCriteria(
+			ScheduleVo scheduleVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Schedule.class,"schedule");
+		query.leftJoin("schedule.train", "train");
+		query.leftJoin("schedule.beginSite", "beginsite").leftJoin("schedule.endSite", "endsite");
+		
+		return query;
+	}
 	
 }

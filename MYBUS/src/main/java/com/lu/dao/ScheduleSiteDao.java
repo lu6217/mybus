@@ -34,4 +34,11 @@ public class ScheduleSiteDao extends BaseDAO<ScheduleSite>{
 		return select(query);
 	}
 
+	public List<ScheduleSite> getScheduleByScheduleId(Long scheduleId) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(ScheduleSite.class,"scheduleSite");
+		query.addEq("scheduleSite.scheduleId", scheduleId);
+		return select(query);
+	}
+
 }

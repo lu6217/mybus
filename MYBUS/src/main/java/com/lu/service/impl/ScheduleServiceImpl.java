@@ -17,6 +17,7 @@ import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
 import com.lu.entity.vo.ScheduleSearchVo;
+import com.lu.entity.vo.ScheduleVo;
 import com.lu.entity.vo.view.ScheduleView;
 import com.lu.service.ScheduleService;
 import com.lu.service.SiteService;
@@ -105,6 +106,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 		}
 		
 	}
+	
+	@Override
+	@Transactional
+	public void saveScheduleAndSite(TrainNumber train, Date startDate,
+			Date endDate) {	
+		// TODO Auto-generated method stub
+		//添加调度信息
+	}
+	
 
 	@Override
 	@Transactional
@@ -158,5 +168,41 @@ public class ScheduleServiceImpl implements ScheduleService{
 		
 		return null;
 	}
+
+	@Override
+	@Transactional
+	public void delExpiredSchedule() {
+		// TODO Auto-generated method stub
+		List<Schedule> lists=scheduleDao.getExpiredSchedule();
+		if(lists!=null && lists.size()>0){
+			Schedule schedule=new Schedule();
+			for(int i=0;i<lists.size();i++){
+				schedule=lists.get(i);
+				//先删除对应站点调度信息
+				List<ScheduleSite>scheduleSites= schedulesiteDao.getScheduleByScheduleId(schedule.getId());
+				if(scheduleSites!=null && scheduleSites.size()>0){
+					ScheduleSite scheduleSite=new ScheduleSite();
+					for(int j=0;j<scheduleSites.size();j++){
+						scheduleSite=scheduleSites.get(j);
+						schedulesiteDao.delete(scheduleSite);
+					}
+				}
+				//删除对应车次调度信息
+				scheduleDao.delete(schedule);				
+			}
+		}
+		
+	}
+
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo, ScheduleVo scheduleVo) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=scheduleDao.searchList(pagingVo,scheduleVo);
+		return vo;
+	}
+
+
 
 }
