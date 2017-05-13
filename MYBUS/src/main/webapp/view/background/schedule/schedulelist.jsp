@@ -104,8 +104,8 @@
 													</c:choose>
 	                                             </td>
 	                                            <td class="text-center">
-													<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
-													<button class="btn btn-danger btn-sm"  onclick="del('${train.id }','${train.number }')"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-success btn-sm" onclick="edits('${schedule.id }')" disabled=""><i class="fa fa-edit" ></i> Edit</button>
+													<button class="btn btn-danger btn-sm"  onclick="del('${schedule.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            
 	                                            </td>
 	                                        </tr>
@@ -114,12 +114,12 @@
 	  									 </c:if>
                                     </tbody>
                                 <div>
-                                	<button class="btn btn-primary btn-sm" onclick="adds('0')"><i class="fa fa-plus "></i> Add</button>
-									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Schedule</button>
+                                	<button class="btn btn-primary btn-sm" onclick="adds('0')"><i class="fa fa-plus "></i> Add Schedule</button>
+<%-- 									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${schedule.id }')"><i class="fa fa-plus "></i> Add Schedule</button> --%>
                                 	<hr>
                                 </div>
                                 </table>
-                            </div>
+                            </div> 
                             
                         </div>
                     </div>
@@ -215,26 +215,21 @@
             		});
                }
              
-             function del(id,number){
-            	 layer.msg('确定要删除  '+number+' 列车', {
+             function del(id){
+            	 layer.msg('确定要删除此次调度？', {
             		  time: 20000, //20s后自动关闭
             		  btn: ['残忍删除', '火速取消'],
             		  yes: function(){
             			  $.ajax({
             				 type:"POST",
-      		    		     url:"${path}/luwei/train/deltrain",
+      		    		     url:"${path}/luwei/schedule/delschedule",
       		    		     data: {id:id},
       		    	         success:function(res){
       		    	        	 if(res && res.result){
       		    	        		 layer.msg(res.message);
-//       		    	        		 alert(res.message); 
       		    	        	 }else{
       		    	        		 layer.msg(res.message);
-      		    	        	 	//alert(res.message);
       		    	        	 }
-//       		    	        	 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-//       		 	               		 parent.layer.close(index);
-      		  						//window.parent.location.reload();
       		  						window.location.reload();
       			    		},
       			    		error:function(err,err1,err2){

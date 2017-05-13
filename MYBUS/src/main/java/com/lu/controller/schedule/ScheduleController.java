@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lu.entity.schedule.Schedule;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.vo.ScheduleVo;
 import com.lu.service.ScheduleService;
@@ -66,15 +67,33 @@ public class ScheduleController {
 		return result;
 	}
 	
-	@RequestMapping("/delschedule")
+	@RequestMapping("/delallschedule")
 	@ResponseBody
-	public ResultResponse delSchedule(HttpServletRequest request, Model model){
+	public ResultResponse delAllSchedule(HttpServletRequest request, Model model){
 		ResultResponse result = new ResultResponse();
 		scheduleService.delExpiredSchedule();
 		
 		result.setMessage("success");
 		return result;
 	}
+	
+	@RequestMapping("/delschedule")
+	@ResponseBody
+	public ResultResponse delSchedule(HttpServletRequest request){
+		ResultResponse result = new ResultResponse();
+		Long id=Long.parseLong(request.getParameter("id").trim());
+		
+		Schedule schedule=scheduleService.getScheduleById(id);
+		if(schedule!=null){
+			scheduleService.delSchedule(schedule);
+			result.setMessage("OK! 删除成功!");
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("falure!");
+		}
+		return result;
+	}
+	
 	
 	@RequestMapping("/schedulelist")
 	public String trainSearchList(PagingVO pagingVo,ScheduleVo scheduleVo,Model model, HttpServletRequest request){

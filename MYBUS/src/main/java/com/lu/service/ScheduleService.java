@@ -2,6 +2,7 @@ package com.lu.service;
 
 import java.util.Date;
 
+import com.lu.entity.schedule.Schedule;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.vo.ScheduleSearchVo;
 import com.lu.entity.vo.ScheduleVo;
@@ -18,6 +19,10 @@ public interface ScheduleService {
 	PagingVO searchList(PagingVO pagingVo, ScheduleVo scheduleVo);
 
 	void saveScheduleAndSite(TrainNumber train, Date startDate, Date endDate);
+
+	Schedule getScheduleById(Long id);
+
+	void delSchedule(Schedule schedule);
 
 	
 }

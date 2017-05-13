@@ -101,5 +101,12 @@ public class ScheduleDao extends BaseDAO<Schedule>{
 		
 		return query;
 	}
+
+	public Schedule getScheduleById(Long id) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Schedule.class,"schedule");
+		query.addEq("schedule.id",id);
+		return this.selectTopOne(query);
+	}
 	
 }
