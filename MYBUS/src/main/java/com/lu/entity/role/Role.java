@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.lu.entity.menu.Menu;
 
 @Entity
-@Table(name = "tb_role")
+@Table(name = "tb_roles")
 @DynamicInsert
 @DynamicUpdate
 public class Role {
@@ -26,8 +26,8 @@ public class Role {
 	@Column(name="name")
 	private String name;//角色名称
 	
-	@Column(name="desc")
-	private String desc;//角色描述
+	@Column(name="description")
+	private String description;//角色描述
 	
 	@Column(name="accountTypeId")
 	private Long accountTypeId;
@@ -52,12 +52,12 @@ public class Role {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Long getAccountTypeId() {
@@ -75,7 +75,6 @@ public class Role {
 	public void setMenus(Menu menus) {
 		this.menus = menus;
 	}
-	
-	
+
 	
 }
