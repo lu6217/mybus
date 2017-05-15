@@ -1,6 +1,7 @@
 package com.lu.service.impl;
 
 import java.io.File;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +39,10 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	@Transactional
-	public Order getOrderByUserIdAndTrainId(Long userId, Long trainId) {
+	public Order getOrderByUserIdAndTrainId(Long userId, Long trainId,Date date) {
 		// TODO Auto-generated method stub
 		
-		return orderDao.getOrderByUserIdAndTrainId(userId,trainId);
+		return orderDao.getOrderByUserIdAndTrainId(userId,trainId,date);
 	}
 
 	@Override

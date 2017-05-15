@@ -1,4 +1,4 @@
-package com.lu.entity.account;
+package com.lu.entity.authority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
-import com.lu.entity.role.Role;
 
 @Entity
 @Table(name = "tb_accountType")

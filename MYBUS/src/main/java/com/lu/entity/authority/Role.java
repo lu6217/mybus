@@ -1,4 +1,4 @@
-package com.lu.entity.role;
+package com.lu.entity.authority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
-import com.lu.entity.menu.Menu;
 
 @Entity
 @Table(name = "tb_roles")
@@ -29,8 +27,8 @@ public class Role {
 	@Column(name="description")
 	private String description;//角色描述
 	
-	@Column(name="accountTypeId")
-	private Long accountTypeId;
+//	@Column(name="accountTypeId")
+//	private Long accountTypeId;
 	
 	//角色所拥有的权限
 	@Transient
@@ -58,14 +56,6 @@ public class Role {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Long getAccountTypeId() {
-		return accountTypeId;
-	}
-
-	public void setAccountTypeId(Long accountTypeId) {
-		this.accountTypeId = accountTypeId;
 	}
 
 	public Menu getMenus() {

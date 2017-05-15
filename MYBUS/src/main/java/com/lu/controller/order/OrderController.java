@@ -98,11 +98,11 @@ public class OrderController extends BaseController{
 		//生成订单
 		//在userlists 中一个一个取出Id   每个用户生成一个order   
 		if(orderVo.getUserLists()!=null && orderVo.getUserLists().length>0){
-			Order order=new Order();
+			
 			for(int i=0;i<orderVo.getUserLists().length;i++){
-				
+				Order order=new Order();
 				order.setUserId(orderVo.getUserLists()[i]);
-				if(orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId())!=null){
+				if(orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId(),orderVo.getDepartureTime())!=null){
 					result.setMessage("用户订单和已有订单冲突！");
 					result.setResult(Boolean.FALSE);
 					return result;
@@ -121,7 +121,7 @@ public class OrderController extends BaseController{
 				seatService.saveOrUpdateSeat(seat);
 				order.setSeatId(seat.getId());
 				orderService.saveOrUpdateOrder(order);
-				order=orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId());
+				order=orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId(),orderVo.getDepartureTime());
 				result.addAttribute("order"+i, order);
 			}
 			result.setMessage("success!");

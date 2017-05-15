@@ -87,7 +87,7 @@ public class SiteController {
 	
 	
 	@RequestMapping("/sitelist")
-	public String userSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
+	public String siteSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
 		PagingVO vo =siteService.searchAllSiteList(pagingVo);
 		model.addAttribute("pageVO", vo);
 		return "view/background/site/sitelist";

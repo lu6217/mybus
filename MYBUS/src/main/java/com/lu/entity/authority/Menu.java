@@ -1,4 +1,4 @@
-package com.lu.entity.menu;
+package com.lu.entity.authority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,8 +38,8 @@ public class Menu {
 	@Column(name="leaf")
 	private Boolean leaf;//是否为叶子节点
 	
-	@Column(name="roleId")
-	private Long roleId;
+//	@Column(name="roleId")
+//	private Long roleId;
 	
 	public long getId() {
 		return id;
@@ -95,14 +95,6 @@ public class Menu {
 
 	public void setLeaf(Boolean leaf) {
 		this.leaf = leaf;
-	}
-
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
 	}
 	
 }

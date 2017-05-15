@@ -85,6 +85,9 @@
     									   </c:if>
    										  </c:if>
                                     </tbody>
+                                    <div>
+                                   	 <button class="btn btn-success btn-sm" onclick="adds('0')"><i class="fa fa-plus"></i> Add</button>
+                                    </div>
                                 </table>
                             </div>
                             
@@ -123,7 +126,7 @@
          	layer.open({
          		  type: 2, 
          		  title: ['AddSite','font-size:25px;'],
-         		  area:['600px','500px'],
+         		  area:['480px','300px'],
          		  content:'${path}/luwei/site/tocreatesite/'+id,
 //          		  content: '${path}/view/background/account/adduser.jsp?accountId='+id,
          		  btn:['Close'],

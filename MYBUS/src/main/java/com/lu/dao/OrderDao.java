@@ -1,5 +1,6 @@
 package com.lu.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -25,16 +26,18 @@ public class OrderDao extends BaseDAO<Order>{
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
 		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
 		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
+//		query.addEq("order.", value)
 //		query.addEq("order.accountId", accountId);
 		return query;
 	}
 
-	public Order getOrderByUserIdAndTrainId(Long userId, Long trainId) {
+	public Order getOrderByUserIdAndTrainId(Long userId, Long trainId, Date date) {
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
 		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
 		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
 		query.addEq("order.userId", userId).addEq("order.trainId", trainId);
+		query.addEq("order.departureTime", date);
 		return this.selectTopOne(query);
 	}
 

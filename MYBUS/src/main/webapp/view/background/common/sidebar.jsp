@@ -30,7 +30,7 @@
                         <a <c:if test="${param.item=='orderList'}" >class="active-menu"</c:if> href="${path }/luwei/order/orderlist"><i class="fa fa-table"></i> Order Management</a>
                     </li>
                     <li>
-                        <a <c:if test="${param.item=='authority'}" >class="active-menu"</c:if> href=""><i class="fa fa-edit"></i> Authority Management </a>
+                        <a <c:if test="${param.item=='authority'}" >class="active-menu"</c:if> href="${path }/luwei/authority/authoritylist"><i class="fa fa-edit"></i> Authority Management </a>
                     </li>
 					<li>
                         <a <c:if test="${param.item=='schedule'}" >class="active-menu"</c:if> href="${path }/luwei/schedule/schedulelist"><i class="fa fa-edit"></i> Schedule Management </a>

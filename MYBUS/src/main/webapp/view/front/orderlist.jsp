@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	request.setAttribute("path", request.getContextPath());
-	request.setAttribute("s", request.getContextPath().trim());
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -52,6 +51,7 @@
 		                            	<p>
 		                            		<span>订单日期：<fmt:formatDate value="${order.createTime }" pattern="yyyy-MM-dd" /></span>
 		                            		&nbsp;&nbsp;<span>${order.user.name }</span>
+		                            		&nbsp;&nbsp;<span>${order.train.number }</span>
 		                            		&nbsp;&nbsp;<span>${order.beginSite.name }</span>
 		                            		--->   
 		                            		&nbsp;&nbsp;<span>${order.endSite.name }</span>
@@ -71,7 +71,6 @@
 		                                        </tr>
 		                                    </thead>
 		                                    <tbody>
-		                                    	
 			                                       
 			                                       <c:choose>  
 		   												 <c:when test="${vs.count%4==0}">  
@@ -108,7 +107,13 @@
 			                                            	<c:if test="${order.status =='待支付'}">
 																<button class="btn btn-success btn-sm" onclick="topay('${order.id}')"><i class="fa fa-yen"></i> 去支付</button>
 															</c:if>
-															<button class="btn btn-danger btn-sm"  onclick="del('${order.id}')"><i class="fa fa-trash-o"></i> 取消订单</button>
+															
+															<c:if test="${order.status =='已取消'}">
+																<button class="btn btn-danger btn-sm"  onclick="del('${order.id}')" disabled=""><i class="fa fa-trash-o"></i> 取消订单</button>
+															</c:if>
+															<c:if test="${order.status !='已取消'}">
+																<button class="btn btn-danger btn-sm"  onclick="del('${order.id}')"><i class="fa fa-trash-o"></i> 取消订单</button>
+															</c:if>
 															<c:choose>
 																<c:when test="${order.qrcodeStatus ==1}">
 																	<button class="btn btn-primary btn-sm" onclick="showQrcode('${order.id}')"><i class="fa fa-qrcode "></i> 查看二维码</button>
@@ -168,6 +173,7 @@
             
             
             function createQrcode(id){
+            	
             	layer.open({
             		type: 2
                     ,title: '订单二维码'
@@ -182,9 +188,7 @@
             	
             }
             
-            
             function topay(id){
-            	
             	layer.open({
             		type: 2
                     ,title: '是否支付此订单？'

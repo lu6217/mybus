@@ -52,11 +52,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 		//生成明天的车辆的调度
 		departureDate.setHours(train.getDepartureTime().getHours());
 		departureDate.setMinutes(train.getDepartureTime().getMinutes());
-		departureDate.setDate(departureDate.getDate()+1);
+		departureDate.setDate(departureDate.getDate());
 		schedule.setDepartureTime(departureDate);
 		arrivalDate.setHours(train.getArrivalTime().getHours());
 		arrivalDate.setMinutes(train.getArrivalTime().getMinutes());
-		arrivalDate.setDate(arrivalDate.getDate()+1+train.getNumberDay().intValue());
+		arrivalDate.setDate(arrivalDate.getDate()+train.getNumberDay().intValue());
 		schedule.setArrivalTime(arrivalDate);
 		schedule.setNumberDay(train.getNumberDay());
 		schedule.setTrainId(train.getId());
@@ -123,14 +123,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 //					scheduleSite.setDepartureTime(null);
 					arrDate.setHours(train_site.getArrivalTime().getHours());
 					arrDate.setMinutes(train_site.getArrivalTime().getMinutes());
-					arrDate.setDate(arrDate.getDate()+train_site.getNumberDay().intValue());
+					arrDate=new Date(arrDate.getTime()+((train_site.getNumberDay().intValue())*1000*3600*24));
 					scheduleSite.setArrivalTime(arrDate);
 				}else{
 					depDate.setHours(train_site.getDepartureTime().getHours());
 					depDate.setMinutes(train_site.getDepartureTime().getMinutes());
 					arrDate.setHours(train_site.getArrivalTime().getHours());
 					arrDate.setMinutes(train_site.getArrivalTime().getMinutes());
-					arrDate.setDate(arrDate.getDate()+train_site.getNumberDay().intValue());
+					arrDate=new Date(arrDate.getTime()+((train_site.getNumberDay().intValue())*1000*3600*24));
+//					arrDate.setDate(arrDate.getDate()+train_site.getNumberDay().intValue());
 					scheduleSite.setDepartureTime(depDate);
 					scheduleSite.setArrivalTime(arrDate);
 				}
