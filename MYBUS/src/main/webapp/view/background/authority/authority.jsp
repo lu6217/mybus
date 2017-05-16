@@ -54,9 +54,10 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr class="">
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Name</th>
+                                            <th class="text-center">Description</th>
+                                            <th class="text-center">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody id="rolebody">
@@ -65,23 +66,23 @@
 	     										<c:forEach varStatus="vs" var="role" items="${pageVO.details}">
 		                                    	  <c:choose>  
    													 <c:when test="${vs.count%4==0}">  
-	                                        			<tr class="success" onclick="detail('${role.id}')">
+	                                        			<tr class="success" ondblclick="detail('${role.id}')">
 	                                    	    	 </c:when> 
 	                                        		 <c:when test="${vs.count%4==1}">  
-	                                        			<tr class="info" onclick="detail('${role.id}')">
+	                                        			<tr class="info" ondblclick="detail('${role.id}')">
 	                                        	 	</c:when> 
 	                                        	 	<c:when test="${vs.count%4==2}">  
-	                                        			<tr class="warning" onclick="detail('${role.id}')">
+	                                        			<tr class="warning" ondblclick="detail('${role.id}')">
 	                                        	 	</c:when> 
 	                                        	 	<c:when test="${vs.count%4==3}">  
-	                                        			<tr class="danger" onclick="detail('${role.id}')">
+	                                        			<tr class="danger" ondblclick="detail('${role.id}')">
 	                                        	 	</c:when> 
 													</c:choose>  
 	                                    
-		                                           <td name="role_number">${vs.count }</td>
-		                                           <td name="role_name">${role.name }</td>
-		                                           <td name="role_description">${role.description }</td>
-	                                      
+		                                           <td class="text-center" name="role_number">${vs.count }</td>
+		                                           <td class="text-center" name="role_name">${role.name }</td>
+		                                           <td class="text-center" name="role_description">${role.description }</td>
+	                                      		   <td class="text-center"><button class="btn btn-success btn-sm" onclick="assignment('${role.id }')"><i class="fa fa-edit"></i> Assignment</button></td>
 	                                      		  </tr>
 	                                        	</c:forEach>
 	                                        </c:if>
@@ -89,10 +90,10 @@
                                     </tbody>
                                     <div>
                                 	<button class="btn btn-primary btn-sm" onclick="addrole()"><i class="fa fa-plus "></i> Add</button>
-									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
-									<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
+									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${role.id }')"><i class="fa fa-plus "></i> Add Site</button>
+									<button class="btn btn-success btn-sm" onclick="edits('${role.id }')"><i class="fa fa-edit"></i> Edit</button>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-									<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+									<button class="btn btn-danger btn-sm"  onclick="del('${role.id }')"><i class="fa fa-trash-o"></i> Delete</button>
                                 	<hr>
                                 </div>
                                 </table>
@@ -113,10 +114,10 @@
 				                                <table class="table table-striped table-bordered table-hover">
 				                                    <thead>
 				                                        <tr>
-				                                            <th>#</th>
-				                                            <th>First Name</th>
-				                                            <th>Last Name</th>
-				                                            <th>Username</th>
+				                                            <th class="text-center">#</th>
+				                                            <th class="text-center">First Name</th>
+				                                            <th class="text-center">Last Name</th>
+				                                            <th class="text-center">Username</th>
 				                                        </tr>
 				                                    </thead>
 				                                    <tbody id="menuTableId">
@@ -147,7 +148,7 @@
 				                                    </tbody>
 				                                      <div>
 					                                	<button class="btn btn-primary btn-sm" onclick="addmenu()"><i class="fa fa-plus "></i> Add</button>
-														<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
+														<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="glyphicon glyphicon-apple "></i> Add Site</button>
 					                                	<hr>
 					                                </div>
 				                                </table>
@@ -178,6 +179,17 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+            
+            function assignment(id){
+            	layer.open({
+           		  type: 2, 
+           		  title: ['Assignment','font-size:25px;'],
+           		  area:['480px','400px'],
+           		  content:'${path}/luwei/authority/toassignment/'+id,
+           		  btn:['Close']
+           		}); 
+            }
+            
             
           function detail(id){
         	  alert(id);
@@ -250,7 +262,7 @@
              	layer.open({
              		  type: 2, 
              		  title: ['AddMenu','font-size:25px;'],
-             		  area:['480px','300px'],
+             		  area:['480px','440px'],
              		  content:'${path}/luwei/authority/toaddmenu',
              		  btn:['Close']
 //              		  ,end:function(){

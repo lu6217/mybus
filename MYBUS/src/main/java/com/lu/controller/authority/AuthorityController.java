@@ -7,11 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lu.entity.authority.Menu;
 import com.lu.entity.authority.Role;
+import com.lu.entity.authority.Role_Menu;
+import com.lu.entity.vo.MenuVo;
+import com.lu.entity.vo.Role_MenuVo;
 import com.lu.service.AuthorityService;
 import com.lu.util.PagingVO;
 import com.lu.util.ResultResponse;
@@ -39,9 +43,20 @@ public class AuthorityController {
 	
 	@RequestMapping("/toaddmenu")
 	public String toAddMenu(Model model, HttpServletRequest request){
-		
+		List<Menu> menus=authorityService.getMenus();
+		model.addAttribute("menus", menus);
 		return "/view/background/authority/addmenu";
 	}
+	
+	@RequestMapping("/toassignment/{id}")
+	public String toAssignment(@PathVariable("id")Long id,Model model, HttpServletRequest request){
+		Role role=authorityService.getRoleById(id);
+		List<Menu> menus=authorityService.getMenus();
+		model.addAttribute("menus", menus);
+		model.addAttribute("role", role);
+		return "/view/background/authority/assignmentmenu";
+	}
+	
 	
 	@RequestMapping("/checkrolename")
 	@ResponseBody
@@ -65,16 +80,44 @@ public class AuthorityController {
 	
 	@RequestMapping("/addrole")
 	@ResponseBody
-	public ResultResponse createSite(HttpServletRequest request,Role role){
+	public ResultResponse createRole(HttpServletRequest request,Role role){
 		ResultResponse result = new ResultResponse();
 		if(role!=null){
 			if(!authorityService.checkName(role.getName())){
-				authorityService.save(role);
+				authorityService.saveRole(role);
 				result.setMessage("Create Success");
 			}else{
 				result.setResult(Boolean.FALSE);
 				result.setMessage("Failure! Name Exists");
 			}
+		}
+		return result; 
+	}
+	
+	
+	@RequestMapping("/addmenu")
+	@ResponseBody
+	public ResultResponse createMenu(HttpServletRequest request,MenuVo menuVo){
+		ResultResponse result = new ResultResponse();
+		if(menuVo!=null){
+			//如果父节点不是根节点就将父节点改为不是叶子节点
+			if(menuVo.getUpperLevelMenuId()!=0){
+				Menu pmenu=authorityService.getMenuById(menuVo.getUpperLevelMenuId());
+				pmenu.setLeaf(Boolean.FALSE);
+				authorityService.updateMenu(pmenu);
+			}
+			Menu menu=new Menu();
+			menu.setName(menuVo.getName());
+			menu.setIcon(menuVo.getIcon());
+			menu.setLevel(Integer.parseInt(menuVo.getLevel()));
+			menu.setLeaf(menuVo.getLeaf());
+			menu.setUpperLevelMenuId(menuVo.getUpperLevelMenuId());
+			menu.setUrl(menuVo.getUrl());
+			authorityService.saveMenu(menu);
+			result.setMessage("Create Success");
+		}else {
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Failure!");
 		}
 		return result; 
 	}
@@ -87,6 +130,27 @@ public class AuthorityController {
 		List<Menu> menus=authorityService.getMenuByRoleId(roleId);
 		model.addAttribute("menulist",menus);
 		return "/view/background/authority/menu_data";
+	}
+	
+	
+	@RequestMapping("/addrolemenu")
+	@ResponseBody
+	public ResultResponse addRoleMenu(HttpServletRequest request,Role_MenuVo role_MenuVo){
+		ResultResponse result = new ResultResponse();
+		if(role_MenuVo!=null && role_MenuVo.getMenulists().length>0){
+			for (int i = 0; i < role_MenuVo.getMenulists().length; i++) {
+				Role_Menu role_Menu=new Role_Menu();
+				role_Menu.setMenuId(role_MenuVo.getMenulists()[i]);
+				role_Menu.setRoleId(role_MenuVo.getRoleId());
+				authorityService.saveRoleMenu(role_Menu);
+				result.setMessage("Success");
+			}
+			
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Failure!");
+		}
+		return result; 
 	}
 	
 	

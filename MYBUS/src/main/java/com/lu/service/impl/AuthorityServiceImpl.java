@@ -44,9 +44,16 @@ public class AuthorityServiceImpl implements AuthorityService{
 
 	@Override
 	@Transactional
-	public void save(Role role) {
+	public void saveRole(Role role) {
 		// TODO Auto-generated method stub
 		roleDao.save(role);
+	}
+
+	@Override
+	@Transactional
+	public void saveMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		menuDao.save(menu);
 	}
 
 	@Override
@@ -72,6 +79,50 @@ public class AuthorityServiceImpl implements AuthorityService{
 			return menus;
 		}
 		return null;
+	}
+
+	@Override
+	@Transactional
+	public List<Menu> getMenus() {
+		// TODO Auto-generated method stub
+		List<Menu> menus=menuDao.getMenus();
+		if(menus!=null && menus.size()>0){
+			return menus;
+		}
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public Menu getMenuById(Long menuId) {
+		// TODO Auto-generated method stub
+		List<Menu> menus=menuDao.getMenusById(menuId);
+		if(menus!=null && menus.size()>0){
+			return menus.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public void updateMenu(Menu pmenu) {
+		// TODO Auto-generated method stub
+		menuDao.update(pmenu);
+	}
+
+	@Override
+	@Transactional
+	public Role getRoleById(Long id) {
+		// TODO Auto-generated method stub
+		Role role=roleDao.getRoleById(id);
+		return role;
+	}
+
+	@Override
+	@Transactional
+	public void saveRoleMenu(Role_Menu role_Menu) {
+		// TODO Auto-generated method stub
+		role_MenuDao.save(role_Menu);
 	}
 
 	
