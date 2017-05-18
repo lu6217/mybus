@@ -17,6 +17,8 @@ public interface AuthorityService {
 
 	List<Menu> getMenuByRoleId(Long roleId);
 
+	List<Menu> getMenus(Long id);
+	
 	List<Menu> getMenus();
 
 	Menu getMenuById(Long menuId);

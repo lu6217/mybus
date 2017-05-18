@@ -16,7 +16,6 @@ import com.lu.util.PagingVO;
 @RequestMapping("/front/train")
 public class FrontTrainController {
 	
-	
 	@Autowired
 	private TrainService trainService;
 	

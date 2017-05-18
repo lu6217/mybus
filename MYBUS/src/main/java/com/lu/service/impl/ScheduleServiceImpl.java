@@ -44,19 +44,22 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public void saveScheduleAndSite(TrainNumber train) {
 		// TODO Auto-generated method stub
+		int day=7;//设置自动生成的几天后的调度信息
 		Schedule schedule=new Schedule();
 		schedule.setBeginSiteId(train.getBeginSiteId());
 		schedule.setEndSiteId(train.getEndSiteId());
 		Date departureDate=new Date();
 		Date arrivalDate=new Date();
 		//生成明天的车辆的调度
+		departureDate=new Date(departureDate.getTime()+(day*1000*3600*24));
 		departureDate.setHours(train.getDepartureTime().getHours());
 		departureDate.setMinutes(train.getDepartureTime().getMinutes());
-		departureDate.setDate(departureDate.getDate());
+//		departureDate.setDate(departureDate.getDate()+day);
 		schedule.setDepartureTime(departureDate);
 		arrivalDate.setHours(train.getArrivalTime().getHours());
 		arrivalDate.setMinutes(train.getArrivalTime().getMinutes());
-		arrivalDate.setDate(arrivalDate.getDate()+train.getNumberDay().intValue());
+		arrivalDate=new Date(arrivalDate.getTime()+((day+train.getNumberDay().intValue())*1000*3600*24));
+//		arrivalDate.setDate(arrivalDate.getDate()+day+train.getNumberDay().intValue());
 		schedule.setArrivalTime(arrivalDate);
 		schedule.setNumberDay(train.getNumberDay());
 		schedule.setTrainId(train.getId());
@@ -64,7 +67,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 		schedule.setSeatNum(train.getNum());
 		scheduleDao.save(schedule);
 		schedule=scheduleDao.getScheduleByIdAndTime(train.getId(),departureDate);
-		saveSiteSchedule(schedule,train,new Date());
+		saveSiteSchedule(schedule,train,departureDate);
 		
 	}
 	

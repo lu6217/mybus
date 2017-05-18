@@ -51,7 +51,7 @@ public class AuthorityController {
 	@RequestMapping("/toassignment/{id}")
 	public String toAssignment(@PathVariable("id")Long id,Model model, HttpServletRequest request){
 		Role role=authorityService.getRoleById(id);
-		List<Menu> menus=authorityService.getMenus();
+		List<Menu> menus=authorityService.getMenus(id);
 		model.addAttribute("menus", menus);
 		model.addAttribute("role", role);
 		return "/view/background/authority/assignmentmenu";
@@ -128,7 +128,7 @@ public class AuthorityController {
 		Long roleId=Long.parseLong(request.getParameter("roleId").trim());
 		//此功能还没有进行测试   
 		List<Menu> menus=authorityService.getMenuByRoleId(roleId);
-		model.addAttribute("menulist",menus);
+		model.addAttribute("menus",menus);
 		return "/view/background/authority/menu_data";
 	}
 	

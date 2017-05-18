@@ -166,7 +166,7 @@
             	
             	$.post("${path}/luwei/order/initorder",data,function(res){
 //             		window.location.reload();
-alert("kk");
+// alert("kk");
 // alert("id="+res.id+" trainId="+res.trainId+" beginid="+res.beginSiteId+"endId="+res.endSiteId);
 					window.location.href="${path}/view/front/initorder.jsp?id="+id+"&trainId="+trainId+"&beginSiteId="+beginSiteId+"&endSiteId="+endSiteId;
 					//还是有点问题  穿过去的id   再通过ID进行查询  查出所需的内容   
@@ -174,37 +174,6 @@ alert("kk");
             	}); 
             	
             	
-//            	 	$.ajax({
-//    				 type:"POST",
-// 		    		     url:"${path}/luwei/order/initorder",
-// 		    		     data: {id:id
-// 		    		    	 ,trainId:trainId
-// 		    		    	 ,beginSiteId:beginSiteId
-// 		    		    	 ,endSiteId:endSiteId
-// 		    		    	 ,departureTime:departureTime
-// 		    		    	 ,arrivalTime:arrivalTime
-// 		    		    	 ,numberDay:numberDay
-// 		    		    	 ,price:price},
-// 		    	         	success:function(res){
-// 		    	        	 alert("kk");
-		    	        	 
-// 		    	        	 $(this).html(res);
-// // 		    	        	 if(res && res.result){
-// // 		    	        		 layer.msg(res.message);
-// // 		    	        	 }else{
-// // 		    	        		 layer.msg(res.message);
-// // 		    	        	 }
-// //		  						window.location.reload();
-// // 		    	        	 layer.close(index);
-// 			    		},
-// 			    		error:function(err,err1,err2){
-// 			    		    //debugger;
-// 			            }
-// 		    		  });
-            	
-// //             	layer.open({
-
-// //             	});
             	
             }
             

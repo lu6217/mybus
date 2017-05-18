@@ -125,5 +125,23 @@ public class AuthorityServiceImpl implements AuthorityService{
 		role_MenuDao.save(role_Menu);
 	}
 
+	@Override
+	public List<Menu> getMenus(Long id) {
+		// TODO Auto-generated method stub
+		List<Role_Menu> role_Menus=role_MenuDao.getRole_MenuByRoleId(id);
+		Long [] menuIds = null;
+		if (role_Menus!=null) {
+			menuIds=new Long[role_Menus.size()];
+			for (int i = 0; i < role_Menus.size(); i++) {
+				menuIds[i]=role_Menus.get(i).getMenuId();
+			}
+		}
+		List<Menu> menus=menuDao.getMenus(menuIds);
+		if(menus!=null && menus.size()>0){
+			return menus;
+		} 
+		return null;
+	}
+
 	
 }

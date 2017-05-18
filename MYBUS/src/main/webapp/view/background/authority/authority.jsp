@@ -44,65 +44,64 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-5">
                                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Role
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr class="">
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Name</th>
-                                            <th class="text-center">Description</th>
-                                            <th class="text-center">Options</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="rolebody">
-                                    	<c:if test="${not empty pageVO}">
-                                    		<c:if test="${not empty pageVO.details}">
-	     										<c:forEach varStatus="vs" var="role" items="${pageVO.details}">
-		                                    	  <c:choose>  
-   													 <c:when test="${vs.count%4==0}">  
-	                                        			<tr class="success" ondblclick="detail('${role.id}')">
-	                                    	    	 </c:when> 
-	                                        		 <c:when test="${vs.count%4==1}">  
-	                                        			<tr class="info" ondblclick="detail('${role.id}')">
-	                                        	 	</c:when> 
-	                                        	 	<c:when test="${vs.count%4==2}">  
-	                                        			<tr class="warning" ondblclick="detail('${role.id}')">
-	                                        	 	</c:when> 
-	                                        	 	<c:when test="${vs.count%4==3}">  
-	                                        			<tr class="danger" ondblclick="detail('${role.id}')">
-	                                        	 	</c:when> 
-													</c:choose>  
-	                                    
-		                                           <td class="text-center" name="role_number">${vs.count }</td>
-		                                           <td class="text-center" name="role_name">${role.name }</td>
-		                                           <td class="text-center" name="role_description">${role.description }</td>
-	                                      		   <td class="text-center"><button class="btn btn-success btn-sm" onclick="assignment('${role.id }')"><i class="fa fa-edit"></i> Assignment</button></td>
-	                                      		  </tr>
-	                                        	</c:forEach>
-	                                        </c:if>
-                                        </c:if>
-                                    </tbody>
-                                    <div>
-                                	<button class="btn btn-primary btn-sm" onclick="addrole()"><i class="fa fa-plus "></i> Add</button>
-									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${role.id }')"><i class="fa fa-plus "></i> Add Site</button>
-									<button class="btn btn-success btn-sm" onclick="edits('${role.id }')"><i class="fa fa-edit"></i> Edit</button>
-<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-									<button class="btn btn-danger btn-sm"  onclick="del('${role.id }')"><i class="fa fa-trash-o"></i> Delete</button>
-                                	<hr>
+				                        <div class="panel-heading">
+				                            Role
+				                        </div>
+				                        <div class="panel-body">
+				                            <div class="table-responsive">
+				                                <table class="table table-striped table-bordered table-hover">
+				                                    <thead>
+				                                        <tr class="">
+				                                            <th class="text-center">#</th>
+				                                            <th class="text-center">Name</th>
+				                                            <th class="text-center">Description</th>
+				                                            <th class="text-center">Options</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody id="rolebody">
+				                                    	<c:if test="${not empty pageVO}">
+				                                    		<c:if test="${not empty pageVO.details}">
+					     										<c:forEach varStatus="vs" var="role" items="${pageVO.details}">
+						                                    	  <c:choose>  
+				   													 <c:when test="${vs.count%4==0}">  
+					                                        			<tr class="success" ondblclick="detail('${role.id}')">
+					                                    	    	 </c:when> 
+					                                        		 <c:when test="${vs.count%4==1}">  
+					                                        			<tr class="info" ondblclick="detail('${role.id}')">
+					                                        	 	</c:when> 
+					                                        	 	<c:when test="${vs.count%4==2}">  
+					                                        			<tr class="warning" ondblclick="detail('${role.id}')">
+					                                        	 	</c:when> 
+					                                        	 	<c:when test="${vs.count%4==3}">  
+					                                        			<tr class="danger" ondblclick="detail('${role.id}')">
+					                                        	 	</c:when> 
+																	</c:choose>  
+					                                    
+						                                           <td class="text-center" name="role_number">${vs.count }</td>
+						                                           <td class="text-center" name="role_name">${role.name }</td>
+						                                           <td class="text-center" name="role_description">${role.description }</td>
+					                                      		   <td class="text-center"><button class="btn btn-success btn-sm" onclick="assignment('${role.id }')"><i class="fa fa-edit"></i> Assignment</button></td>
+					                                      		  </tr>
+					                                        	</c:forEach>
+					                                        </c:if>
+				                                        </c:if>
+				                                    </tbody>
+				                                    <div>
+				                                	<button class="btn btn-primary btn-sm" onclick="addrole()"><i class="fa fa-plus "></i> Add</button>
+													<button class="btn btn-primary btn-sm" onclick="addTrainSite('${role.id }')"><i class="fa fa-plus "></i> Add Site</button>
+													<button class="btn btn-success btn-sm" onclick="edits('${role.id }')"><i class="fa fa-edit"></i> Edit</button>
+				<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
+													<button class="btn btn-danger btn-sm"  onclick="del('${role.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+				                                	<hr>
+				                                </div>
+				                                </table>
+				                            </div>
+				                        </div>
+				                    </div>
                                 </div>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
+                                <div class="col-lg-7">
                                     <div class="panel panel-default">
                        
 				                        <div class="panel-heading">
@@ -114,37 +113,16 @@
 				                                <table class="table table-striped table-bordered table-hover">
 				                                    <thead>
 				                                        <tr>
-				                                            <th class="text-center">#</th>
-				                                            <th class="text-center">First Name</th>
-				                                            <th class="text-center">Last Name</th>
-				                                            <th class="text-center">Username</th>
+				                                            <th class="text-center">Name</th>
+				                                            <th class="text-center">URL</th>
+				                                            <th class="text-center">Icon</th>
+				                                            <th class="text-center">Parent Menu</th>
+				                                            <th class="text-center">Level</th>
+				                                            <th class="text-center">Leaf</th>
 				                                        </tr>
 				                                    </thead>
 				                                    <tbody id="menuTableId">
-				                                        <tr class="success">
-				                                            <td>1</td>
-				                                            <td>Mark</td>
-				                                            <td>Otto</td>
-				                                            <td>@mdo</td>
-				                                        </tr>
-				                                        <tr class="info">
-				                                            <td>2</td>
-				                                            <td>Jacob</td>
-				                                            <td>Thornton</td>
-				                                            <td>@fat</td>
-				                                        </tr>
-				                                        <tr class="warning">
-				                                            <td>3</td>
-				                                            <td>Larry</td>
-				                                            <td>the Bird</td>
-				                                            <td>@twitter</td>
-				                                        </tr>
-				                                        <tr class="danger">
-				                                            <td>4</td>
-				                                            <td>John</td>
-				                                            <td>Smith</td>
-				                                            <td>@jsmith</td>
-				                                        </tr>
+				                                       
 				                                    </tbody>
 				                                      <div>
 					                                	<button class="btn btn-primary btn-sm" onclick="addmenu()"><i class="fa fa-plus "></i> Add</button>
@@ -192,9 +170,8 @@
             
             
           function detail(id){
-        	  alert(id);
         	  
-        	  $.post("${path}/luwei/authority/getmenu",{roleId:roleId},function(data) {
+        	  $.post("${path}/luwei/authority/getmenu",{roleId:id},function(data) {
   				
         		  $("#menuTableId").html(data);
   				

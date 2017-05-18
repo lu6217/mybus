@@ -21,7 +21,18 @@ public class MenuDao extends BaseDAO<Menu>{
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Menu.class,"menu");
 		query.addEq("menu.id", menuId);
-		return null;
+		return this.select(query);
+	}
+
+	public List<Menu> getMenus(Long[] menuIds) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Menu.class,"menu");
+		if(menuIds!=null){
+			for (int i = 0; i < menuIds.length; i++) {
+				query.addNe("menu.id", menuIds[i]);
+			}
+		}
+		return this.select(query);
 	}
 
 }

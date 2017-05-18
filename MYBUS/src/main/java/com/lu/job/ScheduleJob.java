@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.entity.train.TrainNumber;
 import com.lu.service.ScheduleService;
@@ -22,7 +21,6 @@ public class ScheduleJob {
 	
 	//每天晚上23点自动触发
 	@Scheduled(cron="0 0 23 * * ?")
-	@Transactional
 	public void execute(){
 		//添加车次调度
 		List<TrainNumber> lists=trainService.getTrain();

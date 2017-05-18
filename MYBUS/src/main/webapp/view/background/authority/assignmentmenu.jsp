@@ -30,11 +30,16 @@
                         </div>
                         <div class="form-group">
                            <i class="fa fa-user fa-fw"></i>
+                           <c:if test="${not empty menus }">
 	                         <c:forEach varStatus="vs" var="menu" items="${menus }">
 	                           <label class="checkbox-inline">
                                     <input type="checkbox" name="menulists" value="${menu.id }">${menu.name }
                                 </label>
 	                           </c:forEach>
+	                       </c:if>
+	                       <c:if test="${empty menus }">
+	                       		无可分配的Menu
+	                       </c:if>
                          </div>
                             
 <!--                           <div class="form-group"> -->

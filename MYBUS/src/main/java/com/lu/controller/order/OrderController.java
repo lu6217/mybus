@@ -121,8 +121,9 @@ public class OrderController extends BaseController{
 				seatService.saveOrUpdateSeat(seat);
 				order.setSeatId(seat.getId());
 				orderService.saveOrUpdateOrder(order);
-				order=orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId(),orderVo.getDepartureTime());
-				result.addAttribute("order"+i, order);
+				
+//				order=orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId(),orderVo.getDepartureTime());
+//				result.addAttribute("order"+i, order);
 			}
 			result.setMessage("success!");
 		}else{
@@ -217,7 +218,6 @@ public class OrderController extends BaseController{
 		model.addAttribute("order", order);
 		return "/view/front/order/qrcodeview";
 	}
-	
 //	@RequestMapping("/createqrcode")
 //	public RestResponse createQrcode(Model model, HttpServletRequest request){
 //		return processSimple(new RestResponse(), new Taker() {
