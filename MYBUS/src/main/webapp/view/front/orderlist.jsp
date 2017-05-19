@@ -183,7 +183,9 @@
                     ,btn: ['关闭']
                     ,moveType: 1 //拖拽模式，0或者1
                     ,content: '${path}/luwei/order/createqrcode/'+id
-                    
+                    ,end: function () {
+                        location.reload();
+                    }
            		}); 
             	
             }
