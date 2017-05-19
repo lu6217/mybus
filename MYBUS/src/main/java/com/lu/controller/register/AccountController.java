@@ -1,6 +1,8 @@
 package com.lu.controller.register;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +154,15 @@ public class AccountController {
 		return "view/background/account/adduser";
 	}
 	
+	@RequestMapping("/getusers/{id}")
+	public String getUsersByaccountId(@PathVariable("id")Long id, Model model){
+		List<User> users=userService.getUserByAccountId(id);
+		Account account =accountService.findById(id);
+		model.addAttribute("users", users);
+		model.addAttribute("account", account);
+		return "view/background/account/showusers";
+	}
+	
 	@RequestMapping("/getuserinfo/{id}")
 	public String getUserInfo(@PathVariable("id")Long id, Model model){
 		User user=userService.getUserById(id);
@@ -214,7 +225,12 @@ public class AccountController {
 	@ResponseBody
 	public ResultResponse addUser(HttpServletRequest request, UserVo userVo){
 		ResultResponse result = new ResultResponse();
-		Account account = (Account)WebUtils.getSessionAttribute(request, "account");
+		Account account;
+		if(userVo.getAccountId()==0){
+			account = (Account)WebUtils.getSessionAttribute(request, "account");
+		}else {
+			account=accountService.findById(userVo.getAccountId());
+		}
 		if(userVo!=null && userVo.getId()!=null){
 			User user=userService.getUserById(userVo.getId());
 			user.setAddress(userVo.getAddress().trim());

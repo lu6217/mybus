@@ -54,6 +54,9 @@ public class ScheduleSite {
 	@Column(name="seatNum")
 	private Long seatNum;
 	
+	@Column(name="number")
+	private Long number;
+	
 	public Long getId() {
 		return id;
 	}
@@ -140,6 +143,14 @@ public class ScheduleSite {
 
 	public void setSeatNum(Long seatNum) {
 		this.seatNum = seatNum;
+	}
+
+	public Long getNumber() {
+		return number;
+	}
+
+	public void setNumber(Long number) {
+		this.number = number;
 	}
 	
 }

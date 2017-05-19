@@ -25,9 +25,8 @@ public class ScheduleJob {
 		//添加车次调度
 		List<TrainNumber> lists=trainService.getTrain();
 		if (lists!=null && lists.size()>0 ) {
-			TrainNumber train=new TrainNumber();
 			for (int i = 0; i < lists.size(); i++) {
-				train=lists.get(i);
+				TrainNumber train=lists.get(i);
 				if(train!=null){
 					scheduleService.saveScheduleAndSite(train);
 				}

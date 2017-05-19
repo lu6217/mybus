@@ -36,35 +36,35 @@
                         <a <c:if test="${param.item=='schedule'}" >class="active-menu"</c:if> href="${path }/luwei/schedule/schedulelist"><i class="fa fa-edit"></i> Schedule Management </a>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
+<!--                     <li> -->
+<!--                         <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a> -->
+<!--                         <ul class="nav nav-second-level"> -->
+<!--                             <li> -->
+<!--                                 <a href="#">Second Level Link</a> -->
+<!--                             </li> -->
+<!--                             <li> -->
+<!--                                 <a href="#">Second Level Link</a> -->
+<!--                             </li> -->
+<!--                             <li> -->
+<!--                                 <a href="#">Second Level Link<span class="fa arrow"></span></a> -->
+<!--                                 <ul class="nav nav-third-level"> -->
+<!--                                     <li> -->
+<!--                                         <a href="#">Third Level Link</a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<!--                                         <a href="#">Third Level Link</a> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<!--                                         <a href="#">Third Level Link</a> -->
+<!--                                     </li> -->
 
-                                </ul>
+<!--                                 </ul> -->
 
-                            </li>
-                        </ul>
-                    </li>
+<!--                             </li> -->
+<!--                         </ul> -->
+<!--                     </li> -->
                     <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                        <a <c:if test="${param.item=='booking'}" >class="active-menu"</c:if> href="${path }/luwei/front/train/booking"><i class="fa fa-edit"></i> Book tickets </a>
                     </li>
                 </ul>
 

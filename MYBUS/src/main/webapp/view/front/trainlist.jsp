@@ -149,32 +149,10 @@
    		    	 ,numberDay:numberDay
    		    	 ,price:price}
             	
-//             	layer.open({
-//              		  type: 2, 
-//              		  title: ['Station Info','font-size:25px;'],
-//              		  area:['550px','400px'],
-//              		  content: '${path}/luwei/order/initorder/'+data,
-//              		  shadeClose: true,//点击窗体外的任意处 关闭窗体
-//              		  btn:['Close']
-// //              		  end:function(){
-// //              			// alert('close');
-// //                 		 window.location.reload();
-// //              		 }
-//              		});
-            	
-            	
             	
             	$.post("${path}/luwei/order/initorder",data,function(res){
-//             		window.location.reload();
-// alert("kk");
-// alert("id="+res.id+" trainId="+res.trainId+" beginid="+res.beginSiteId+"endId="+res.endSiteId);
 					window.location.href="${path}/view/front/initorder.jsp?id="+id+"&trainId="+trainId+"&beginSiteId="+beginSiteId+"&endSiteId="+endSiteId;
-					//还是有点问题  穿过去的id   再通过ID进行查询  查出所需的内容   
-//             		window.location.replace("${path}/view/front/initorder.jsp?id="+id);
             	}); 
-            	
-            	
-            	
             }
             
             

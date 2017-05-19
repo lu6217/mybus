@@ -88,6 +88,14 @@ public class OrderController extends BaseController{
 		
 		return "/view/front/initorder";
 	}
+	@RequestMapping("/getuserinfo")
+	public String getUserInfo(HttpServletRequest request, Model model,HttpServletResponse response){
+		String [] userlists=request.getParameterValues("userList");
+		for(int i=0;i<userlists.length;i++){
+			System.out.println(userlists[i]);
+		}
+		return "";
+	}
 	
 	@RequestMapping("/createorder")
 	@ResponseBody

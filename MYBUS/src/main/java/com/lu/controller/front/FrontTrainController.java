@@ -24,9 +24,13 @@ public class FrontTrainController {
 	
 	@RequestMapping("/searchlist")
 	public String addTrainSite(PagingVO pagingVo,HttpServletRequest request,ScheduleSearchVo scheduleSearchVo,Model model){
-//		System.out.println("kk");
 		PagingVO vo =scheduleService.searchList(pagingVo, scheduleSearchVo);
 		model.addAttribute("pageVO", vo);
 		return "view/front/trainlist_date";
+	}
+	
+	@RequestMapping("/booking")
+	public String booking(HttpServletRequest request,Model model){
+		return "view/front/trainlist";
 	}
 }

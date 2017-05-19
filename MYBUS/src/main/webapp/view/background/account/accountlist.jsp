@@ -78,7 +78,7 @@ Account account=(Account)request.getSession().getAttribute("account");
 	                                            <td title='<c:out value="${acc.type } "></c:out>' class="text-center">${acc.type }</td>
 	                                            <td class="text-center">
 													<button class="btn btn-success btn-sm" onclick="adds('${acc.id }')"><i class="fa fa-plus"></i> Add</button>
-	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button>
+	                                            	<button class="btn btn-default btn-sm" onclick="showUsers('${acc.id }')"><i class=" fa fa-refresh "></i> Show Users</button>
 													<button class="btn btn-primary btn-sm" onclick="edits('${acc.id }')"><i class="fa fa-edit "></i> Edit</button>
 													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
@@ -120,6 +120,16 @@ Account account=(Account)request.getSession().getAttribute("account");
        		 
        		}); 
           }
+         
+         function showUsers(id){
+        	 layer.open({
+        		 type:2,
+        		 title:['Show Users','font-size:25px;'],
+        		 area:['800px','600px'],
+        		 content:'${path}/luwei/account/getusers/'+id,
+        		 btn:['Close']
+        	 });
+         }
           
          function adds(id){ 
          	layer.open({

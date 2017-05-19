@@ -88,11 +88,33 @@
                            <i class="fa fa-user fa-fw"></i>
 	                         <c:forEach varStatus="vs" var="user" items="${users}">
 	                           <label class="checkbox-inline">
-	                                    <input type="checkbox" name="userLists" value="${user.id }">${user.name }
+	                                    <input type="checkbox" id="c${user.id }" name="userLists" onclick="getUserInfo('${user.id}')" value="${user.id }">${user.name }
 	                                </label>
 	                           </c:forEach>
                             </div>
                             <hr>
+                            <table class="table">
+                            	<thead>
+	                            	<tr>
+<!-- 	                            		<td>序号</td> -->
+	                            		<td class="text-center">姓名</td>
+	                            		<td class="text-center">证件号码</td>
+	                            		<td class="text-center">手机号</td>
+	                            		<td class="text-center">操作</td>
+	                            	</tr>
+	                            </thead>
+	                            <tbody>
+	                             	<c:forEach varStatus="vs" var="user" items="${users}">
+		                            	<tr id="${user.id }" style="display:none">
+<%-- 			                            	<td>${vs.count }</td> --%>
+			                            	<td class="text-center">${user.name }</td>
+			                            	<td class="text-center">${user.IDcard }</td>
+			                            	<td class="text-center">${user.telphone }</td>
+			                            	<td class="text-center"><button class="btn btn-danger btn-sm"  onclick="hideuser('${user.id }')"><i class="fa fa-trash-o"></i></button></td>
+		                            	</tr>
+	                            	</c:forEach>
+	                            </tbody>
+                            </table>
                             <div class="input-group">
                             	<a class="form-control btn btn-success" type="" id="back" value=""></i> 上一步</a>
 								<span class="input-group-addon"></span>
@@ -130,6 +152,17 @@
             	});
             });
             
+            function getUserInfo(id){
+            	if(document.getElementById('c'+id).checked){
+            		document.getElementById(id).style.display="";
+            	}else{
+            		document.getElementById(id).style.display="none";
+            	}
+            }
+            
+            function hideuser(id){
+            	document.getElementById(id).style.display="none";
+            }
             
             $("#reg").bind("click",function(){
             //提交之前要先判断有没有选择用户
@@ -157,44 +190,44 @@
             
              
     </script>
-	<script>
-		layui.use('laydate', function(){
-		  var laydate = layui.laydate;
+<!-- 	<script> -->
+<!-- // 		layui.use('laydate', function(){ -->
+<!-- // 		  var laydate = layui.laydate; -->
 		  
-		  var start = {
-			format: 'YYYY-MM-DD',
-		    min: laydate.now()
-		    ,max: laydate.now(+30)
-		    ,istoday: false
-// 		    ,istime: true
-		    ,choose: function(datas){
-		      end.min = datas; //开始日选好后，重置结束日的最小日期
-		      end.start = datas //将结束日的初始值设定为开始日
-		    }
-		  };
+<!-- // 		  var start = { -->
+<!-- // 			format: 'YYYY-MM-DD', -->
+<!-- // 		    min: laydate.now() -->
+<!-- // 		    ,max: laydate.now(+30) -->
+<!-- // 		    ,istoday: false -->
+<!-- // // 		    ,istime: true -->
+<!-- // 		    ,choose: function(datas){ -->
+<!-- // 		      end.min = datas; //开始日选好后，重置结束日的最小日期 -->
+<!-- // 		      end.start = datas //将结束日的初始值设定为开始日 -->
+<!-- // 		    } -->
+<!-- // 		  }; -->
 		  
-		  var end = {
-			format: 'YYYY-MM-DD',
-		    min: laydate.now()
-		    ,max: laydate.now(+30)
-		    ,istoday: false
-// 		    ,istime: true
-		    ,choose: function(datas){
-		      start.max = datas; //结束日选好后，重置开始日的最大日期
-		    }
-		  };
+<!-- // 		  var end = { -->
+<!-- // 			format: 'YYYY-MM-DD', -->
+<!-- // 		    min: laydate.now() -->
+<!-- // 		    ,max: laydate.now(+30) -->
+<!-- // 		    ,istoday: false -->
+<!-- // // 		    ,istime: true -->
+<!-- // 		    ,choose: function(datas){ -->
+<!-- // 		      start.max = datas; //结束日选好后，重置开始日的最大日期 -->
+<!-- // 		    } -->
+<!-- // 		  }; -->
 		  
-		  document.getElementById('departureDate').onclick = function(){
-		    start.elem = this;
-		    laydate(start);
-		  }
-		  document.getElementById('backDate').onclick = function(){
-		    end.elem = this
-		    laydate(end);
-		  }
+<!-- // 		  document.getElementById('departureDate').onclick = function(){ -->
+<!-- // 		    start.elem = this; -->
+<!-- // 		    laydate(start); -->
+<!-- // 		  } -->
+<!-- // 		  document.getElementById('backDate').onclick = function(){ -->
+<!-- // 		    end.elem = this -->
+<!-- // 		    laydate(end); -->
+<!-- // 		  } -->
 		  
-		});
-	</script>
+<!-- // 		}); -->
+<!-- 	</script> -->
          <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
     

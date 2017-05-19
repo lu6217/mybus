@@ -143,6 +143,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 				scheduleSite.setSiteId(train_site.getSiteId());
 				scheduleSite.setNumberDay(train_site.getNumberDay());
 				scheduleSite.setScheduleId(schedule.getId());
+				scheduleSite.setNumber(train_site.getNumber());
 				schedulesiteDao.save(scheduleSite);
 			}
 		}
@@ -168,8 +169,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 			for(int i=0;i<lists.size();i++){
 				ScheduleSite scheduleSite=schedulesiteDao.getScheduleSiteByScheduleIdAndSiteId(lists.get(i).getScheduleId(),endsite.getId());
 				if(scheduleSite!=null){
-					Ids[j]=lists.get(i).getScheduleId();
-					j++;
+					if(scheduleSite.getNumber()==0 || scheduleSite.getNumber()>lists.get(i).getNumber()){
+						Ids[j]=lists.get(i).getScheduleId();
+						j++;
+					}
 				}
 			}
 			if(j!=0){
