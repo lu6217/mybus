@@ -27,7 +27,7 @@ public class OrderDao extends BaseDAO<Order>{
 		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
 		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
 //		query.addEq("order.", value)
-//		query.addEq("order.accountId", accountId);
+		query.addEq("order.accountId", accountId);
 		return query;
 	}
 
@@ -62,6 +62,22 @@ public class OrderDao extends BaseDAO<Order>{
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
 		query.addEq("trainId", trainId);
 		return select(query);
+	}
+
+	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = initQueryCriteria(orderSearchVo);
+		DetachedCriteriaBuilder count = initQueryCriteria(orderSearchVo);
+		return this.selectPagingVO(query, pagingVo, count);
+	}
+
+	private DetachedCriteriaBuilder initQueryCriteria(
+			OrderSearchVo orderSearchVo) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
+		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
+		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
+		return query;
 	}
 	
 }

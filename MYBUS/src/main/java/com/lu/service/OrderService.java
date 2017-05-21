@@ -18,4 +18,6 @@ public interface OrderService {
 
 	void createQrcode(Order order, String path);
 
+	PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo);
+
 }

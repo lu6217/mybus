@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.WebUtils;
 
 @Controller
 public class AdminSessionFilter implements Filter {
@@ -33,7 +32,8 @@ public class AdminSessionFilter implements Filter {
 		String uri = request.getRequestURI();
 //		Account account = (Account)WebUtils.getSessionAttribute(request, "account");
 		//还要通过用户的类型进行判断用户是否可以访问某一个页面  
-		Object accountObj = WebUtils.getSessionAttribute(request, "account");
+//		Object accountObj = WebUtils.getSessionAttribute(request, "account");
+		Object accountObj = request.getSession().getAttribute("account");
 		if(accountObj==null){
 			
 			

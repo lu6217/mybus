@@ -38,6 +38,9 @@ public class Menu {
 	@Column(name="leaf")
 	private Boolean leaf;//是否为叶子节点
 	
+	@Column(name="item")
+	private String item;//又来定位页面属于哪一个menu
+	
 //	@Column(name="roleId")
 //	private Long roleId;
 	
@@ -95,6 +98,14 @@ public class Menu {
 
 	public void setLeaf(Boolean leaf) {
 		this.leaf = leaf;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 	
 }

@@ -46,12 +46,19 @@ public class UserDao extends BaseDAO<User>{
 		builder.addEq("accountId",accountId);
 		return this.select(builder);
 	}
-	public List<User> checkName(String name) {
+	public List<User> checkIdCard(String idCard) {
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(User.class,"user");
 		query.leftJoin("user.account", "account");
-		query.addEq("name",name);
+		query.addEq("IDcard",idCard);
 		
+		return this.select(query);
+	}
+	public List<User> getUserByIdCard(String iDcard) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(User.class,"user");
+		query.leftJoin("user.account", "account");
+		query.addEq("user.IDcard", iDcard);
 		return this.select(query);
 	}
 	

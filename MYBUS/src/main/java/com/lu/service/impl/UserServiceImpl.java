@@ -1,13 +1,16 @@
 package com.lu.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lu.dao.Account_UserDao;
 import com.lu.dao.OrderDao;
 import com.lu.dao.UserDao;
+import com.lu.entity.account.Account_User;
 import com.lu.entity.account.User;
 import com.lu.entity.order.Order;
 import com.lu.entity.vo.UserVo;
@@ -23,6 +26,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired 
 	private OrderDao orderDao; 
 
+	@Autowired 
+	private Account_UserDao account_UserDao;
+	
 	@Override
 	@Transactional
 	public void saveOrUpdateUser(User user) {
@@ -72,8 +78,12 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public List<User> getUserByAccountId(Long accountId) {
 		// TODO Auto-generated method stub
-		List<User> lists=userDao.getUserByAccountId(accountId);
-		if(lists!=null && lists.size()>0){
+		List<Account_User> account_Users=account_UserDao.getAccount_UserByAccountId(accountId);
+		List<User> lists=new ArrayList<User>();
+		if (account_Users!=null) {
+			for (int i = 0; i < account_Users.size(); i++) {
+				lists.add(account_Users.get(i).getUser());
+			}
 			return lists;
 		}
 		return null;
@@ -81,13 +91,24 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public boolean checkName(String name) {
+	public boolean checkIdCard(String IdCard) {
 		// TODO Auto-generated method stub
-		List<User> lists=userDao.checkName(name);
+		List<User> lists=userDao.checkIdCard(IdCard);
 		if(lists!=null && lists.size()!=0){
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	@Transactional
+	public User getUserByIdCard(String iDcard) {
+		// TODO Auto-generated method stub
+		List<User> lists=userDao.getUserByIdCard(iDcard);
+		if(lists!=null && lists.size()>0){
+			return lists.get(0);
+		}
+		return null;
 	}
 	
 }

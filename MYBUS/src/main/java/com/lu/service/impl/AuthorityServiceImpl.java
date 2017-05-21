@@ -143,5 +143,27 @@ public class AuthorityServiceImpl implements AuthorityService{
 		return null;
 	}
 
+	@Override
+	@Transactional
+	public Boolean delRoleMenu(Long roleId, Long menuId) {
+		// TODO Auto-generated method stub
+		Role_Menu role_Menu=role_MenuDao.getRole_MenuByRoleIdAndMenuId(roleId,menuId);
+		if(role_Menu!=null){
+			role_MenuDao.delete(role_Menu);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public Role getRoleByNumber(Long number) {
+		// TODO Auto-generated method stub
+		Role role= roleDao.getroleByNumber(number);
+		if(role!=null)
+			return role;
+		return null;
+	}
+
 	
 }

@@ -33,12 +33,20 @@ public class OrderServiceImpl implements OrderService{
 	@Transactional
 	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo, Long accountId) {
 		// TODO Auto-generated method stub
-		
 		PagingVO vo =pagingVo;
 		vo=orderDao.searchList(pagingVo,orderSearchVo,accountId);
 		return vo;
 	}
 
+	@Override
+	@Transactional
+	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=orderDao.searchList(pagingVo,orderSearchVo);
+		return vo;
+	}
+	
 	@Override
 	@Transactional
 	public Order getOrderByUserIdAndTrainId(Long userId, Long trainId,Date date) {

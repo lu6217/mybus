@@ -13,6 +13,8 @@ public class MenuVo {
 	private String level;
 	
 	private Boolean leaf;
+	
+	private String item;
 
 	public String getName() {
 		return name;
@@ -61,7 +63,13 @@ public class MenuVo {
 	public void setLeaf(Boolean leaf) {
 		this.leaf = leaf;
 	}
-	
-	
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
 	
 }

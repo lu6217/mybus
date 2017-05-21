@@ -31,4 +31,8 @@ public interface AuthorityService {
 
 	void saveRoleMenu(Role_Menu role_Menu);
 
+	Boolean delRoleMenu(Long roleId, Long menuId);
+
+	Role getRoleByNumber(Long number);
+
 }

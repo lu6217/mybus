@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lu.entity.account.Account;
+import com.lu.entity.authority.Menu;
+import com.lu.entity.authority.Role;
 import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
@@ -20,6 +23,7 @@ import com.lu.entity.vo.ResultVO;
 import com.lu.entity.vo.TrainSearchVo;
 import com.lu.entity.vo.TrainVo;
 import com.lu.entity.vo.Train_SiteVo;
+import com.lu.service.AuthorityService;
 import com.lu.service.SiteService;
 import com.lu.service.TrainService;
 import com.lu.service.Train_SiteService;
@@ -38,6 +42,9 @@ public class TrainController {
 	
 	@Autowired
 	private Train_SiteService train_siteService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	@RequestMapping("/saveOrUpdateTrain")
 	@ResponseBody
@@ -247,6 +254,15 @@ public class TrainController {
 	public String trainSearchList(PagingVO pagingVo,TrainSearchVo trainSearchVo,Model model, HttpServletRequest request){
 		PagingVO vo =trainService.searchList(pagingVo,trainSearchVo);
 		model.addAttribute("pageVO", vo);
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
 		return "view/background/train/trainlist";
 	}
 	

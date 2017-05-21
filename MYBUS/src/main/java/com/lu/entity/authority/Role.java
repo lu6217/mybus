@@ -27,6 +27,9 @@ public class Role {
 	@Column(name="description")
 	private String description;//角色描述
 	
+	@Column(name="number")
+	private Long number;
+	
 //	@Column(name="accountTypeId")
 //	private Long accountTypeId;
 	
@@ -64,6 +67,14 @@ public class Role {
 
 	public void setMenus(Menu menus) {
 		this.menus = menus;
+	}
+
+	public Long getNumber() {
+		return number;
+	}
+
+	public void setNumber(Long number) {
+		this.number = number;
 	}
 
 	

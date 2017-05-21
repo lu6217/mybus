@@ -40,5 +40,12 @@ public class RoleDao extends BaseDAO<Role>{
 		query.addEq("role.id", id);
 		return this.selectTopOne(query);
 	}
+
+	public Role getroleByNumber(Long number) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Role.class, "role");
+		query.addEq("role.number", number);
+		return this.selectTopOne(query);
+	}
 	
 }

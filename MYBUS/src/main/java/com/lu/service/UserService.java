@@ -18,6 +18,8 @@ public interface UserService {
 
 	public List<User> getUserByAccountId(Long accountId);
 
-	public boolean checkName(String name);
+	public boolean checkIdCard(String name);
+
+	public User getUserByIdCard(String iDcard);
 
 }

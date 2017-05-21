@@ -20,4 +20,11 @@ public class Role_MenuDao extends BaseDAO<Role_Menu>{
 		return this.select(builder);
 	}
 
+	public Role_Menu getRole_MenuByRoleIdAndMenuId(Long roleId, Long menuId) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder builder = DetachedCriteriaBuilder.instance(Role_Menu.class,"role_menu");
+		builder.addEq("role_menu.roleId", roleId).addEq("role_menu.menuId", menuId);
+		return this.selectTopOne(builder);
+	}
+
 }

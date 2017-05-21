@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lu.entity.account.Account;
 import com.lu.entity.authority.Menu;
 import com.lu.entity.authority.Role;
 import com.lu.entity.authority.Role_Menu;
@@ -28,10 +29,19 @@ public class AuthorityController {
 	private AuthorityService authorityService;
 	
 	@RequestMapping("/authoritylist")
-	public String orderlist(PagingVO pagingVo,Model model, HttpServletRequest request){
+	public String authoritylist(PagingVO pagingVo,Model model, HttpServletRequest request){
 //		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
 		PagingVO vo =authorityService.searchList(pagingVo);
 		model.addAttribute("pageVO", vo);
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
 		return "/view/background/authority/authority";
 	}
 	
@@ -55,6 +65,12 @@ public class AuthorityController {
 		model.addAttribute("menus", menus);
 		model.addAttribute("role", role);
 		return "/view/background/authority/assignmentmenu";
+	}
+	
+	@RequestMapping("/toaddaccounttype")
+	public String toAccountType(Model model, HttpServletRequest request){
+		
+		return "/view/background/authority/addAccountType";
 	}
 	
 	
@@ -128,6 +144,7 @@ public class AuthorityController {
 		Long roleId=Long.parseLong(request.getParameter("roleId").trim());
 		//此功能还没有进行测试   
 		List<Menu> menus=authorityService.getMenuByRoleId(roleId);
+		model.addAttribute("roleId", roleId);
 		model.addAttribute("menus",menus);
 		return "/view/background/authority/menu_data";
 	}
@@ -153,5 +170,21 @@ public class AuthorityController {
 		return result; 
 	}
 	
+	@RequestMapping("/delrolemenu")
+	@ResponseBody
+	public ResultResponse delRoleMenu(HttpServletRequest request,Model model){
+		ResultResponse result = new ResultResponse();
+		Long roleId=Long.parseLong(request.getParameter("roleId").trim());
+		Long menuId=Long.parseLong(request.getParameter("menuId").trim());
+		if(roleId!=null && roleId!=null){
+			if(authorityService.delRoleMenu(roleId,menuId)){
+				result.setMessage("success!");
+				return result;
+			}
+		}
+		result.setResult(Boolean.FALSE);
+		result.setMessage("failure!");
+		return result; 
+	}
 	
 }

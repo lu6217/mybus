@@ -10,22 +10,22 @@
 	<c:forEach varStatus="vs" var="menu" items="${menus}">
        <c:choose>  
 		 <c:when test="${vs.count%4==0}">  
-             <tr class="success">
+             <tr class="success" ondblclick="delmenu('${roleId}','${menu.id }')">
            	 </c:when> 
            	 <c:when test="${vs.count%4==1}">  
-           		<tr class="info">
+           		<tr class="info" ondblclick="delmenu('${roleId}','${menu.id }')">
            	 </c:when> 
            	 <c:when test="${vs.count%4==2}">  
-           		<tr class="warning">
+           		<tr class="warning" ondblclick="delmenu('${roleId}','${menu.id }')">
            	 </c:when> 
            	 <c:when test="${vs.count%4==3}">  
-           		<tr class="danger">
+           		<tr class="danger" ondblclick="delmenu('${roleId}','${menu.id }')">
            	 </c:when> 
 		</c:choose>  
              <td title='<c:out value="${menu.name } "></c:out>' class="text-center"><a href="javascript:void(0)" onclick="showSite('${menu.name }')">${menu.name }</a></td>
              <td title='<c:out value="${menu.url } "></c:out>' class="text-center">${menu.url }</td>
              
-             <td title='<c:out value="${menu.icon } "></c:out>' class="text-center">${menu.icon }</td>
+             <td title='<c:out value="${menu.icon } "></c:out>' class="text-center"><i class="${menu.icon }"></i></td>
              <td title='<c:out value="${menu.upperLevelMenuId } "></c:out>' class="text-center">${menu.upperLevelMenuId }</td>
 
 			<td title='<c:out value="${menu.level } "></c:out>' class="text-center">${menu.level }</td>

@@ -15,6 +15,10 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form role="form" id="createrole" name="createrole">
+                    	<div class="form-group">
+                            <label>Number</label>
+                            <input class="form-control" placeholder=""  name="number" id="number" value="" onblur="checkSite(this)">
+                        </div>
                         <div class="form-group">
                             <label>Role Name</label>
                             <input class="form-control" placeholder="" id="name" name="name" value="" onblur="checkName()">

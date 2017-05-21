@@ -15,7 +15,7 @@ Account account=(Account)request.getSession().getAttribute("account");
 <!--                     <span class="icon-bar"></span> -->
 <!--                     <span class="icon-bar"></span> -->
 <!--                 </button> -->
-                <a class="navbar-brand" href="${path}/view/background/index.jsp"><i class="fa fa-comments"></i> <strong>TRAIN </strong></a>
+                <a class="navbar-brand" href="${path}/luwei/front/home/index"><i class="glyphicon glyphicon-home"></i> <strong>TRAIN </strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">

@@ -53,6 +53,10 @@
 	                     			
 <!--                             <input class="form-control" placeholder="上级菜单" id="upperLevelMenu" name="upperLevelMenu" value="" onblur="checkName()"> -->
                         </div>
+                         <div class="form-group">
+<!--                             <label>层次</label> -->
+                            <input class="form-control" placeholder="item" id="item" name="item" value="" onblur="checkName()">
+                        </div>
                         <div class="form-group">
 <!--                             <label>层次</label> -->
                             <input class="form-control" placeholder="层次" id="level" name="level" value="" onblur="checkName()">

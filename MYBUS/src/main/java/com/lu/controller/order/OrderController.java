@@ -18,6 +18,8 @@ import org.springframework.web.util.WebUtils;
 
 import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
+import com.lu.entity.authority.Menu;
+import com.lu.entity.authority.Role;
 import com.lu.entity.enumType.OrderStatus;
 import com.lu.entity.order.Order;
 import com.lu.entity.seat.Seat;
@@ -25,6 +27,7 @@ import com.lu.entity.vo.OrderSearchVo;
 import com.lu.entity.vo.OrderVo;
 import com.lu.entity.vo.view.ScheduleView;
 import com.lu.service.AccountService;
+import com.lu.service.AuthorityService;
 import com.lu.service.OrderService;
 import com.lu.service.SeatService;
 import com.lu.service.SiteService;
@@ -56,6 +59,9 @@ public class OrderController extends BaseController{
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	@RequestMapping("/initorder/{id}/{trainId}/{beginSiteId}/{endSiteId}/{departureTime}/{arrivalTime}/{numberDay}/{price}")
 	public String initOrder(@PathVariable("id")Long id,@PathVariable("trainId")Long trainId,
@@ -145,10 +151,36 @@ public class OrderController extends BaseController{
 	
 	@RequestMapping("/orderlist")
 	public String orderlist(PagingVO pagingVo,OrderSearchVo orderSearchVo,Model model, HttpServletRequest request){
+//		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
+		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo);
+		model.addAttribute("pageVO", vo);
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
+		return "/view/front/orderlist";
+	}
+	
+	@RequestMapping("/accountorderlist")
+	public String accountOrderlist(PagingVO pagingVo,OrderSearchVo orderSearchVo,Model model, HttpServletRequest request){
 		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
 		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo,accountId);
 		model.addAttribute("pageVO", vo);
-		return "/view/front/orderlist";
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
+		return "/view/front/accountorderlist";
 	}
 	
 	

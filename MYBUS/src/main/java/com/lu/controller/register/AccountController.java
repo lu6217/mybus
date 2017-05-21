@@ -16,11 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import com.lu.entity.account.Account;
+import com.lu.entity.account.Account_User;
 import com.lu.entity.account.User;
+import com.lu.entity.authority.Menu;
+import com.lu.entity.authority.Role;
 import com.lu.entity.vo.AccountRegisterVo;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.entity.vo.UserVo;
 import com.lu.service.AccountService;
+import com.lu.service.Account_UserService;
+import com.lu.service.AuthorityService;
 import com.lu.service.UserService;
 import com.lu.util.PagingVO;
 import com.lu.util.ResultResponse;
@@ -35,6 +40,12 @@ public class AccountController {
 	
 	@Autowired
 	private UserService userService; 
+	
+	@Autowired
+	private Account_UserService account_UserService;
+	
+	@Autowired
+	private AuthorityService authorityService;
 	
 	/**
 	 * login
@@ -144,6 +155,15 @@ public class AccountController {
 	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){
 		PagingVO vo =accountService.searchList(pagingVo,accountVo);
 		model.addAttribute("pageVO", vo);
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
 		return "view/background/account/accountlist";
 	}
 	
@@ -242,9 +262,9 @@ public class AccountController {
 			userService.saveOrUpdateUser(user);
 			result.setMessage("OK! success!");
 		}else if(userVo!=null && userVo.getId()==null){
-				if(userService.checkName(userVo.getName().trim())){
+				if(userService.checkIdCard(userVo.getIDcard().trim())){
 					result.setResult(Boolean.FALSE);
-					result.setMessage("failure! Name Exists" );
+					result.setMessage("failure! IdCard Exists" );
 					return result;
 				}
 				if(account!=null){
@@ -257,6 +277,15 @@ public class AccountController {
 					user.setSex(Long.parseLong(userVo.getSex().trim()));
 					user.setTelphone(userVo.getTelphone().trim());
 					userService.saveOrUpdateUser(user);
+					
+					user=userService.getUserByIdCard(userVo.getIDcard());
+					//保存account_user
+					if(userVo.getAccountId()!=0){
+						Account_User account_User=new Account_User();
+						account_User.setAccountId(userVo.getAccountId());
+						account_User.setUserId(user.getId());
+						account_UserService.saveOrUpdate(account_User);
+					}
 					result.setMessage("OK!success!");
 				}else{
 					result.setResult(Boolean.FALSE);
@@ -273,6 +302,15 @@ public class AccountController {
 	public String userSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
 		PagingVO vo =userService.searchList(pagingVo,userVo);
 		model.addAttribute("pageVO", vo);
+		Account account = (Account)request.getSession().getAttribute("account");
+		if(account!=null){
+			Long number=account.getType();
+			Role role=authorityService.getRoleByNumber(number);
+			if(role!=null){
+				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
+				model.addAttribute("menus", menus);
+			}
+		}
 		return "view/background/account/userlist";
 	}
 }
