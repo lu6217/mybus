@@ -20,4 +20,6 @@ public interface AccountService {
 
 	public boolean updateAccountType(Account account);
 
+	public void updateAccount(Account account);
+
 }

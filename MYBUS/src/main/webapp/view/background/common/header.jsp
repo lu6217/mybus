@@ -5,6 +5,9 @@
 <%
 Account account=(Account)request.getSession().getAttribute("account");
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <header class="header">
 
 <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -207,28 +210,25 @@ Account account=(Account)request.getSession().getAttribute("account");
                         </li>
                     </ul>
                     <!-- /.dropdown-alerts -->
-               	 	<%
-						if(account==null){
-					%>
-               	 	</li>
-            		<li class="dropdown">
-						<li><a href="${path }/luwei/account/logon/tologin"><i class="fa fa-sign-in fa-fw"></i> Login</a></li>	
-          			</li>
-              		<li class="dropdown">
-	                	<li><a href="${path }/luwei/account/logon/toregister"><i class="fa fa-group fa-fw"></i> Register</a></li>
-               		</li>
-            		<%
-						}else{
-					%>
+	               	 	</li>
+					<c:if test="${empty account }">
+	            		<li class="dropdown">
+							<li><a href="${path }/luwei/account/logon/tologin"><i class="fa fa-sign-in fa-fw"></i> Login</a></li>	
+	          			</li>
+	              		<li class="dropdown">
+		                	<li><a href="${path }/luwei/account/logon/toregister"><i class="fa fa-group fa-fw"></i> Register</a></li>
+	               		</li>
+               		</c:if>
+               		<c:if test="${not empty account }">
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> ${account.name }<i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                     	
                     
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Account Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -238,7 +238,7 @@ Account account=(Account)request.getSession().getAttribute("account");
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
-                <%} %>
+                </c:if>
                 <!-- /.dropdown -->
             </ul>
         </nav>

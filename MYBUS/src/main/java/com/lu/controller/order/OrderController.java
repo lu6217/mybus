@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.lu.controller.home.MenuUtil;
 import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
-import com.lu.entity.authority.Menu;
-import com.lu.entity.authority.Role;
 import com.lu.entity.enumType.OrderStatus;
 import com.lu.entity.order.Order;
 import com.lu.entity.seat.Seat;
@@ -130,7 +129,7 @@ public class OrderController extends BaseController{
 				order.setTrainId(orderVo.getTrainId());
 				order.setCreateTime(new Date());
 				//设置座位  
-				Seat seat=seatService.getOneSeat();
+				Seat seat=seatService.getOneSeat(orderVo.getTrainId());
 				seat.setStatus(1L);
 				seatService.saveOrUpdateSeat(seat);
 				order.setSeatId(seat.getId());
@@ -154,15 +153,7 @@ public class OrderController extends BaseController{
 //		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
 		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "/view/front/orderlist";
 	}
 	
@@ -171,15 +162,7 @@ public class OrderController extends BaseController{
 		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
 		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo,accountId);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "/view/front/accountorderlist";
 	}
 	

@@ -87,7 +87,7 @@
 			
 			if (data && data.result) {
 				layer.msg(data.message,{icon: 6});
-				window.location.replace("${path}/luwei/account/accountlist");
+				window.location.replace("${path}/luwei/front/home/index");
 			}else if (data){
 				alert(data.message,{icon: 5});
 			}

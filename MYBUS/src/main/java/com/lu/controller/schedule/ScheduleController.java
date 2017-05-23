@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lu.entity.account.Account;
-import com.lu.entity.authority.Menu;
-import com.lu.entity.authority.Role;
+import com.lu.controller.home.MenuUtil;
 import com.lu.entity.schedule.Schedule;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.vo.ScheduleVo;
@@ -106,15 +104,7 @@ public class ScheduleController {
 	public String scheduleSearchList(PagingVO pagingVo,ScheduleVo scheduleVo,Model model, HttpServletRequest request){
 		PagingVO vo =scheduleService.searchList(pagingVo,scheduleVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "view/background/schedule/schedulelist";
 	}
 	

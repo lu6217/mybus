@@ -76,5 +76,12 @@ public class AccountServiceImpl implements AccountService {
 		return true;
 	}
 
+	@Override
+	@Transactional
+	public void updateAccount(Account account) {
+		// TODO Auto-generated method stub
+		accountDao.update(account);
+	}
+
 
 }

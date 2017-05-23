@@ -6,6 +6,6 @@ public interface SeatService {
 
 	void saveOrUpdateSeat(Seat seat);
 
-	Seat getOneSeat();
+	Seat getOneSeat(Long trainId);
 
 }

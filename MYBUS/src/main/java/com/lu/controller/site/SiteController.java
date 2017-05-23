@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lu.entity.account.Account;
-import com.lu.entity.authority.Menu;
-import com.lu.entity.authority.Role;
+import com.lu.controller.home.MenuUtil;
 import com.lu.entity.site.Site;
 import com.lu.entity.vo.ResultVO;
 import com.lu.entity.vo.UserVo;
@@ -96,15 +94,7 @@ public class SiteController {
 	public String siteSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
 		PagingVO vo =siteService.searchAllSiteList(pagingVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "view/background/site/sitelist";
 	}
 }

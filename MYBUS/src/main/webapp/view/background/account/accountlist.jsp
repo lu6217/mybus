@@ -24,7 +24,7 @@ Account account=(Account)request.getSession().getAttribute("account");
         <!--/. NAV TOP  -->
          <nav class="navbar-default navbar-side" role="navigation">
 <!-- 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div> -->
-             <jsp:include page="/view/background/common/sidebar.jsp?item=accountList"/>
+             <jsp:include page="/view/background/common/sidebar.jsp?item=account"/>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -113,9 +113,9 @@ Account account=(Account)request.getSession().getAttribute("account");
          function edits(id){
           	layer.open({
        		  type: 2, 
-       		  title: ['UserInfo','font-size:25px;'],
-       		  area:['600px','500px'],
-       		  content: '${path}/luwei/account/get/'+id,
+       		  title: ['Account Info','font-size:25px;'],
+       		  area:['500px','370px'],
+       		  content: '${path}/luwei/account/accountinfo/'+id,
        		  btn:['Close']
        		 
        		}); 

@@ -1,6 +1,8 @@
 package com.lu.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+
+import com.lu.controller.home.MenuUtil;
 
 @Controller
 public class AdminSessionFilter implements Filter {
@@ -35,19 +39,25 @@ public class AdminSessionFilter implements Filter {
 //		Object accountObj = WebUtils.getSessionAttribute(request, "account");
 		Object accountObj = request.getSession().getAttribute("account");
 		if(accountObj==null){
-			
-			
-			if(!uri.contains(uriPath)){
-				if(!uri.contains(uriPath2)){
-					response.sendRedirect(request.getContextPath() + "/luwei/account/logon/tologin");
-				}
+			List<String> urisList=new ArrayList<String>();
+			urisList.add(uriPath);
+			urisList.add(uriPath2);
+			if(uri.contains(uriPath) || uri.contains(uriPath2)){
+				chain.doFilter(arg0, arg1);
+			}else{
+				response.sendRedirect(request.getContextPath() + "/luwei/account/logon/tologin");
 			}
-			
-			chain.doFilter(arg0, arg1);
 		}else if(accountObj!=null){
 			if(uri.contains(uriPath)){
 				request.getSession().removeAttribute("account");
 			}
+			
+			if(!MenuUtil.isPermission(request, response, uri)){
+				request.setAttribute("message", "对不起，您没有权限，请联系管理员！！！");
+	            request.getRequestDispatcher("/view/message.jsp").forward(request, response);
+			}
+			
+			
 			chain.doFilter(arg0, arg1);
 		} 
 		

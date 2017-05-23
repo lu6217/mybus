@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lu.entity.account.Account;
-import com.lu.entity.authority.Menu;
-import com.lu.entity.authority.Role;
+import com.lu.controller.home.MenuUtil;
 import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 import com.lu.entity.train_site.Train_Site;
@@ -254,15 +252,7 @@ public class TrainController {
 	public String trainSearchList(PagingVO pagingVo,TrainSearchVo trainSearchVo,Model model, HttpServletRequest request){
 		PagingVO vo =trainService.searchList(pagingVo,trainSearchVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "view/background/train/trainlist";
 	}
 	

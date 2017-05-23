@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.lu.controller.home.MenuUtil;
 import com.lu.entity.account.Account;
 import com.lu.entity.account.Account_User;
 import com.lu.entity.account.User;
-import com.lu.entity.authority.Menu;
-import com.lu.entity.authority.Role;
 import com.lu.entity.vo.AccountRegisterVo;
 import com.lu.entity.vo.AccountSearchVo;
 import com.lu.entity.vo.UserVo;
@@ -155,16 +154,32 @@ public class AccountController {
 	public String accountSearchList(PagingVO pagingVo,AccountSearchVo accountVo,Model model, HttpServletRequest request){
 		PagingVO vo =accountService.searchList(pagingVo,accountVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "view/background/account/accountlist";
+	}
+	
+	
+	@RequestMapping("/accountinfo/{id}")
+	public String getAccountInfo(@PathVariable("id")Long id, Model model){
+		Account account=accountService.findById(id);
+		model.addAttribute("accountinfo", account);
+		return "view/background/account/editaccount";
+	}
+	
+	@RequestMapping("/updateAccount")
+	@ResponseBody
+	public ResultResponse updateAccount(HttpServletRequest request,Account account){
+		
+		ResultResponse result = new ResultResponse();
+		if(account!=null){
+			accountService.updateAccount(account);
+			result.setMessage("success!");
+		}else {
+			result.setResult(Boolean.FALSE);
+			result.setMessage("failure!");
+		}
+		return result;
 	}
 	
 	@RequestMapping("/get/{id}")
@@ -302,15 +317,7 @@ public class AccountController {
 	public String userSearchList(PagingVO pagingVo,UserVo userVo,Model model, HttpServletRequest request){
 		PagingVO vo =userService.searchList(pagingVo,userVo);
 		model.addAttribute("pageVO", vo);
-		Account account = (Account)request.getSession().getAttribute("account");
-		if(account!=null){
-			Long number=account.getType();
-			Role role=authorityService.getRoleByNumber(number);
-			if(role!=null){
-				List<Menu> menus=authorityService.getMenuByRoleId(role.getId());
-				model.addAttribute("menus", menus);
-			}
-		}
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "view/background/account/userlist";
 	}
 }
