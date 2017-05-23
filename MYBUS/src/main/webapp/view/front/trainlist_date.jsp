@@ -27,10 +27,10 @@
              <td title='<c:out value="${scheduleview.beginSite.name } "></c:out>' class="text-center">${scheduleview.beginSite.name }</td>
              
              <td title='<c:out value="${scheduleview.endSite.name } "></c:out>' class="text-center">${scheduleview.endSite.name }</td>
-             <td title='<fmt:formatDate value="${scheduleview.departureTime }" pattern="HH:mm" />' class="text-center">
+             <td title='<fmt:formatDate value="${scheduleview.departureTime }" pattern="yyyy-MM-dd HH:mm" />' class="text-center">
 				<fmt:formatDate value="${scheduleview.departureTime }" pattern="HH:mm" />
 			</td>
-			<td title='<fmt:formatDate value="${scheduleview.arrivalTime }" pattern="HH:mm" />' class="text-center">
+			<td title='<fmt:formatDate value="${scheduleview.arrivalTime }" pattern="yyyy-MM-dd HH:mm" />' class="text-center">
 			<fmt:formatDate value="${scheduleview.arrivalTime }" pattern="HH:mm" />
 			<c:choose>
 				<c:when test="${scheduleview.numberDay==0}">(即日)</c:when>

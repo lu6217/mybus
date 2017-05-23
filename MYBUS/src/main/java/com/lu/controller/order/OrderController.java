@@ -89,7 +89,7 @@ public class OrderController extends BaseController{
 		
 		model.addAttribute("scheduleView", scheduleview);
 		model.addAttribute("users", userLists);
-		
+		model.addAttribute("menus", MenuUtil.getMenus(request));
 		
 		return "/view/front/initorder";
 	}
@@ -227,7 +227,8 @@ public class OrderController extends BaseController{
 		Order order=orderService.getOrderById(id);
 		//生成二维码
 //		String path=request.getContextPath()+"/images/qrcodeImages/";
-		String path="E:/myBusGit/mybus/MYBUS/src/main/webapp/images/qrcodeImages/";
+//		String path="E:/myBusGit/mybus/MYBUS/src/main/webapp/images/qrcodeImages/";
+		String path=request.getSession().getServletContext().getRealPath("/images/qrcodeImages")+"/";
 		orderService.createQrcode(order,path);
 		
 		order=orderService.getOrderById(id);
@@ -236,7 +237,7 @@ public class OrderController extends BaseController{
 	}
 	
 	@RequestMapping("/showqrcode/{id}")
-	public String showqrcodeInfo(@PathVariable("id")Long id, Model model){
+	public String showqrcodeInfo(@PathVariable("id")Long id, Model model,HttpServletRequest request){
 		Order order=orderService.getOrderById(id);
 		model.addAttribute("order", order);
 		return "/view/front/order/qrcodeview";

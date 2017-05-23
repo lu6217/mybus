@@ -1,6 +1,9 @@
 package com.lu.entity.vo.view;
 
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.lu.entity.site.Site;
 import com.lu.entity.train.TrainNumber;
 
@@ -15,9 +18,10 @@ public class ScheduleView {
 	private TrainNumber train;
 	
 //	private String direction;//方向
-	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date departureTime;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Long numberDay;
 	
 //	private Long beginSiteId;

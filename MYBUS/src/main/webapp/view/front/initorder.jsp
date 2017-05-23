@@ -60,9 +60,9 @@
                                 <input type="hidden" name="trainId" id="trainId" value="${scheduleView.train.id }">
                                 <input type="hidden" name="numberDay" id="numberDay" value="${scheduleView.numberDay }">
                                 <input type="hidden" name="beginSiteId" id="beginSiteId" value="${scheduleView.beginSite.id }">
-                                <input type="hidden" name="departureTime" id="departureTime" value="${scheduleView.departureTime }">
+                                <input type="hidden" name="departureTime" id="departureTime" value="<fmt:formatDate value="${scheduleView.departureTime }" pattern="yyyy-MM-dd HH:mm" />">
                                 <input type="hidden" name="endSiteId" id="endSiteId" value="${scheduleView.endSite.id }">
-                                <input type="hidden" name="arrivalTime" id="arrivalTime" value="${scheduleView.arrivalTime }">
+                                <input type="hidden" name="arrivalTime" id="arrivalTime" value="<fmt:formatDate value="${scheduleView.arrivalTime }" pattern="yyyy-MM-dd HH:mm" />">
                                  <input type="hidden" name="price" id="price" value="${scheduleView.price }">
                               <p class=""><span id=""><fmt:formatDate value="${scheduleView.departureTime }" pattern="yyyy-MM-dd" /> </span>
                               		&nbsp;<span id="" name="">${scheduleView.train.number }次</span>
@@ -174,7 +174,7 @@
    	             		  type: 1, 
    	             		  title: ['Tip Info'],
    	             		  area:['260px','180px'],
-   	             		  content: '<center><p>订单已提交</p> <p> 支付请点击<a href="${path}/luwei/order/topay" style="color:blue;">订单支付</a></p> <p>查看订单情况请点击<a href="${path }/luwei/order/orderlist" style="color:blue;">未完成订单</a></p></center>',
+   	             		  content: '<center><p>订单已提交</p> <p> 支付请点击<a href="${path}/luwei/order/accountorderlist" style="color:blue;">订单支付</a></p> <p>查看订单情况请点击<a href="${path }/luwei/order/accountorderlist" style="color:blue;">未完成订单</a></p></center>',
    	             		  shadeClose: true,//点击窗体外的任意处 关闭窗体
    	             		  btn:['Close']
 //   	              		  end:function(){

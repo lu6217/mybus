@@ -2,6 +2,8 @@ package com.lu.entity.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class OrderVo {
 	private Long id;
 	
@@ -13,8 +15,10 @@ public class OrderVo {
 	
 	private Long endSiteId; //终点站
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date departureTime;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date arrivalTime;
 	
 	private Long numberDay;
