@@ -230,6 +230,8 @@ Account account=(Account)request.getSession().getAttribute("account");
                     
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> Account Profile</a>
                         </li>
+                         <li><a id="changepassword"><i class="glyphicon glyphicon-tree-deciduous"></i> Change Password</a>
+                        </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
@@ -244,3 +246,22 @@ Account account=(Account)request.getSession().getAttribute("account");
         </nav>
 
 </header>
+<script src="${path}/js/jquery-2.1.1.min.js"></script>
+<script src="${path}/js/layer/layer.js"></script>
+<script>
+	$("#changepassword").bind("click",function(){
+		layer.open({
+   		  type: 2, 
+   		  title: ['Change Password','font-size:25px;'],
+   		  area:['400px','360px'],
+   		  content:'${path }/luwei/accountinfo/tochangepassword',
+   		  btn:['Close']
+//    		  ,end:function(){
+//    			 alert('close');
+//      			// window.location.reload();
+//   		 }
+   		}); 
+		
+	});
+
+</script>

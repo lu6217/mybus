@@ -71,7 +71,7 @@ public class AccountController {
 			result.setMessage("Login Failure!");
 			return result;
 		}else if(pwd.equals(account.getPassword())){
-			result.setMessage("Register Success!");
+			result.setMessage("Login Success!");
 			request.getSession().setAttribute("account", account);
 		}else{
 			result.setResult(Boolean.FALSE);
