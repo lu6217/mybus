@@ -24,5 +24,7 @@ public interface ScheduleService {
 
 	void delSchedule(Schedule schedule);
 
+	void updateSchedule(Schedule schedule);
+
 	
 }

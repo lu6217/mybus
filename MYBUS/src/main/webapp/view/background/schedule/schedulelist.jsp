@@ -194,7 +194,7 @@
              	layer.open({
              		  type: 2, 
              		  title: ['AddSchedule','font-size:25px;'],
-             		  area:['600px','500px'],
+             		  area:['400px','340px'],
              		  content:'${path}/luwei/schedule/toaddschedule',
              		  btn:['Close']
              		  
@@ -240,54 +240,6 @@
             		});
             	 
              }
-             
-               // 需要修改 还不能实现功能   
-/* 			function del(id){
-            	 layer.open({
-             		type: 2
-                     ,title: '是否删除此用户？'
-                     ,closeBtn: false
-                     ,area: ['250px','360px']
-                     ,shade: 0.8
-                     ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                     ,btn: ['残忍删除','火速取消']
-                     ,moveType: 1 //拖拽模式，0或者1
-//                      ,content:'${path}/view/background/account/userinfo.jsp'
-                     ,content: '${path}/luwei/account/getuserinfo/'+id
-                     ,yes: function(){
-                     	$.ajax(
-             		    		{
-             		    			 type:"POST",
-             		    		     url:"${path}/luwei/account/deluser/",
-             		    		     data: {id:id},
-             		    	         success:function(res){
-             		    	        	 if(res && res.result){
-             		    	        		 layer.msg(res.message);
-//              		    	        		 alert(res.message); 
-             		    	        	 }else{
-             		    	        		 layer.msg(res.message);
-             		    	        	 	//alert(res.message);
-             		    	        	 }
-//              		    	        	 var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-//              		 	               		 parent.layer.close(index);
-             		  						//window.parent.location.reload();
-             		  						window.location.reload();
-             			    		},
-             			    		error:function(err,err1,err2){
-             			    		    //debugger;
-             			            }
-             		    		});
-                     }
-//                      ,success: function(layero){
-//                        var btn = layero.find('.layui-layer-btn');
-//                        btn.css('text-align', 'center');
-//                        btn.find('.layui-layer-btn0').attr({
-//                          href: '${path}/luwei/account/toadduser/'+id
-                        
-//                        });
-//                      }	
-            		});  
-             }  */
              
              
     </script>

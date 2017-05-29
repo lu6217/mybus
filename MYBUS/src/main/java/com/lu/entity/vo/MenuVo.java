@@ -14,7 +14,7 @@ public class MenuVo {
 	
 	private Boolean leaf;
 	
-	private String item;
+	private String Item;
 
 	public String getName() {
 		return name;
@@ -65,11 +65,12 @@ public class MenuVo {
 	}
 
 	public String getItem() {
-		return item;
+		return Item;
 	}
 
 	public void setItem(String item) {
-		this.item = item;
+		this.Item = item;
 	}
-	
+
+
 }

@@ -73,7 +73,7 @@
 <%-- 													<button class="btn btn-success btn-sm" onclick="adds('${user.id }')"><i class="fa fa-plus"></i> Add</button> --%>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
 													<button class="btn btn-primary btn-sm" onclick="edits('${user.id }')"><i class="fa fa-edit "></i> Edit</button>
-													<button class="btn btn-danger btn-sm"  onclick="del('${user.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-danger btn-sm"  onclick="del('${user.id }','${account.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
@@ -129,7 +129,7 @@
 //             		 }
              		}); 
              };
-            function del(id){
+            function del(id,accountId){
             	layer.open({
             		type: 2
                     ,title: '是否删除此用户？'
@@ -145,8 +145,11 @@
                     	$.ajax(
             		    		{
             		    			 type:"POST",
-            		    		     url:"${path}/luwei/account/deluser/",
-            		    		     data: {id:id},
+            		    		     url:"${path}/luwei/account/deluser",
+            		    		     data: {
+            		    		    	 id:id,
+            		    		    	 accountId:accountId
+            		    		    	 },
             		    	         success:function(res){
             		    	        	 if(res && res.result){
             		    	        		 layer.msg(res.message);

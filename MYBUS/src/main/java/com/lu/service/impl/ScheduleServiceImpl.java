@@ -199,6 +199,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 					scheduleView.setDepartureTime(begin.getDepartureTime());
 					scheduleView.setArrivalTime(end.getArrivalTime());
 					scheduleView.setPrice(Integer.parseInt(end.getPrice())-Integer.parseInt(begin.getPrice())+"");
+					long time=scheduleView.getArrivalTime().getTime()+scheduleView.getNumberDay()*24*3600*1000-scheduleView.getDepartureTime().getTime();
+					scheduleView.setTime(new Date(time));
+					scheduleView.setHour((time)/(60*60*1000));
+					scheduleView.setMinute(((time)%(60*60*1000))/(60*1000));
 				}
 				return pageVo;
 			}
@@ -253,6 +257,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 		}
 		//删除对应车次调度信息
 		scheduleDao.delete(schedule);	
+	}
+
+	@Override
+	@Transactional
+	public void updateSchedule(Schedule schedule) {
+		// TODO Auto-generated method stub
+		scheduleDao.update(schedule);
+		
 	}
 
 

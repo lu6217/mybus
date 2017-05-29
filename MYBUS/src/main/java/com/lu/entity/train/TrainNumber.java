@@ -69,6 +69,12 @@ public class TrainNumber {
 	private Date time;//运行时长
 	
 	@Transient
+	private long hour;
+	
+	@Transient
+	private long minute;
+	
+	@Transient
 	private List<Site> sites; //所经的站点
 	
 	@Column(name="category")
@@ -202,6 +208,22 @@ public class TrainNumber {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public long getHour() {
+		return hour;
+	}
+
+	public void setHour(long hour) {
+		this.hour = hour;
+	}
+
+	public long getMinute() {
+		return minute;
+	}
+
+	public void setMinute(long minute) {
+		this.minute = minute;
 	}
 
 	public Date getDepartureTime() {

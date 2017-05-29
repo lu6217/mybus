@@ -21,13 +21,14 @@ import com.lu.entity.account.Account;
 import com.lu.entity.account.User;
 import com.lu.entity.enumType.OrderStatus;
 import com.lu.entity.order.Order;
-import com.lu.entity.seat.Seat;
 import com.lu.entity.vo.OrderSearchVo;
 import com.lu.entity.vo.OrderVo;
 import com.lu.entity.vo.view.ScheduleView;
 import com.lu.service.AccountService;
 import com.lu.service.AuthorityService;
 import com.lu.service.OrderService;
+import com.lu.service.ScheduleService;
+import com.lu.service.ScheduleSiteService;
 import com.lu.service.SeatService;
 import com.lu.service.SiteService;
 import com.lu.service.TrainService;
@@ -61,6 +62,12 @@ public class OrderController extends BaseController{
 	
 	@Autowired
 	private AuthorityService authorityService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
+	
+	@Autowired
+	private ScheduleSiteService scheduleSiteService;
 	
 	@RequestMapping("/initorder/{id}/{trainId}/{beginSiteId}/{endSiteId}/{departureTime}/{arrivalTime}/{numberDay}/{price}")
 	public String initOrder(@PathVariable("id")Long id,@PathVariable("trainId")Long trainId,
@@ -104,7 +111,7 @@ public class OrderController extends BaseController{
 	
 	@RequestMapping("/createorder")
 	@ResponseBody
-	public ResultResponse addTrainSite(HttpServletRequest request,OrderVo orderVo){
+	public ResultResponse createOrder(HttpServletRequest request,OrderVo orderVo){
 		
 		ResultResponse result = new ResultResponse();
 		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
@@ -128,12 +135,21 @@ public class OrderController extends BaseController{
 				order.setPrice(orderVo.getPrice());
 				order.setTrainId(orderVo.getTrainId());
 				order.setCreateTime(new Date());
-				//设置座位  
-				Seat seat=seatService.getOneSeat(orderVo.getTrainId());
-				seat.setStatus(1L);
-				seatService.saveOrUpdateSeat(seat);
-				order.setSeatId(seat.getId());
-				orderService.saveOrUpdateOrder(order);
+				if(!orderService.saveOrUpdateOrder(order,orderVo)){
+					result.setResult(Boolean.FALSE);
+					result.setMessage("failure!");
+					return result;
+				}
+//				Long scheduleId=scheduleSiteService.getScheduleId(orderVo.getTrainId(),orderVo.getBeginSiteId(),orderVo.getDepartureTime());
+//				Schedule schedule=scheduleService.getScheduleById(scheduleId);
+//				schedule.setSeatNum(schedule.getSeatNum()-1);
+//				scheduleService.updateSchedule(schedule);
+//				//设置座位  
+//				Seat seat=seatService.getOneSeat(orderVo.getTrainId());
+//				seat.setStatus(1L);
+//				seatService.saveOrUpdateSeat(seat);
+//				order.setSeatId(seat.getId());
+//				orderService.saveOrUpdateOrder(order);
 				
 //				order=orderService.getOrderByUserIdAndTrainId(orderVo.getUserLists()[i],orderVo.getTrainId(),orderVo.getDepartureTime());
 //				result.addAttribute("order"+i, order);

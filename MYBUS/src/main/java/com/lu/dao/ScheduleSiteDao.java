@@ -41,4 +41,12 @@ public class ScheduleSiteDao extends BaseDAO<ScheduleSite>{
 		return select(query);
 	}
 
+	public ScheduleSite getScheduleSiteByTrainIdBeginSiteIdAndDepartureTime(
+			Long trainId, Long beginSiteId, Date departureTime) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(ScheduleSite.class,"scheduleSite");
+		query.addEq("scheduleSite.trainId", trainId).addEq("scheduleSite.siteId", beginSiteId).addBetween("scheduleSite.departureTime", departureTime, new Date(departureTime.getTime()+60*1000));
+		return this.selectTopOne(query);
+	}
+
 }

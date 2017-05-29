@@ -22,8 +22,13 @@
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
+        
             <div id="page-inner">
-
+				<div class="jumbotron">
+					  <h1>Hello, world!</h1>
+					  <p>欢迎使用本购票系统.....</p>
+					  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+				</div>
 
                 <div class="row">
                     <div class="col-md-12">

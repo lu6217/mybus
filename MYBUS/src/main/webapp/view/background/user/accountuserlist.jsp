@@ -22,7 +22,7 @@
         <!--/. NAV TOP  -->
          <nav class="navbar-default navbar-side" role="navigation">
 <!-- 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div> -->
-             <jsp:include page="/view/background/common/sidebar.jsp?item=user"/>
+             <jsp:include page="/view/background/common/sidebar.jsp?item=accountuser"/>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -54,14 +54,13 @@
                                             <th class="text-center">Sex</th>
                                             <th class="text-center">Telphone</th>
                                             <th class="text-center">Address</th>
-                                            <th class="text-center">AccountId</th>
+<!--                                             <th class="text-center">AccountId</th> -->
                                             <th class="text-center">Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:if test="${not empty pageVO}">
-      										<c:if test="${not empty pageVO.details}">
-      										<c:forEach varStatus="vs" var="user" items="${pageVO.details}">
+                                    	<c:if test="${not empty users}">
+      										<c:forEach varStatus="vs" var="user" items="${users}">
 	                                       <!-- varStatus 是从1开始的  -->
 	                                       <c:choose>  
    												 <c:when test="${vs.count%4==0}">  
@@ -91,21 +90,20 @@
 <%-- 	                                            <td title='<c:out value="${user.sex } "></c:out>' class="center">${user.sex }</td> --%>
 	                                            <td title='<c:out value="${user.telphone } "></c:out>' class="text-center">${user.telphone }</td>
 	                                            <td title='<c:out value="${user.address } "></c:out>' class="text-center">${user.address }</td>
-	                                            <td title='<c:out value="${user.accountId } "></c:out>' class="text-center">${user.accountId }</td>
+<%-- 	                                            <td title='<c:out value="${user.accountId } "></c:out>' class="text-center">${user.accountId }</td> --%>
 	                                       		 <td class="text-center">
 <%-- 													<button class="btn btn-success btn-sm" onclick="adds('${user.id }')"><i class="fa fa-plus"></i> Add</button> --%>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
 													<button class="btn btn-primary btn-sm" onclick="edits('${user.id }')"><i class="fa fa-edit "></i> Edit</button>
-													<button class="btn btn-danger btn-sm"  onclick="del('${user.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-danger btn-sm"  onclick="del('${user.id }','${account.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
  
     									   </c:if>
-   										  </c:if>
                                     </tbody>
                                     <div>
-                                    	<button class="btn btn-success btn-sm" onclick="adds(0)"><i class="fa fa-plus"></i> Add</button>
+                                    	<button class="btn btn-success btn-sm" onclick="adds('${account.id}')"><i class="fa fa-plus"></i> Add</button>
                                     </div>
                                 </table>
                             </div>
@@ -136,7 +134,7 @@
            		  type: 2, 
            		  title: ['UserInfo','font-size:25px;'],
            		  area:['600px','500px'],
-           		  content: '${path}/luwei/account/get/'+id,
+           		  content: '${path}/luwei/accountuser/get/'+id,
            		  btn:['Close']
 //            		  end:function(){
 //            			// alert('close');
@@ -150,7 +148,7 @@
              		  type: 2, 
              		  title: ['AddUser','font-size:25px;'],
              		  area:['600px','500px'],
-             		  content:'${path}/luwei/account/toadduser/'+id,
+             		  content:'${path}/luwei/accountuser/toadduser/'+id,
              		  btn:['Close']
 //              		  ,end:function(){
 //              			 alert('close');
@@ -158,7 +156,7 @@
 //             		 }
              		}); 
              };
-            function del(id){
+            function del(id,accountId){
             	layer.open({
             		type: 2
                     ,title: '是否删除此用户？'
@@ -169,13 +167,16 @@
                     ,btn: ['残忍删除','火速取消']
                     ,moveType: 1 //拖拽模式，0或者1
 //                     ,content:'${path}/view/background/account/userinfo.jsp'
-                    ,content: '${path}/luwei/account/getuserinfo/'+id
+                    ,content: '${path}/luwei/accountuser/getuserinfo/'+id
                     ,yes: function(){
                     	$.ajax(
             		    		{
             		    			 type:"POST",
-            		    		     url:"${path}/luwei/account/deluser/",
-            		    		     data: {id:id},
+            		    		     url:"${path}/luwei/accountuser/deluser",
+            		    		     data: {
+            		    		    	 id:id,
+            		    		    	 accountId:accountId
+            		    		     },
             		    	         success:function(res){
             		    	        	 if(res && res.result){
             		    	        		 layer.msg(res.message);

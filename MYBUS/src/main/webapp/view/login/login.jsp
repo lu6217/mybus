@@ -89,7 +89,7 @@
 				layer.msg(data.message,{icon: 6});
 				window.location.replace("${path}/luwei/front/home/index");
 			}else if (data){
-				alert(data.message,{icon: 5});
+				layer.msg(data.message,{icon: 5});
 			}
 			
 		});

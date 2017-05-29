@@ -75,10 +75,10 @@
 	                                            <td title='<c:out value="${site.name } "></c:out>' class="text-center">${site.name }</td>
 	                                            <td title='<c:out value="${site.description } "></c:out>' class="text-center">${site.description }</td>
 	                                            <td class="text-center">
-													<button class="btn btn-success btn-sm" onclick="adds('${site.id }')"><i class="fa fa-plus"></i> Add</button>
+<%-- 													<button class="btn btn-success btn-sm" onclick="adds('${site.id }')"><i class="fa fa-plus"></i> Add</button> --%>
 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button>
 													<button class="btn btn-primary btn-sm" onclick="edits('${site.id }')"><i class="fa fa-edit "></i> Edit</button>
-													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-danger btn-sm" onclick="del('${site.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>
@@ -114,9 +114,9 @@
          function edits(id){
           	layer.open({
        		  type: 2, 
-       		  title: ['UserInfo','font-size:25px;'],
-       		  area:['600px','500px'],
-       		  content: '${path}/luwei/account/get/'+id,
+       		  title: ['SiteInfo','font-size:25px;'],
+       		  area:['480px','300px'],
+       		  content: '${path}/luwei/site/get/'+id,
        		  btn:['Close']
        		 
        		}); 
@@ -135,6 +135,31 @@
          		}); 
          };
         
+         function del(id){
+        	 layer.msg('确定要删除此站点?', {
+        		  time: 20000, //20s后自动关闭
+        		  btn: ['残忍删除', '火速取消'],
+        		  yes: function(){
+        			  $.ajax({
+        				 type:"POST",
+  		    		     url:"${path}/luwei/site/delsite",
+  		    		     data: {id:id},
+  		    	         success:function(res){
+  		    	        	 if(res && res.result){
+  		    	        		 layer.msg(res.message);
+  		    	        	 }else{
+  		    	        		 layer.msg(res.message);
+  		    	        	 }
+  		  						window.location.reload();
+  			    		},
+  			    		error:function(err,err1,err2){
+  			    		    //debugger;
+  			            }
+  		    		  });
+        		  }
+        		});
+        	 
+         }
             
     </script>
          <!-- Custom Js -->

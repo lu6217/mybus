@@ -80,7 +80,7 @@ Account account=(Account)request.getSession().getAttribute("account");
 													<button class="btn btn-success btn-sm" onclick="adds('${acc.id }')"><i class="fa fa-plus"></i> Add</button>
 	                                            	<button class="btn btn-default btn-sm" onclick="showUsers('${acc.id }')"><i class=" fa fa-refresh "></i> Show Users</button>
 													<button class="btn btn-primary btn-sm" onclick="edits('${acc.id }')"><i class="fa fa-edit "></i> Edit</button>
-													<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+													<button class="btn btn-danger btn-sm" disabled=""><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>
 	                                        </tr>
 	                                        </c:forEach>

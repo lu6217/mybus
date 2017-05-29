@@ -98,6 +98,7 @@
                                             <th class="text-center">发车时间</th>
                                             <th class="text-center">到站时间</th>
                                             <th class="text-center">运行时间</th>
+                                            <th class="text-center">余票</th>
                                             <th class="text-center">Option</th>
                                         </tr>
                                     </thead>

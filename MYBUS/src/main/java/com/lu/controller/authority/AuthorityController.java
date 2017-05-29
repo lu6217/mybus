@@ -121,6 +121,7 @@ public class AuthorityController {
 			menu.setLeaf(menuVo.getLeaf());
 			menu.setUpperLevelMenuId(menuVo.getUpperLevelMenuId());
 			menu.setUrl(menuVo.getUrl());
+			menu.setItem(menuVo.getItem());
 			authorityService.saveMenu(menu);
 			result.setMessage("Create Success");
 		}else {

@@ -40,7 +40,7 @@ public class AccountInfoController {
 				
 //				if(cpVo.getPassword().equals(cpVo.getPassword2())){
 					//
-					account.setPassword(cpVo.getPassword());
+					account.setPassword(md5.encodePassword(cpVo.getPassword(), null));
 					accountService.updateAccount(account);
 					result.setMessage("success!");
 //				}

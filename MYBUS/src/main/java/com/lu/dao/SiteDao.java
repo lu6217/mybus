@@ -68,7 +68,8 @@ public class SiteDao extends BaseDAO<Site>{
 
 	private DetachedCriteriaBuilder initQueryCriteria() {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Site.class);
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Site.class,"site");
+		query.addNe("site.isDelete", Boolean.TRUE);
 		return query;
 	}
 

@@ -25,10 +25,10 @@ public class SiteServiceImpl implements SiteService{
 	
 	@Override
 	@Transactional
-	public void save(Site site) {
+	public void saveOrUpdate(Site site) {
 		// TODO Auto-generated method stub
 		
-		siteDao.save(site);
+		siteDao.saveOrUpdate(site);
 	}
 
 	@Override

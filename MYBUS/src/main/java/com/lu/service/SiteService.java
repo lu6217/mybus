@@ -8,7 +8,7 @@ import com.lu.util.PagingVO;
 
 public interface SiteService {
 
-	void save(Site site);
+	void saveOrUpdate(Site site);
 
 	boolean checkName(String name);
 

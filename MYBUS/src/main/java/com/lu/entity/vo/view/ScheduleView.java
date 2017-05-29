@@ -40,6 +40,10 @@ public class ScheduleView {
 	
 	private Date time;//运行时长
 	
+	private long hour;
+	
+	private long minute;
+	
 	private Long status;
 	
 	private Long seatNum;
@@ -122,6 +126,22 @@ public class ScheduleView {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public long getHour() {
+		return hour;
+	}
+
+	public void setHour(long hour) {
+		this.hour = hour;
+	}
+
+	public long getMinute() {
+		return minute;
+	}
+
+	public void setMinute(long minute) {
+		this.minute = minute;
 	}
 
 	public Long getStatus() {

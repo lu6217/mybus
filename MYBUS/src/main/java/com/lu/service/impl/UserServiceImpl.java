@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lu.dao.Account_UserDao;
 import com.lu.dao.OrderDao;
 import com.lu.dao.UserDao;
+import com.lu.entity.account.Account;
 import com.lu.entity.account.Account_User;
 import com.lu.entity.account.User;
 import com.lu.entity.order.Order;
@@ -72,6 +73,29 @@ public class UserServiceImpl implements UserService{
 		}
 		userDao.delete(user);
 		
+	}
+
+	
+	
+	@Override
+	@Transactional
+	public void delUser(User user, Account account) {
+		// TODO Auto-generated method stub
+		//删除订单
+		List<Order> lists=orderDao.getOrderByUserId(user.getId());
+		if(lists!=null && lists.size()>0){
+			Order order=new Order();
+			for (int i = 0; i < lists.size(); i++) {
+				order=lists.get(i);
+				orderDao.delete(order);
+			}
+		}
+		//删除账号和用户的关联
+		Account_User account_User=account_UserDao.getAccount_UserByAccountIdAndUserId(account.getId(),user.getId());
+		if(account_User!=null){
+			account_UserDao.delete(account_User);
+		}
+		userDao.delete(user);
 	}
 
 	@Override

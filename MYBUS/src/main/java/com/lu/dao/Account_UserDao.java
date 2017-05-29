@@ -19,5 +19,12 @@ public class Account_UserDao extends BaseDAO<Account_User>{
 		return this.select(query);
 	}
 
+	public Account_User getAccount_UserByAccountIdAndUserId(Long accountId, Long userId) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query=DetachedCriteriaBuilder.instance(Account_User.class,"account_user");
+		query.addEq("account_user.accountId",accountId).addEq("account_user.userId", userId);
+		return this.selectTopOne(query);
+	}
+
 	
 }

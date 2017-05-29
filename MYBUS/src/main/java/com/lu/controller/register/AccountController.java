@@ -173,6 +173,9 @@ public class AccountController {
 		
 		ResultResponse result = new ResultResponse();
 		if(account!=null){
+			Md5PasswordEncoder md5=new Md5PasswordEncoder();
+			String pwd=md5.encodePassword(account.getPassword(), null);
+			account.setPassword(pwd);
 			accountService.updateAccount(account);
 			result.setMessage("success!");
 		}else {
@@ -210,9 +213,11 @@ public class AccountController {
 	public ResultResponse delUser(HttpServletRequest request){
 		ResultResponse result = new ResultResponse();
 		Long id=Long.parseLong(request.getParameter("id").trim());
+		Long accountId=Long.parseLong(request.getParameter("accountId").trim());
+		Account account = accountService.findById(accountId);
 		User user=userService.getUserById(id);
 		if(user!=null){
-			userService.delUser(user);
+			userService.delUser(user,account);
 			result.setMessage("OK! 删除成功!");
 		}else{
 			result.setResult(Boolean.FALSE);

@@ -90,10 +90,10 @@
 				                                    </tbody>
 				                                    <div>
 				                                	<button class="btn btn-primary btn-sm" onclick="addrole()"><i class="fa fa-plus "></i> Add</button>
-													<button class="btn btn-primary btn-sm" onclick="addAccountType()"><i class="fa fa-plus "></i> Add AccountType</button>
-													<button class="btn btn-success btn-sm" onclick="edits('${role.id }')"><i class="fa fa-edit"></i> Edit</button>
-				<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-													<button class="btn btn-danger btn-sm"  onclick="del('${role.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+<!-- 													<button class="btn btn-primary btn-sm" onclick="addAccountType()"><i class="fa fa-plus "></i> Add AccountType</button> -->
+<%-- 													<button class="btn btn-success btn-sm" onclick="edits('${role.id }')"><i class="fa fa-edit"></i> Edit</button> --%>
+<!-- 					                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
+<%-- 													<button class="btn btn-danger btn-sm"  onclick="del('${role.id }')"><i class="fa fa-trash-o"></i> Delete</button> --%>
 				                                	<hr>
 				                                </div>
 				                                </table>
@@ -126,7 +126,7 @@
 				                                    </tbody>
 				                                      <div>
 					                                	<button class="btn btn-primary btn-sm" onclick="addmenu()"><i class="fa fa-plus "></i> Add</button>
-														<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="glyphicon glyphicon-apple "></i> Add Site</button>
+<%-- 														<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="glyphicon glyphicon-apple "></i> Add Site</button> --%>
 					                                	<hr>
 					                                </div>
 				                                </table>

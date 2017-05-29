@@ -1,5 +1,6 @@
 package com.lu.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,16 @@ public class TrainServiceImpl implements TrainService{
 		// TODO Auto-generated method stub
 		PagingVO vo =pagingVo;
 		vo=trainDao.searchList(pagingVo,trainSearchVo);
+		
+		@SuppressWarnings("unchecked")
+		List<TrainNumber> datas = (List<TrainNumber>) vo.getDetails();
+		
+		for (TrainNumber train : datas) {
+			long time=train.getArrivalTime().getTime()+train.getNumberDay()*24*3600*1000-train.getDepartureTime().getTime();
+			train.setTime(new Date(time));
+			train.setHour(time/(60*60*1000));
+			train.setMinute((time%(60*60*1000))/(60*1000));
+		}
 		return vo;
 	}
 	@Override

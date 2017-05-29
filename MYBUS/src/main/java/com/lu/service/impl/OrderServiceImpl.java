@@ -10,8 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lu.dao.OrderDao;
+import com.lu.dao.ScheduleDao;
+import com.lu.dao.ScheduleSiteDao;
+import com.lu.dao.SeatDao;
 import com.lu.entity.order.Order;
+import com.lu.entity.schedule.Schedule;
+import com.lu.entity.schedule.ScheduleSite;
+import com.lu.entity.seat.Seat;
 import com.lu.entity.vo.OrderSearchVo;
+import com.lu.entity.vo.OrderVo;
 import com.lu.service.OrderService;
 import com.lu.util.PagingVO;
 import com.lu.util.qrcodeutil.QRCodeUtil;
@@ -22,13 +29,47 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private OrderDao orderDao;
 	
+	@Autowired
+	private SeatDao seatDao;
+	
+	@Autowired
+	private ScheduleSiteDao scheduleSiteDao;
+	
+	@Autowired
+	private ScheduleDao scheduleDao;
+	
 	@Override
 	@Transactional
 	public void saveOrUpdateOrder(Order order) {
 		// TODO Auto-generated method stub
 		orderDao.saveOrUpdate(order);
 	}
-
+	
+	@Override
+	@Transactional
+	public boolean saveOrUpdateOrder(Order order,OrderVo orderVo) {
+		// TODO Auto-generated method stub
+		//余票数-1
+		ScheduleSite scheduleSite=scheduleSiteDao.getScheduleSiteByTrainIdBeginSiteIdAndDepartureTime(orderVo.getTrainId(),orderVo.getBeginSiteId(),orderVo.getDepartureTime());
+		if(scheduleSite!=null){
+			Long scheduleId=scheduleSite.getScheduleId();
+			Schedule schedule=scheduleDao.getScheduleById(scheduleId);
+			if(schedule.getSeatNum()>0){
+				schedule.setSeatNum(schedule.getSeatNum()-1);
+				scheduleDao.update(schedule);
+			
+				//设置座位  
+				Seat seat=seatDao.getOneSeat();
+				seat.setStatus(1L);
+				seatDao.update(seat);
+				order.setSeatId(seat.getId());
+				orderDao.saveOrUpdate(order);
+				return true;
+			}
+		}
+		return false;
+	}
+		
 	@Override
 	@Transactional
 	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo, Long accountId) {

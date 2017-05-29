@@ -46,15 +46,45 @@ public class SiteController {
 	public ResultResponse createSite(HttpServletRequest request,Site site){
 		ResultResponse result = new ResultResponse();
 		if(site!=null){
-			if(!siteService.checkName(site.getName())){
-				siteService.save(site);
-				result.setMessage("Create Success");
+			site.setIsDelete(Boolean.FALSE);
+			if(site.getId()!=null){
+				siteService.saveOrUpdate(site);
+				result.setMessage("Success");
 			}else{
-				result.setResult(Boolean.FALSE);
-				result.setMessage("Failure! Name Exists");
+				if(!siteService.checkName(site.getName())){
+						siteService.saveOrUpdate(site);
+						result.setMessage("Success");
+				}else{
+					result.setResult(Boolean.FALSE);
+					result.setMessage("Failure! Name Exists");
+				}
 			}
 		}
 		return result; 
+	}
+	
+	@RequestMapping("/get/{id}")
+	public String getTrain(@PathVariable("id")Long id, Model model){
+		Site site=siteService.getSiteById(id);
+		model.addAttribute("site", site);
+		return "view/background/site/createsite";
+	}
+	
+	@RequestMapping("/delsite")
+	@ResponseBody
+	public ResultResponse delTrain(HttpServletRequest request){
+		ResultResponse result = new ResultResponse();
+		Long id=Long.parseLong(request.getParameter("id").trim());
+		Site site=siteService.getSiteById(id);
+		if(site!=null){
+			site.setIsDelete(Boolean.TRUE);
+			siteService.saveOrUpdate(site);
+			result.setMessage("OK! 删除成功!");
+		}else{
+			result.setResult(Boolean.FALSE);
+			result.setMessage("falure!");
+		}
+		return result;
 	}
 	
 	@RequestMapping("/create/checkname")

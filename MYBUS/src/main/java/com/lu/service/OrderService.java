@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.lu.entity.order.Order;
 import com.lu.entity.vo.OrderSearchVo;
+import com.lu.entity.vo.OrderVo;
 import com.lu.util.PagingVO;
 
 public interface OrderService {
@@ -19,5 +20,7 @@ public interface OrderService {
 	void createQrcode(Order order, String path);
 
 	PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo);
+
+	boolean saveOrUpdateOrder(Order order, OrderVo orderVo);
 
 }

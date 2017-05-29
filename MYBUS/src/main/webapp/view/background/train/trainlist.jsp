@@ -95,7 +95,8 @@
 													</c:choose>
 												</td>
 	<!-- 		             									发车时间的这个有问题   不能显示出来      现在可以了    是get和set的问题   以后要注意  -->
-	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td>
+<%-- 	                                             <td title='<c:out value="${train.time } "></c:out>' class="text-center">${train.time }</td> --%>
+	                                             <td title='<c:out value="${train.hour } 小时 ${train.minute } 分钟 "></c:out>' class="text-center">${train.hour } 小时 ${train.minute } 分钟</td>
 	                                             <td title='<c:out value="${train.status } "></c:out>' class="text-center">
 	                                             	<c:choose>
 														<c:when test="${train.status==0}">已禁用</c:when>
@@ -104,7 +105,7 @@
 													</c:choose>
 	                                             </td>
 	                                            <td class="text-center">
-													<button class="btn btn-primary btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus "></i> Add</button>
+<%-- 													<button class="btn btn-primary btn-sm" onclick="adds('${train.id }')"><i class="fa fa-plus "></i> Add</button> --%>
 													<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
 													<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
@@ -119,10 +120,10 @@
                                     </tbody>
                                 <div>
                                 	<button class="btn btn-primary btn-sm" onclick="adds('0')"><i class="fa fa-plus "></i> Add</button>
-									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button>
-									<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button>
+<%-- 									<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="fa fa-plus "></i> Add Site</button> --%>
+<%-- 									<button class="btn btn-success btn-sm" onclick="edits('${train.id }')"><i class="fa fa-edit"></i> Edit</button> --%>
 <!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
-									<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button>
+<%-- 									<button class="btn btn-danger btn-sm"  onclick="del('${train.id }')"><i class="fa fa-trash-o"></i> Delete</button> --%>
                                 	<hr>
                                 </div>
                                 </table>

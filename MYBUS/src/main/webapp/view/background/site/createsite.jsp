@@ -15,13 +15,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form role="form" id="createsite" name="createsite">
+                    <input type="hidden" name="id" id="id" value="${site.id }">
                         <div class="form-group">
                             <label>Site Name</label>
-                            <input class="form-control" placeholder="" id="name" name="name" value="" onblur="checkName()">
+                            <input class="form-control" placeholder="" id="name" name="name" value="${site.name }" onblur="checkName()">
                         </div>
                           <div class="form-group">
                             <label>Description</label>
-                            <input class="form-control" placeholder=""  name="description" id="description" value="" onblur="checkSite(this)">
+                            <input class="form-control" placeholder=""  name="description" id="description" value="${site.description }" onblur="checkSite(this)">
                         </div>
                          
 						<!-- 下面这个按钮用button是提交就无法关闭弹出框   用a标签的时候就可以关闭  -->
@@ -78,6 +79,9 @@
 			}else{
 				layer.msg(data.message,{icon: 5});
 			}
+			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            parent.layer.close(index);
+			window.parent.location.reload();
 		});
 	});
 	</script>
