@@ -69,17 +69,15 @@
                                     <c:if test="${not empty informations}">
       										<c:forEach varStatus="vs" var="information" items="${informations}">
                                    			<c:if test="${information.type==10 }">
-                                   				<a href="" style="padding:10px;line-height:15px;">${information.title } </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
+                                   				<div>
+                                   					<a href="${path }/luwei/front/information/getinformation/${information.id}" target="_blank" style="padding:10px;line-height:15px;">${information.title } </a>
+                                   					<span style="float: right;">(<fmt:formatDate value="${information.createDate }" pattern="yyyy-MM-dd" />)</span>
+                                   					<hr style=" height:1px;border:none;border-top:0px dotted;" />
+                                   				</div>
                                    			</c:if>
                                    			</c:forEach>
     								</c:if>
                                     
-                                    <a href="" style="padding:10px;line-height:15px;">关于调整互联网、电话订票起售时间的公告 </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">上海铁路局关于2017年5月30日增开部分旅客列车的公告  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">哈尔滨铁路局关于加格达奇-韩家园4059次旅客列车调整的公告  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">成都铁路局关于部分客车停运、停站调整的通知  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">成都铁路局关于加开部分旅客列车的公告 </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">青藏铁路公司关于加开动车组列车的通知  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
 <!--                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
                                 </div>
                                 <div class="tab-pane fade" id="messages">
@@ -88,17 +86,13 @@
 									<c:if test="${not empty informations}">
       										<c:forEach varStatus="vs" var="information" items="${informations}">
                                    			<c:if test="${information.type==30 }">
-                                   				<a href="" style="padding:10px;line-height:15px;">${information.title } </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
+                                   				<a href="${path }/luwei/front/information/getinformation/${information.id}" target="_blank" style="padding:10px;line-height:15px;">${information.title } </a>
+                                   				<span style="float: right;">(<fmt:formatDate value="${information.createDate }" pattern="yyyy-MM-dd" />)</span>
+                                   				<hr style=" height:1px;border:none;border-top:0px dotted;" />
                                    			</c:if>
                                    			</c:forEach>
     								</c:if>
     								
-                                    <a href="" style="padding:10px;line-height:15px;">实行车票实名制时，可以使用哪些身份证件？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">什么是实名制车票？  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">为什么有“硬卧代硬座”和“软卧代软座或二等座”车票？  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">如何购买优待（惠）车票？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">什么是异地票、联程票和往返票？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">什么是直达票、通票？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
 <!--                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
                                 </div>
                                 <div class="tab-pane fade" id="settings">
@@ -107,16 +101,12 @@
                                     <c:if test="${not empty informations}">
       										<c:forEach varStatus="vs" var="information" items="${informations}">
                                    			<c:if test="${information.type==20 }">
-                                   				<a href="" style="padding:10px;line-height:15px;">${information.title } </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
+                                   				<a href="${path }/luwei/front/information/getinformation/${information.id}" target="_blank" style="padding:10px;line-height:15px;">${information.title } </a>
+                                   				<span style="float: right;">(<fmt:formatDate value="${information.createDate }" pattern="yyyy-MM-dd" />)</span>
+                                   				<hr style=" height:1px;border:none;border-top:0px dotted;" />
                                    			</c:if>
                                    			</c:forEach>
     								</c:if>
-                                    <a href="" style="padding:10px;line-height:15px;">铁路旅客信用信息记录期限为多长时间？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">纳入铁路旅客信用信息，旅客有异议时如何办理？  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">铁路进站乘车禁止和限制携带物品  </a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">旅客持银行卡购票后需退票时，如果银行卡处于挂失、冻结、销卡状态，无法退款怎么办？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">《铁路旅客信用记录管理办法（试行）》制定依据是什么？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
-                                    <a href="" style="padding:10px;line-height:15px;">哪些失信行为，将纳入铁路旅客信用信息记录管理？</a><hr style=" height:1px;border:none;border-top:0px dotted;" />
 <!--                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
                                 </div>
                             </div>
@@ -133,9 +123,14 @@
     </div>
     <!-- /. WRAPPER  -->
 	<jsp:include page="/view/background/common/scripts.jsp" />
+<!-- 	<script> -->
+<!-- //             $(document).ready(function () { -->
+<%-- //             	window.location.href="${path}/luwei/front/home/index"; --%>
+<!-- //             }); -->
+<!--     </script> -->
 	 <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
-
+ 	
 </body>
 
 </html>
