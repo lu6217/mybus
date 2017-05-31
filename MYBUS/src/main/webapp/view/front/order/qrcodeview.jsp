@@ -18,7 +18,7 @@
 <center>
 <%-- <img src='${path2 }/${order.id}.jpg'  alt="二维码"  /> --%>
 <%-- 	<img src='E:/myBusGit/mybus/MYBUS/src/main/webapp/images/qrcodeImages/${order.id}.jpg'  alt="二维码"  /> --%>
-	<img src='${path }/images/qrcodeI	mages/${order.id}.jpg'  alt="二维码"  />
+	<img src='${path }/images/qrcodeImages/${order.id}.jpg'  alt="二维码"  />
 <%-- 	<img src='${order.qrcodeImg }'  alt="二维码" /> --%>
 </center>
 </body>

@@ -29,15 +29,59 @@
         
             <div id="page-inner">
 			<div class="row">
-                <div class="col-md-12">
-                    <div class="jumbotron">
-                        <h1>Jumbotron</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
-                        <p>
-                            <a class="btn btn-primary btn-lg" role="button">Learn more</a>
-                        </p>
+			
+			 <div class="col-md-12">
+			 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+	                    <img src="${path }/images/qrcodeImages/index1.jpg" alt="index1">
+	                    <div class="carousel-caption">
+	        				<h3>...</h3>
+	   						 <p>...</p>
+	                    </div>
                     </div>
+                    <div class="item">
+	                    <img src="${path }/images/qrcodeImages/index2.jpg" alt="index2">
+	                    <div class="carousel-caption">
+					        <h3>...</h3>
+					   		<p>...</p>
+	                    </div>
+                    </div>
+    				<div class="item">
+	                    <img src="${path }/images/qrcodeImages/index3.jpg" alt="index3">
+	                    <div class="carousel-caption">
+					        <h3>...</h3>
+					   		<p>...</p>
+	                    </div>
+                    </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                    </a>
+					</div>
                 </div>
+<!--                 <div class="col-md-12"> -->
+<!--                     <div class="jumbotron"> -->
+<!--                         <h1>Train</h1> -->
+<!--                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p> -->
+<!--                         <p> -->
+<!--                             <a class="btn btn-primary btn-lg" role="button">Learn more</a> -->
+<!--                         </p> -->
+<!--                     </div> -->
+<!--                 </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12 col-sm-12">
@@ -123,11 +167,14 @@
     </div>
     <!-- /. WRAPPER  -->
 	<jsp:include page="/view/background/common/scripts.jsp" />
-<!-- 	<script> -->
+	<script>
+	$('.carousel').carousel({
+		  interval: 2000
+		})
 <!-- //             $(document).ready(function () { -->
 <%-- //             	window.location.href="${path}/luwei/front/home/index"; --%>
 <!-- //             }); -->
-<!--     </script> -->
+    </script>
 	 <!-- Custom Js -->
     <script src="${path}/view/moban/assets/js/custom-scripts.js"></script>
  	
