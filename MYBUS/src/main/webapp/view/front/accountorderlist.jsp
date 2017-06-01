@@ -43,7 +43,16 @@
                         <div class="panel-heading">
                              Order table
                         </div>
-                        <div class="panel-body">
+                        
+                        <div class="form-group">
+<!--                             <label>CardType</label> -->
+                            <select name="status" id="status" class="form-control" onchange="statusChange()">
+                                <option value="0">所有订单 </option>
+								<option value="待支付">未支付订单</option>
+								<option value="已支付">已支付订单</option>
+                            </select>
+                        </div>
+                        <div class="panel-body" id="orderList">
                         <c:if test="${not empty pageVO}">
 							<c:if test="${not empty pageVO.details}">
 								<c:forEach varStatus="vs" var="order" items="${pageVO.details}">
@@ -155,6 +164,17 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+            
+ 			statusChange();
+            
+            function statusChange(){
+            	 var status=$("#status").val();
+//             	 alert(opt);
+            	 $.post("${path }/luwei/order/selectaccountorder",{status:status},function(data) {
+     				$("#orderList").html(data);
+     				
+     			}); 
+            }
             
             
             function showQrcode(id){

@@ -10,7 +10,7 @@
     <!-- Custom Styles-->
     <link href="${path}/view/moban/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<!--     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
 <!--  -->
 
 <%-- 	<link rel="stylesheet" type="text/css" href="${path}/js/laydate/date/bootstrap.min.css"> --%>

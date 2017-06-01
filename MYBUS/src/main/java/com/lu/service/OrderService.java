@@ -11,7 +11,7 @@ public interface OrderService {
 
 	void saveOrUpdateOrder(Order order);
 
-	PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo, Long accountId);
+	PagingVO searchList(PagingVO pagingVo, String status, Long accountId);
 
 	Order getOrderByUserIdAndTrainId(Long userId, Long trainId, Date date);
 
@@ -22,5 +22,7 @@ public interface OrderService {
 	PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo);
 
 	boolean saveOrUpdateOrder(Order order, OrderVo orderVo);
+
+	PagingVO searchList(PagingVO pagingVo, String status);
 
 }

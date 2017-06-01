@@ -126,7 +126,7 @@
 				                                    </tbody>
 				                                      <div>
 					                                	<button class="btn btn-primary btn-sm" onclick="addmenu()"><i class="fa fa-plus "></i> Add</button>
-<%-- 														<button class="btn btn-primary btn-sm" onclick="addTrainSite('${train.id }')"><i class="glyphicon glyphicon-apple "></i> Add Site</button> --%>
+														<button class="btn btn-primary btn-sm" onclick="showmenus()"><i class="glyphicon glyphicon-apple "></i> Show Menus</button>
 					                                	<hr>
 					                                </div>
 				                                </table>
@@ -210,6 +210,17 @@
             		}); 
             };
             
+            function showmenus(){
+            	layer.open({
+           		  type: 2, 
+           		  title: ['showMenus','font-size:25px;'],
+           		  area:['480px','440px'],
+           		  content:'${path}/luwei/authority/showmenus',
+           		  btn:['Close']
+           		}); 
+            	
+            }
+           
             function addmenu(){ 
              	layer.open({
              		  type: 2, 

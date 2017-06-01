@@ -14,20 +14,23 @@ import com.lu.util.PagingVO;
 @Repository
 public class OrderDao extends BaseDAO<Order>{
 
-	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo, Long accountId) {
+	public PagingVO searchList(PagingVO pagingVo, String status, Long accountId) {
 		// TODO Auto-generated method stub
-		DetachedCriteriaBuilder query = initQueryCriteria(orderSearchVo,accountId);
-		DetachedCriteriaBuilder count = initQueryCriteria(orderSearchVo,accountId);
+		DetachedCriteriaBuilder query = initQueryCriteria(status,accountId);
+		DetachedCriteriaBuilder count = initQueryCriteria(status,accountId);
 		return this.selectPagingVO(query, pagingVo, count);
 	}
 
-	private DetachedCriteriaBuilder initQueryCriteria(OrderSearchVo orderSearchVo, Long accountId) {
+	private DetachedCriteriaBuilder initQueryCriteria(String status, Long accountId) {
 		// TODO Auto-generated method stub
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
 		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
 		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
 //		query.addEq("order.", value)
 		query.addEq("order.accountId", accountId);
+		if(!"0".equals(status)){
+			query.addEq("order.status", status);
+		}
 		return query;
 	}
 
@@ -77,6 +80,24 @@ public class OrderDao extends BaseDAO<Order>{
 		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
 		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
 		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
+		return query;
+	}
+
+	public PagingVO searchList(PagingVO pagingVo, String status) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = initQueryCriteria(status);
+		DetachedCriteriaBuilder count = initQueryCriteria(status);
+		return this.selectPagingVO(query, pagingVo, count);
+	}
+
+	private DetachedCriteriaBuilder initQueryCriteria(String status) {
+		// TODO Auto-generated method stub
+		DetachedCriteriaBuilder query = DetachedCriteriaBuilder.instance(Order.class, "order");
+		query.leftJoin("order.train", "train").leftJoin("order.user", "user")
+		.leftJoin("order.beginSite", "beginSite").leftJoin("order.endSite", "endSite").leftJoin("order.seat", "seat");
+		if(!"0".equals(status)){
+			query.addEq("order.status", status);
+		}
 		return query;
 	}
 	

@@ -86,20 +86,22 @@ public class ScheduleServiceImpl implements ScheduleService{
 			Date departureDate=startDate;
 			Date arrivalDate=startDate;
 			departureDate=new Date(departureDate.getTime()+(i*1000*3600*24));
-			departureDate.setHours(train.getDepartureTime().getHours());
-			departureDate.setMinutes(train.getDepartureTime().getMinutes());
-			schedule.setDepartureTime(departureDate);
-			arrivalDate=new Date(arrivalDate.getTime()+((i+train.getNumberDay().intValue())*1000*3600*24));
-			arrivalDate.setHours(train.getArrivalTime().getHours());
-			arrivalDate.setMinutes(train.getArrivalTime().getMinutes());
-			schedule.setArrivalTime(arrivalDate);
-			schedule.setNumberDay(train.getNumberDay());
-			schedule.setTrainId(train.getId());
-			schedule.setPrice(train.getPrice());
-			schedule.setSeatNum(train.getNum());
-			scheduleDao.save(schedule);
-			schedule=scheduleDao.getScheduleByIdAndTime(train.getId(),departureDate);
-			saveSiteSchedule(schedule,train,departureDate);
+			if(scheduleDao.getScheduleByIdAndTime(train.getId(), departureDate)==null){
+				departureDate.setHours(train.getDepartureTime().getHours());
+				departureDate.setMinutes(train.getDepartureTime().getMinutes());
+				schedule.setDepartureTime(departureDate);
+				arrivalDate=new Date(arrivalDate.getTime()+((i+train.getNumberDay().intValue())*1000*3600*24));
+				arrivalDate.setHours(train.getArrivalTime().getHours());
+				arrivalDate.setMinutes(train.getArrivalTime().getMinutes());
+				schedule.setArrivalTime(arrivalDate);
+				schedule.setNumberDay(train.getNumberDay());
+				schedule.setTrainId(train.getId());
+				schedule.setPrice(train.getPrice());
+				schedule.setSeatNum(train.getNum());
+				scheduleDao.save(schedule);
+				schedule=scheduleDao.getScheduleByIdAndTime(train.getId(),departureDate);
+				saveSiteSchedule(schedule,train,departureDate);
+			}
 		}
 	}
 	
@@ -199,7 +201,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 					scheduleView.setDepartureTime(begin.getDepartureTime());
 					scheduleView.setArrivalTime(end.getArrivalTime());
 					scheduleView.setPrice(Integer.parseInt(end.getPrice())-Integer.parseInt(begin.getPrice())+"");
-					long time=scheduleView.getArrivalTime().getTime()+scheduleView.getNumberDay()*24*3600*1000-scheduleView.getDepartureTime().getTime();
+					long time=scheduleView.getArrivalTime().getTime()-scheduleView.getDepartureTime().getTime();
 					scheduleView.setTime(new Date(time));
 					scheduleView.setHour((time)/(60*60*1000));
 					scheduleView.setMinute(((time)%(60*60*1000))/(60*1000));

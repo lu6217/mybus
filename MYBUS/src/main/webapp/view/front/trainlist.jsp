@@ -94,7 +94,7 @@
                                         <tr>
                                             <th class="text-center">车次</th>
                                             <th class="text-center">发车站</th>
-                                            <th class="text-center">终点站</th>
+                                            <th class="text-center">到达站</th>
                                             <th class="text-center">发车时间</th>
                                             <th class="text-center">到站时间</th>
                                             <th class="text-center">运行时间</th>

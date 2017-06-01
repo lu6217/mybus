@@ -50,6 +50,15 @@ public class AuthorityController {
 		return "/view/background/authority/addmenu";
 	}
 	
+	@RequestMapping("/toeditmenu/{id}")
+	public String toEditMenu(@PathVariable("id")Long id,Model model, HttpServletRequest request){
+		
+		Menu menu=authorityService.getMenuById(id);
+		model.addAttribute("menu", menu);
+		return "/view/background/authority/editmenu";
+	}
+	
+	
 	@RequestMapping("/toassignment/{id}")
 	public String toAssignment(@PathVariable("id")Long id,Model model, HttpServletRequest request){
 		Role role=authorityService.getRoleById(id);
@@ -63,6 +72,14 @@ public class AuthorityController {
 	public String toAccountType(Model model, HttpServletRequest request){
 		
 		return "/view/background/authority/addAccountType";
+	}
+	
+	@RequestMapping("/showmenus")
+	public String showMeuns(Model model, HttpServletRequest request){
+		
+		List<Menu> menus=authorityService.getMenus();
+		model.addAttribute("menus", menus);
+		return "/view/background/authority/showmenus";
 	}
 	
 	
@@ -102,6 +119,30 @@ public class AuthorityController {
 		return result; 
 	}
 	
+	@RequestMapping("/editmenu")
+	@ResponseBody
+	public ResultResponse editMenu(HttpServletRequest request,MenuVo menuVo){
+		ResultResponse result = new ResultResponse();
+		if(menuVo!=null){
+			//如果父节点不是根节点就将父节点改为不是叶子节点
+			if(menuVo.getId()!=null){
+				Menu menu=authorityService.getMenuById(menuVo.getId());
+				menu.setName(menuVo.getName());
+				menu.setUrl(menuVo.getUrl());
+				menu.setIcon(menuVo.getIcon());
+				authorityService.updateMenu(menu);
+				result.setMessage("Success");
+				return result;
+			}else{
+				result.setResult(Boolean.FALSE);
+				result.setMessage("Failure!");
+			}
+		}else {
+			result.setResult(Boolean.FALSE);
+			result.setMessage("Failure!");
+		}
+		return result; 
+	}
 	
 	@RequestMapping("/addmenu")
 	@ResponseBody

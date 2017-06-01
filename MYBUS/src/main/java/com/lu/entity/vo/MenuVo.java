@@ -2,6 +2,8 @@ package com.lu.entity.vo;
 
 public class MenuVo {
 
+	private Long id;
+	
 	private String name;
 	
 	private String url;
@@ -15,6 +17,14 @@ public class MenuVo {
 	private Boolean leaf;
 	
 	private String Item;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

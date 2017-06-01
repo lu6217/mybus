@@ -163,21 +163,39 @@ public class OrderController extends BaseController{
 		return result;
 	}
 	
+	@RequestMapping("/selectorder")
+	public String selectOrderlist(PagingVO pagingVo,Model model, HttpServletRequest request){
+//		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
+		String status=request.getParameter("status").trim();
+		PagingVO vo =orderService.searchList(pagingVo,status);
+		model.addAttribute("pageVO", vo);
+		return "/view/front/order_data";
+	}
+	
+	@RequestMapping("/selectaccountorder")
+	public String selectAccountOrderlist(PagingVO pagingVo,Model model, HttpServletRequest request){
+//		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
+		String status=request.getParameter("status").trim();
+		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
+		PagingVO vo =orderService.searchList(pagingVo,status,accountId);
+		model.addAttribute("pageVO", vo);
+		return "/view/front/order_data";
+	}
 	
 	@RequestMapping("/orderlist")
 	public String orderlist(PagingVO pagingVo,OrderSearchVo orderSearchVo,Model model, HttpServletRequest request){
 //		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
-		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo);
-		model.addAttribute("pageVO", vo);
+//		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo);
+//		model.addAttribute("pageVO", vo);
 		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "/view/front/orderlist";
 	}
 	
 	@RequestMapping("/accountorderlist")
 	public String accountOrderlist(PagingVO pagingVo,OrderSearchVo orderSearchVo,Model model, HttpServletRequest request){
-		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
-		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo,accountId);
-		model.addAttribute("pageVO", vo);
+//		Long accountId= ((Account)WebUtils.getSessionAttribute(request, "account")).getId();
+//		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo,accountId);
+//		model.addAttribute("pageVO", vo);
 		model.addAttribute("menus", MenuUtil.getMenus(request));
 		return "/view/front/accountorderlist";
 	}

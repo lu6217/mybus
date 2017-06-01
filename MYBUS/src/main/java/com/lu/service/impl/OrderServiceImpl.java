@@ -72,10 +72,10 @@ public class OrderServiceImpl implements OrderService{
 		
 	@Override
 	@Transactional
-	public PagingVO searchList(PagingVO pagingVo, OrderSearchVo orderSearchVo, Long accountId) {
+	public PagingVO searchList(PagingVO pagingVo, String status, Long accountId) {
 		// TODO Auto-generated method stub
 		PagingVO vo =pagingVo;
-		vo=orderDao.searchList(pagingVo,orderSearchVo,accountId);
+		vo=orderDao.searchList(pagingVo,status,accountId);
 		return vo;
 	}
 
@@ -142,6 +142,14 @@ public class OrderServiceImpl implements OrderService{
 		order.setQrcodeImg(qrcodepath+filename);
 		order.setQrcodeStatus(1L);
 		orderDao.saveOrUpdate(order);
+	}
+
+	@Override
+	public PagingVO searchList(PagingVO pagingVo, String status) {
+		// TODO Auto-generated method stub
+		PagingVO vo =pagingVo;
+		vo=orderDao.searchList(pagingVo,status);
+		return vo;
 	}
 
 }
