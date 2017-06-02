@@ -104,7 +104,7 @@
 													</c:choose>
 	                                             </td>
 	                                            <td class="text-center">
-													<button class="btn btn-success btn-sm" onclick="edits('${schedule.id }')" disabled=""><i class="fa fa-edit" ></i> Edit</button>
+<%-- 													<button class="btn btn-success btn-sm" onclick="edits('${schedule.id }')" disabled=""><i class="fa fa-edit" ></i> Edit</button> --%>
 													<button class="btn btn-danger btn-sm"  onclick="del('${schedule.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            
 	                                            </td>

@@ -111,7 +111,7 @@
 <!-- 	                                            </td> -->
 	                                            <td class="text-center">
 <%-- 													<button class="btn btn-success btn-sm" onclick="adds('${site.id }')"><i class="fa fa-plus"></i> Add</button> --%>
-	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button>
+<!-- 	                                            	<button class="btn btn-default btn-sm"><i class=" fa fa-refresh "></i> Update</button> -->
 													<button class="btn btn-primary btn-sm" onclick="edits('${information.id }')"><i class="fa fa-edit "></i> Edit</button>
 													<button class="btn btn-danger btn-sm" onclick="del('${information.id }')"><i class="fa fa-trash-o"></i> Delete</button>
 	                                            </td>

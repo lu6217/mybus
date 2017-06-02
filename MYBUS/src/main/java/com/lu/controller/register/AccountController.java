@@ -172,10 +172,13 @@ public class AccountController {
 	public ResultResponse updateAccount(HttpServletRequest request,Account account){
 		
 		ResultResponse result = new ResultResponse();
-		if(account!=null){
-			Md5PasswordEncoder md5=new Md5PasswordEncoder();
-			String pwd=md5.encodePassword(account.getPassword(), null);
-			account.setPassword(pwd);
+		if(account!=null && account.getId()!=null){
+			Account acc=accountService.findById(account.getId());
+			if(!(acc.getPassword().equals(account.getPassword()))){
+				Md5PasswordEncoder md5=new Md5PasswordEncoder();
+				String pwd=md5.encodePassword(account.getPassword(), null);
+				account.setPassword(pwd);
+			}
 			accountService.updateAccount(account);
 			result.setMessage("success!");
 		}else {

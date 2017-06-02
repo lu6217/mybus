@@ -75,7 +75,7 @@ public class Schedule {
 	private Date time;//运行时长
 	
 	@Column(name="status")
-	private Long status;
+	private Long status=10L; // 0禁用   10正常使用 
 	
 	@Column(name="seatNum")
 	private Long seatNum;

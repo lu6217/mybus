@@ -22,7 +22,7 @@
         <!--/. NAV TOP  -->
          <nav class="navbar-default navbar-side" role="navigation">
 <!-- 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div> -->
-             <jsp:include page="/view/background/common/sidebar.jsp?item=accountorder"/>
+             <jsp:include page="/view/background/common/sidebar.jsp?item=order"/>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >

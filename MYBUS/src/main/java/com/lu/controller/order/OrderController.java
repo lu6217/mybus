@@ -188,6 +188,7 @@ public class OrderController extends BaseController{
 //		PagingVO vo =orderService.searchList(pagingVo,orderSearchVo);
 //		model.addAttribute("pageVO", vo);
 		model.addAttribute("menus", MenuUtil.getMenus(request));
+		model.addAttribute("allorder", "all");
 		return "/view/front/orderlist";
 	}
 	

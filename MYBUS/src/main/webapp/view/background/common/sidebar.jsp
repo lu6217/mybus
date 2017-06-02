@@ -13,12 +13,14 @@
                 <ul class="nav" id="main-menu">
 				
 				    <li>
-                        <a <c:if test="${param.item=='booking'}" >class="active-menu"</c:if> href="${path }/luwei/front/train/booking"><i class="glyphicon glyphicon-fire"></i> Book tickets </a>
+<%--                         <a <c:if test="${param.item=='booking'}" >class="active-menu"</c:if> href="${path }/luwei/front/train/booking"><i class="glyphicon glyphicon-fire"></i> Book tickets </a> --%>
+							<a href="${path }/luwei/front/train/booking"><i class="glyphicon glyphicon-fire"></i> Book tickets </a>
                     </li>
 					<c:if test="${not empty menus }">
 						<c:forEach varStatus="vs" var="menu" items="${menus}">
 							<li>
-		                        <a <c:if test="${param.item=='${menu.item }'}" >class="active-menu"</c:if> href="${path }${menu.url}"><i class="${menu.icon }"></i> ${menu.name }</a>
+<%-- 		                        <a <c:if test="${param.item==menu.item }" >class="active-menu"</c:if> href="${path }${menu.url}"><i class="${menu.icon }"></i> ${menu.name }</a> --%>
+		                        <a href="${path }${menu.url}"><i class="${menu.icon }"></i> ${menu.name }</a>
 		                    </li>
 						</c:forEach>
 					</c:if>
